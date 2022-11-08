@@ -1,7 +1,7 @@
 <template>
-  <div class="hero">
-    <div class="hero-content">
-      <h1 class="font-apFont text-xl">arsanandha.xyz V3</h1>
+  <div class="hero min-h-screen">
+    <div class="hero-content text-center">
+      <img src="../assets/svg/logo.svg" width="600" class="px-5" alt="arsanandha"/>
     </div>
   </div>
 </template>
@@ -10,8 +10,6 @@ export default {
   name: "index",
   data() {
     return {
-      placeholder: null,
-      show: false,
     }
   }
 }
