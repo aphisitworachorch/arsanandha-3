@@ -1,6 +1,11 @@
 
 export default defineNuxtConfig({
-    css: ["~/assets/css/tailwind.css"],
+    app:{
+        head:{
+            viewport: 'initial-scale=1, width=device-width, height=device-height, viewport-fit=cover',
+            charset: 'UTF-8'
+        },
+    },
     modules: ['@nuxtjs/tailwindcss'],
     buildModules: [
         '@nuxtjs/google-fonts'

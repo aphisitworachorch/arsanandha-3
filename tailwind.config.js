@@ -1,13 +1,6 @@
 module.exports = {
   mode: "jit",
-  purge: [
-    "./components/**/*.{vue,js}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
-  ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
@@ -18,7 +11,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("daisyui"),require('tailwindcss-animatecss')],
+  plugins: [require("daisyui"),require('tailwindcss-animatecss'),require('tailwind-scrollbar-hide')],
   daisyui: {
     styled: true,
     themes: ["cyberpunk","black","dark","coffee","synthwave"],
