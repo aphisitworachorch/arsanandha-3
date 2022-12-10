@@ -7,12 +7,13 @@
             <img :src="switchProfile" />
           </div>
         </div>
-        <img src="../assets/svg/logo.svg" alt="arsanandha" class="p-3 invisible md:visible"/>
+        <img src="../assets/svg/logo.svg" alt="arsanandha" class="p-3 pt-9 invisible md:visible"/>
       </div>
       <div class="p-2 text-left">
-        <h1 class="text-5xl p-5 text-bold"><b>
+        <h1 class="text-5xl pl-6 pb-3 pt-2 pr-6 text-bold"><b>
           About Me
         </b></h1>
+        <p class="pl-6">Scroll for more information.</p>
         <div class="overflow-y-scroll scrollbar-hide h-80 w-76">
           <div class="stats stats-vertical shadow">
             <div class="stat" v-for="db in skills">
@@ -21,6 +22,9 @@
               <div class="stat-desc">Total {{ db.skill.length }} Skills</div>
             </div>
           </div>
+        </div>
+        <div class="p-6">
+          <nuxt-link to="/" class="btn btn-info font-bold rounded">Back</nuxt-link>
         </div>
       </div>
     </div>
