@@ -10,7 +10,7 @@
       </div>
       <div class="p-2 text-left">
         <img src="../assets/svg/logo.svg" alt="arsanandha" class="p-5"/>
-        <div tabindex="0" class="collapse collapse-arrow rounded-box">
+        <div tabindex="0" class="collapse collapse-open rounded-box">
           <input type="checkbox" class="peer" />
           <div class="collapse-title text-primary-content peer-checked:rounded-t">
             <h1 class="text-2xl">
