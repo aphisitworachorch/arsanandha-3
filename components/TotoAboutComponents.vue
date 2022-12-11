@@ -4,7 +4,7 @@
       <div class="p-2">
         <div class="avatar">
           <div class="w-96 rounded-b-xl rounded-t-xl">
-            <img :src="switchProfile" />
+            <img :src="switchProfile"  alt="Profile"/>
           </div>
         </div>
         <img src="../assets/svg/logo.svg" alt="arsanandha" class="p-3 pt-9 invisible md:visible"/>
@@ -14,12 +14,12 @@
           About Me
         </b></h1>
         <p class="pl-6">Scroll for more information.</p>
-        <div class="overflow-y-scroll scrollbar-hide h-80 w-76">
-          <div class="stats stats-vertical shadow">
-            <div class="stat" v-for="db in skills">
-              <div class="stat-title"><b>Skills</b></div>
-              <div class="stat-value">{{ db.name }}</div>
-              <div class="stat-desc">Total {{ db.skill.length }} Skills</div>
+        <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-6 pt-2">
+          <div class="w-76 rounded bg-emerald-900 mb-3" v-for="info in skills">
+            <div class="p-3">
+              <h1 class="text-xl font-bold ml-2">{{ info.name }}</h1>
+              <h3 class="ml-2">Total {{ info.skill.length }} Skills</h3>
+              <div class="badge rounded ml-2 p-2 bg-emerald-700 hover:bg-emerald-500 hover:font-bold break-words" v-for="more in info.skill">{{ more.name }}</div>
             </div>
           </div>
         </div>
@@ -57,205 +57,260 @@ export default {
           name: "Programming Language",
           skill: [{
             alias:"js",
-            name:"JavaScript"
+            name:"JavaScript",
+            details: ""
           },{
             alias:"ts",
-            name:"TypeScript"
+            name:"TypeScript",
+            details: ""
           },{
             alias:"golang",
-            name:"Golang"
+            name:"Golang",
+            details: ""
           },{
             alias:"csharp",
-            name:"C#"
+            name:"C#",
+            details: ""
           },{
             alias:"java",
-            name:"Java"
+            name:"Java",
+            details: ""
           },{
             alias:"php",
-            name:"PHP"
+            name:"PHP",
+            details: ""
           },{
             alias:"arduinocpp",
-            name:"Arduino C++"
+            name:"Arduino C++",
+            details: ""
           }]
         },{
           alias:"os",
           name:"Operating Systems",
           skill: [{
             alias:"win",
-            name:"Windows (Server)"
+            name:"Windows (Server)",
+            details: ""
           },{
             alias:"linux",
-            name:"Linux Distros (Ubuntu / Fedora / RHEL)"
+            name:"Linux Distros (Ubuntu / Fedora / RHEL)",
+            details: ""
           },{
             alias:"macos",
-            name:"macOS"
+            name:"macOS",
+            details: ""
           }]
         },{
           alias:"programminglang_frameworks",
           name:"Programming Frameworks",
           skill: [{
             alias:"nestjs",
-            name:"NestJS"
+            name:"NestJS",
+            details: ""
           },{
             alias:"express",
-            name:"Express"
+            name:"Express",
+            details: ""
           },{
             alias:"laravel",
-            name:"Laravel"
+            name:"Laravel",
+            details: ""
           },{
             alias:"gin",
-            name:"Gin"
+            name:"Gin",
+            details: ""
           },{
             alias:"django",
-            name:"Django"
+            name:"Django",
+            details: ""
           },{
             alias:"flask",
-            name:"Flask"
+            name:"Flask",
+            details: ""
           },{
             alias:"fastapi",
-            name:"FastAPI"
+            name:"FastAPI",
+            details: ""
           },{
             alias:"aspnet",
-            name:"ASP.net (MVC/Core)"
+            name:"ASP.net (MVC/Core)",
+            details: ""
           },{
             alias:"nuxtjs",
-            name:"Nuxt (Vue)"
+            name:"Nuxt (Vue)",
+            details: ""
           }]
         },{
           alias:"databases",
           name:"Databases",
           skill: [{
             alias:"postgresql",
-            name:"PostgreSQL"
+            name:"PostgreSQL",
+            details: ""
           },{
             alias:"supabase",
-            name:"Supabase"
+            name:"Supabase",
+            details: ""
           },{
             alias:"mysql",
-            name:"MySQL"
+            name:"MySQL",
+            details: ""
           },{
             alias:"mariadb",
-            name:"MariaDB"
+            name:"MariaDB",
+            details: ""
           },{
             alias:"mssql",
-            name:"Microsoft SQL Server"
+            name:"Microsoft SQL Server",
+            details: ""
           },{
             alias:"redis",
-            name:"Redis"
+            name:"Redis",
+            details: ""
           }]
         },{
           alias:"datascience_skills",
           name:"Data Science",
           skill: [{
             alias:"tableau",
-            name:"Tableau"
+            name:"Tableau",
+            details: ""
           },{
             alias:"excel",
-            name:"Microsoft Excel"
+            name:"Microsoft Excel",
+            details: ""
           },{
             alias:"csv",
-            name:"Comma Separated Value File"
+            name:"Comma Separated Value File",
+            details: ""
           },{
             alias:"webscraping",
-            name:"Web Scraping with Data Manipulation"
+            name:"Web Scraping with Data Manipulation",
+            details: ""
           }]
         },{
           alias:"artificial_intelligence",
           name:"Artificial Intelligence",
           skill: [{
             alias:"nlp",
-            name:"Foundation of Natural Language Processing"
+            name:"Foundation of Natural Language Processing",
+            details: ""
           },{
             alias:"chatbot",
-            name:"Foundation of Chatbot"
+            name:"Foundation of Chatbot",
+            details: ""
           }]
         },{
           alias:"testing_and_document_frameworks",
           name:"Testing Frameworks",
           skill: [{
             alias:"postman",
-            name:"Postman"
+            name:"Postman",
+            details: ""
           },{
             alias:"insomnia",
-            name:"Kong Insomnia"
+            name:"Kong Insomnia",
+            details: ""
           },{
             alias:"K8",
-            name:"k8"
+            name:"k8",
+            details: ""
           },{
             alias:"selenium",
-            name:"Selenium"
+            name:"Selenium",
+            details: ""
           }]
         },{
           alias:"development_tools",
           name:"Development Tools",
           skill: [{
             alias:"prometheus",
-            name:"Prometheus"
+            name:"Prometheus",
+            details: ""
           },{
             alias:"grafana",
-            name:"Grafana"
+            name:"Grafana",
+            details: ""
           },{
             alias:"otel",
-            name:"Foundation of OpenTelemetry"
+            name:"Foundation of OpenTelemetry",
+            details: ""
           },{
             alias:"elk",
-            name:"Foundation of ELK Stack"
+            name:"Foundation of ELK Stack",
+            details: ""
           },{
             alias:"imgproxy",
-            name:"ImgProxy"
+            name:"ImgProxy",
+            details: ""
           },{
             alias:"docker",
-            name:"Docker"
+            name:"Docker",
+            details: ""
           },{
             alias:"k8s",
-            name:"Little of K8s"
+            name:"Little of K8s",
+            details: ""
           },{
             alias:"datadog",
-            name:"Little of Datadog"
+            name:"Little of Datadog",
+            details: ""
           }]
         },{
           alias:"ops_skills",
           name:"DevOps",
           skill: [{
             alias:"aws",
-            name:"AWS S3 / Lambda"
+            name:"AWS",
+            details: " S3 / Lambda"
           },{
             alias:"digitalocean",
-            name:"DigitalOcean Instance / Functions / Spaces / Database"
+            name:"DigitalOcean",
+            details: "Instance / Functions / Spaces / Database"
           },{
             alias:"azure",
-            name:"Azure Blob Storage / SQL Server"
+            name:"Azure",
+            details: "Blob Storage / SQL Server"
           },{
             alias:"cf",
-            name:"Cloudflare"
+            name:"Cloudflare",
+            details: "",
           },{
             alias:"cicd",
-            name:"CI/CD Pipeline (GitLab) / Auto-deploy"
+            name:"CI/CD Pipeline",
+            details: "(GitLab) / Auto-deploy"
           }]
         },{
           alias:"extraordinary_skills",
           name:"Extraordinary",
           skill: [{
             alias:"training",
-            name:"Training Skills (Technology Stack Training / Programming Language Training / Knowledge Sharing)"
+            name:"Training Skills",
+            details: "Technology Stack Training / Programming Language Training / Knowledge Sharing"
           },{
             alias:"data_governance",
-            name:"Data Governance"
+            name:"Data Governance",
+            details: ""
           },{
             alias:"iot",
-            name:"IoT (API Usage / Plan)"
+            name:"IoT",
+            details: "API Usage / Plan"
           },{
             alias:"it_support",
-            name:"IT Support / Helpdesk Skill (Crash Diagnostic / Error Diagnostic)"
+            name:"IT Support / Helpdesk Skill",
+            details: "Crash Diagnostic / Error Diagnostic"
           },{
             alias:"graphics_design",
-            name:"Graphic Design (Adobe Illustrator / Affinity Designer)"
+            name:"Graphic Design",
+            details: "Adobe Illustrator / Affinity Designer"
           },{
             alias:"coffee_skills",
-            name:"Coffee Brewing Skills (Espresso / Pour-over / Mokapot / Siphon / Immersion Brew)"
+            name:"Coffee Brewing Skills ",
+            details: "Espresso / Pour-over / Mokapot / Siphon / Immersion Brew"
           },{
             alias:"tech_stack_pioneer",
-            name:"Tech-stack Pioneer"
+            name:"Tech-stack Pioneer",
+            details: ""
           }]
         }]
       }, 300)
