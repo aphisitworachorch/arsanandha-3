@@ -10,11 +10,11 @@
         <img src="../assets/svg/logo.svg" alt="arsanandha" class="p-3 pt-9 invisible md:visible"/>
       </div>
       <div class="p-2 text-left">
-        <h1 class="text-5xl pl-6 pb-3 pt-2 pr-6 text-bold"><b>
+        <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold"><b>
           About Me
         </b></h1>
-        <p class="pl-6">Scroll for more information.</p>
-        <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-6 pt-2">
+        <p class="pl-3">Scroll for more information.</p>
+        <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-3 pt-2">
           <div class="w-76 rounded bg-emerald-900 mb-3" v-for="info in skills">
             <div class="p-3">
               <h1 class="text-xl font-bold ml-2">{{ info.name }}</h1>
@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div class="p-6">
+        <div class="pl-3 pt-5 pb-5">
           <nuxt-link to="/" class="btn btn-info font-bold rounded">Back</nuxt-link>
         </div>
       </div>
