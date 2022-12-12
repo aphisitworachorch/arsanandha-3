@@ -6,9 +6,10 @@ export default defineNuxtConfig({
             charset: 'UTF-8'
         },
     },
+    css: ['animate.css/animate.min.css'],
     modules: ['@nuxtjs/tailwindcss'],
     buildModules: [
-        '@nuxtjs/google-fonts'
+        '@nuxtjs/google-fonts',
     ],
     googleFonts: {
         families: {
