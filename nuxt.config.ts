@@ -7,15 +7,11 @@ export default defineNuxtConfig({
         },
     },
     css: ['animate.css/animate.min.css'],
-    modules: ['@nuxtjs/tailwindcss'],
-    buildModules: [
-        '@nuxtjs/google-fonts'
-    ],
-    googleFonts: {
+    modules: ['@nuxtjs/tailwindcss',['@nuxtjs/google-fonts',{
         families: {
             'Space Grotesk': true,
         },
         download: true,
         display: 'auto',
-    },
+    }]],
 })
