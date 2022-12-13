@@ -22,8 +22,15 @@
               {{ customWelcome }}
             </h2>
             <br/>
-            <nuxt-link to="/about" class="btn btn-info font-bold rounded">View Profile</nuxt-link>
           </div>
+        </div>
+        <div class="dropdown p-3">
+          <label tabindex="0" class="btn m-1">View Profile</label>
+          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-accent rounded-box w-52" v-for="data in menu">
+            <li>
+              <nuxt-link :to="data.route">{{ data.name }} <div class="badge badge-primary" v-if="data.isnew">NEW 🎉</div></nuxt-link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -43,7 +50,8 @@ export default {
       switchProfile: new URL(totoMain, import.meta.url).href,
       positionShow: "",
       customWelcome: "",
-      skills: []
+      skills: [],
+      menu: []
     }
   },
   methods: {
@@ -56,6 +64,11 @@ export default {
         this.customWelcome = `Hi! I'm Backend Developer
               Who Involved Cutting-edge Technology
               with Love and Passion 💖`;
+        this.menu = [{
+          "name":"Skills",
+          "route":"/skills",
+          "isnew": true
+        }]
       }, 300)
 
     },

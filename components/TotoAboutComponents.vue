@@ -11,7 +11,7 @@
       </div>
       <div class="p-2 text-left">
         <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold animate__animated animate__fadeInDown" v-if="showLogo"><b>
-          About Me
+          {{ title }}
         </b></h1>
         <p class="pl-3 animate__animated animate__fadeInDown" v-if="showLogo">Scroll for more information.</p>
           <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-3 pt-2">
@@ -51,7 +51,8 @@ export default {
       showLogo: false,
       switchProfile: new URL(totoAlternative, import.meta.url).href,
       positionShow: "",
-      skills: []
+      skills: [],
+      title: "Skills"
     }
   },
   methods: {
