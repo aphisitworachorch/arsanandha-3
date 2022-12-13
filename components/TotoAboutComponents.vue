@@ -30,7 +30,7 @@
             </TransitionGroup>
           </div>
         <div class="pl-3 pt-5 pb-5">
-          <nuxt-link to="/" class="btn btn-info font-bold rounded animate__animated animate__fadeInUp">Back</nuxt-link>
+          <nuxt-link to="/" class="btn btn-info font-bold rounded">Back</nuxt-link>
         </div>
       </div>
     </div>
@@ -67,31 +67,38 @@ export default {
           skill: [{
             alias: "js",
             name: "JavaScript",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "ts",
             name: "TypeScript",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "golang",
             name: "Golang",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "csharp",
             name: "C#",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "java",
             name: "Java",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "php",
             name: "PHP",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "arduinocpp",
             name: "Arduino C++",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "os",
@@ -99,15 +106,18 @@ export default {
           skill: [{
             alias: "win",
             name: "Windows (Server)",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "linux",
             name: "Linux Distros (Ubuntu / Fedora / RHEL)",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "macos",
             name: "macOS",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "programminglang_frameworks",
@@ -115,39 +125,48 @@ export default {
           skill: [{
             alias: "nestjs",
             name: "NestJS",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "express",
             name: "Express",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "laravel",
             name: "Laravel",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "gin",
             name: "Gin",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "django",
             name: "Django",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "flask",
             name: "Flask",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "fastapi",
             name: "FastAPI",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "aspnet",
             name: "ASP.net (MVC/Core)",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "nuxtjs",
             name: "Nuxt (Vue)",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "databases",
@@ -155,27 +174,33 @@ export default {
           skill: [{
             alias: "postgresql",
             name: "PostgreSQL",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "supabase",
             name: "Supabase",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "mysql",
             name: "MySQL",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "mariadb",
             name: "MariaDB",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "mssql",
             name: "Microsoft SQL Server",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "redis",
             name: "Redis",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "datascience_skills",
@@ -183,19 +208,23 @@ export default {
           skill: [{
             alias: "tableau",
             name: "Tableau",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "excel",
             name: "Microsoft Excel",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "csv",
             name: "Comma Separated Value File",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "webscraping",
             name: "Web Scraping with Data Manipulation",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "artificial_intelligence",
@@ -203,11 +232,13 @@ export default {
           skill: [{
             alias: "nlp",
             name: "Foundation of Natural Language Processing",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "chatbot",
             name: "Foundation of Chatbot",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "testing_and_document_frameworks",
@@ -215,19 +246,23 @@ export default {
           skill: [{
             alias: "postman",
             name: "Postman",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "insomnia",
             name: "Kong Insomnia",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "K8",
             name: "k8",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "selenium",
             name: "Selenium",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "development_tools",
@@ -235,35 +270,43 @@ export default {
           skill: [{
             alias: "prometheus",
             name: "Prometheus",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "grafana",
             name: "Grafana",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "otel",
             name: "Foundation of OpenTelemetry",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "elk",
             name: "Foundation of ELK Stack",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "imgproxy",
             name: "ImgProxy",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "docker",
             name: "Docker",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "k8s",
             name: "Little of K8s",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "datadog",
             name: "Little of Datadog",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }, {
           alias: "ops_skills",
@@ -271,23 +314,28 @@ export default {
           skill: [{
             alias: "aws",
             name: "AWS",
-            details: " S3 / Lambda"
+            details: "S3 / Lambda",
+            skillsLevel: 10
           }, {
             alias: "digitalocean",
             name: "DigitalOcean",
-            details: "Instance / Functions / Spaces / Database"
+            details: "Instance / Functions / Spaces / Database",
+            skillsLevel: 10
           }, {
             alias: "azure",
             name: "Azure",
-            details: "Blob Storage / SQL Server"
+            details: "Blob Storage / SQL Server",
+            skillsLevel: 10
           }, {
             alias: "cf",
             name: "Cloudflare",
             details: "",
+            skillsLevel: 10
           }, {
             alias: "cicd",
             name: "CI/CD Pipeline",
-            details: "(GitLab) / Auto-deploy"
+            details: "(GitLab) / Auto-deploy",
+            skillsLevel: 10
           }]
         }, {
           alias: "extraordinary_skills",
@@ -295,31 +343,38 @@ export default {
           skill: [{
             alias: "training",
             name: "Training Skills",
-            details: "Technology Stack Training / Programming Language Training / Knowledge Sharing"
+            details: "Technology Stack Training / Programming Language Training / Knowledge Sharing",
+            skillsLevel: 10
           }, {
             alias: "data_governance",
             name: "Data Governance",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }, {
             alias: "iot",
             name: "IoT",
-            details: "API Usage / Plan"
+            details: "API Usage / Plan",
+            skillsLevel: 10
           }, {
             alias: "it_support",
             name: "IT Support / Helpdesk Skill",
-            details: "Crash Diagnostic / Error Diagnostic"
+            details: "Crash Diagnostic / Error Diagnostic",
+            skillsLevel: 10
           }, {
             alias: "graphics_design",
             name: "Graphic Design",
-            details: "Adobe Illustrator / Affinity Designer"
+            details: "Adobe Illustrator / Affinity Designer",
+            skillsLevel: 10
           }, {
             alias: "coffee_skills",
             name: "Coffee Brewing Skills ",
-            details: "Espresso / Pour-over / Mokapot / Siphon / Immersion Brew"
+            details: "Espresso / AeroPress / Pour-over / Immersion Brew",
+            skillsLevel: 10
           }, {
             alias: "tech_stack_pioneer",
             name: "Tech-stack Pioneer",
-            details: ""
+            details: "",
+            skillsLevel: 10
           }]
         }]
       }, 300)

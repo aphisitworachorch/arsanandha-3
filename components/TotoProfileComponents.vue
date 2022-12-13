@@ -22,7 +22,7 @@
               {{ customWelcome }}
             </h2>
             <br/>
-            <nuxt-link to="/about" class="btn btn-info font-bold rounded animate__animated animate__fadeInUp">View Profile</nuxt-link>
+            <nuxt-link to="/about" class="btn btn-info font-bold rounded">View Profile</nuxt-link>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@ export default {
   methods: {
     showName: function() {
       setTimeout(() => {
-        this.customGreet = "Asanan Aphisitworachorch";
+        this.customGreet = "Arsanandha Aphisitworachorch";
         this.showLogo = true;
         this.switchProfile = new URL(totoAlternative, import.meta.url).href;
         this.positionShow = "Backend Developer";

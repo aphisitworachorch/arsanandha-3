@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     css: ['animate.css/animate.min.css'],
     modules: ['@nuxtjs/tailwindcss'],
     buildModules: [
-        '@nuxtjs/google-fonts',
+        '@nuxtjs/google-fonts'
     ],
     googleFonts: {
         families: {
