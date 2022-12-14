@@ -16,7 +16,7 @@ useHead({
     { hid: 'og-title', property: 'og:title' ,content: 'Arsanandha Aphisitworachorch (arsanandha.xyz)'},
     { hid: 'og-desc', property: 'og:description', content: "Hi! I'm Backend Developer Who Involved Cutting-edge Technology with Love and Passion 💖" },
     { hid: 'og-image', property: 'og:image',
-      content: new URL(og, import.meta.url).href
+      content: '/pics/arsanandhaOG.png'
     },
     { hid: 'og-url', property: 'og:url', content: 'https://arsanandha.xyz' },
     { hid: 't-type', name: 'twitter:card', content: 'summary_large_image' },

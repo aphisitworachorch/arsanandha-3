@@ -2,19 +2,19 @@
   <div class="container font-apFont">
     <div class="flex flex-col md:flex-row m-3">
       <div class="p-2">
-        <div class="avatar">
-          <div class="w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
-            <img :src="switchProfile" alt="Profile"/>
+        <div class="transition-all duration-50 avatar md:hover:pr-4">
+          <div class="transition-all duration-50 w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn hover:rotate-1 hover:scale-105">
+            <img src="/pics/arsanandha-newpro.png" alt="Profile"/>
           </div>
         </div>
-        <img src="../assets/svg/logo.svg" alt="arsanandha" class="p-3 pt-9 visible animate__animated animate__fadeInUp"/>
+        <img src="/svg/logo.svg" alt="arsanandha" class="p-3 pt-9 visible animate__animated animate__fadeInUp"/>
       </div>
       <div class="p-2 text-left">
         <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold animate__animated animate__fadeInDown" v-if="showLogo"><b>
           {{ title }}
         </b></h1>
         <p class="pl-3 animate__animated animate__fadeInDown" v-if="showLogo">Scroll for more information.</p>
-          <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-3 pt-2">
+          <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-3 pt-2 font-apMonoFont">
             <TransitionGroup :css="false" tag="div" class="w-76" @after-enter="onEnter" @leave="onLeave">
             <div class="w-76 rounded bg-primary mb-3" v-for="(info, index) in skills" :key="info.alias" :data-index="index">
               <div class="p-3">
@@ -43,13 +43,12 @@ import arsanandhaNewPro from 'assets/jpg/arsanandha-newpro.png';
 import gsap from "gsap";
 
 export default {
-  name: "TotoAboutComponents",
+  name: "TotoSkillsComponents",
   data() {
     return {
       text: "as soon as possible.",
       customGreet: "",
       showLogo: false,
-      switchProfile: new URL(totoAlternative, import.meta.url).href,
       positionShow: "",
       skills: [],
       title: "Skills"
@@ -60,7 +59,6 @@ export default {
       setTimeout(() => {
         this.customGreet = "Asanan Aphisitworachorch";
         this.showLogo = true;
-        this.switchProfile = new URL(arsanandhaNewPro, import.meta.url).href;
         this.positionShow = "Backend Developer"
         this.skills = [{
           alias: "programming_language",
@@ -184,12 +182,7 @@ export default {
             skillsLevel: 10
           }, {
             alias: "mysql",
-            name: "MySQL",
-            details: "",
-            skillsLevel: 10
-          }, {
-            alias: "mariadb",
-            name: "MariaDB",
+            name: "MySQL + MariaDB",
             details: "",
             skillsLevel: 10
           }, {
@@ -200,6 +193,35 @@ export default {
           }, {
             alias: "redis",
             name: "Redis",
+            details: "",
+            skillsLevel: 10
+          }, {
+            alias: "mongo",
+            name: "MongoDB",
+            details: "",
+            skillsLevel: 10
+          }]
+        }, {
+          alias: "styling_css_frameworks",
+          name: "CSS Styling Frameworks",
+          skill: [{
+            alias: "bs",
+            name: "Bootstrap",
+            details: "",
+            skillsLevel: 10
+          }, {
+            alias: "tailwind",
+            name: "TailwindCSS",
+            details: "",
+            skillsLevel: 10
+          }, {
+            alias: "tw_daisy",
+            name: "TailwindCSS + daisyUI",
+            details: "",
+            skillsLevel: 10
+          }, {
+            alias: "uikit",
+            name: "UIKit",
             details: "",
             skillsLevel: 10
           }]
@@ -229,17 +251,46 @@ export default {
           }]
         }, {
           alias: "artificial_intelligence",
-          name: "Artificial Intelligence",
+          name: "Artificial Intelligence & ML",
           skill: [{
             alias: "nlp",
-            name: "Foundation of Natural Language Processing",
+            name: "Natural Language Processing",
             details: "",
             skillsLevel: 10
           }, {
-            alias: "chatbot",
-            name: "Foundation of Chatbot",
+            alias: "chat_bot",
+            name: "Chat bot",
             details: "",
             skillsLevel: 10
+          }]
+        },{
+          alias: "3rd_party_integration",
+          name: "3rd Party Integrations",
+          skill: [{
+            alias: "line",
+            name: "LINE APIs",
+            details: "",
+            skillsLevel: 10
+          }, {
+            alias: "discord",
+            name: "Discord APIs",
+            details: "",
+            skillsLevel: 10
+          }, {
+            alias: "meta",
+            name: "Meta APIs",
+            details: "",
+            skillsLevel: 10,
+          }, {
+            alias: "tw",
+            name: "Twitter APIs",
+            details: "",
+            skillsLevel: 10,
+          }, {
+            alias: "google",
+            name: "Google APIs",
+            details: "",
+            skillsLevel: 10,
           }]
         }, {
           alias: "testing_and_document_frameworks",
@@ -269,23 +320,18 @@ export default {
           alias: "development_tools",
           name: "Development Tools",
           skill: [{
-            alias: "prometheus",
-            name: "Prometheus",
+            alias: "nginx",
+            name: "NGINX",
             details: "",
-            skillsLevel: 10
-          }, {
-            alias: "grafana",
-            name: "Grafana",
+            skillsLevel: 10,
+          },{
+            alias: "caddy2",
+            name: "Caddy 2",
             details: "",
-            skillsLevel: 10
-          }, {
-            alias: "otel",
-            name: "Foundation of OpenTelemetry",
-            details: "",
-            skillsLevel: 10
+            skillsLevel: 10,
           }, {
             alias: "elk",
-            name: "Foundation of ELK Stack",
+            name: "ELK Stacks",
             details: "",
             skillsLevel: 10
           }, {
@@ -295,23 +341,13 @@ export default {
             skillsLevel: 10
           }, {
             alias: "docker",
-            name: "Docker",
-            details: "",
-            skillsLevel: 10
-          }, {
-            alias: "k8s",
-            name: "Little of K8s",
-            details: "",
-            skillsLevel: 10
-          }, {
-            alias: "datadog",
-            name: "Little of Datadog",
+            name: "Docker (include containerd)",
             details: "",
             skillsLevel: 10
           }]
         }, {
           alias: "ops_skills",
-          name: "DevOps",
+          name: "DevOps + Cloud Service",
           skill: [{
             alias: "aws",
             name: "AWS",

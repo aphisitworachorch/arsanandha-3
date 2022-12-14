@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     modules: ['@nuxtjs/tailwindcss',['@nuxtjs/google-fonts',{
         families: {
             'Space Grotesk': true,
+            'Space Mono': true,
         },
         download: true,
         display: 'auto',

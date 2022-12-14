@@ -2,14 +2,14 @@
   <div class="container font-apFont">
     <div class="flex flex-col md:flex-row m-3">
       <div class="p-2">
-        <div class="avatar">
-          <div class="w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
-            <img :src="switchProfile"  alt="Profile"/>
+        <div class="transition-all duration-50 avatar md:hover:pr-4">
+          <div class="transition-all duration-50 w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn hover:rotate-1 hover:scale-105">
+            <img src="/pics/toto-alternative.jpg"  alt="Profile"/>
           </div>
         </div>
       </div>
       <div class="p-2 text-left">
-        <img src="../assets/svg/logo.svg" alt="arsanandha" class="w-96 p-5 animate__animated animate__fadeInDown"/>
+        <img src="/svg/logo.svg" alt="arsanandha" class="w-96 p-5 animate__animated animate__fadeInDown"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <input type="checkbox" class="peer" />
           <div class="collapse-title peer-checked:rounded-t animate__animated animate__fadeInRight"  v-if="showLogo">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="dropdown p-3">
-          <label tabindex="0" class="btn m-1">View Profile</label>
+          <label tabindex="0" class="btn btn-info m-1">View Profile</label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-accent rounded-box w-52" v-for="data in menu">
             <li>
               <nuxt-link :to="data.route">{{ data.name }} <div class="badge badge-primary" v-if="data.isnew">NEW 🎉</div></nuxt-link>
@@ -37,8 +37,6 @@
   </div>
 </template>
 <script>
-import totoMain from 'assets/jpg/toto-main.png';
-import totoAlternative from 'assets/jpg/toto-alternative.jpg';
 
 export default {
   name: "TotoProfileComponents",
@@ -47,7 +45,6 @@ export default {
       text: "as soon as possible.",
       customGreet: "",
       showLogo: false,
-      switchProfile: new URL(totoMain, import.meta.url).href,
       positionShow: "",
       customWelcome: "",
       skills: [],
@@ -59,7 +56,6 @@ export default {
       setTimeout(() => {
         this.customGreet = "Arsanandha Aphisitworachorch";
         this.showLogo = true;
-        this.switchProfile = new URL(totoAlternative, import.meta.url).href;
         this.positionShow = "Backend Developer";
         this.customWelcome = `Hi! I'm Backend Developer
               Who Involved Cutting-edge Technology
