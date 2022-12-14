@@ -4,15 +4,14 @@
       <div class="p-2">
         <div class="transition-all duration-50 avatar md:hover:pr-4">
           <div class="transition-all duration-50 w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn hover:rotate-1 hover:scale-105">
-            <img src="/pics/toto-alternative.jpg"  alt="Profile"/>
+            <nuxt-img src="/pics/toto-alternative.jpg" alt="Profile with 1 Person" format="webp"/>
           </div>
         </div>
       </div>
       <div class="p-2 text-left">
-        <img src="/svg/logo.svg" alt="arsanandha" class="w-96 p-5 animate__animated animate__fadeInDown"/>
+        <nuxt-img src="/svg/logo.svg" class="w-96 p-5 animate__animated animate__fadeInDown" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
-          <input type="checkbox" class="peer" />
-          <div class="collapse-title peer-checked:rounded-t animate__animated animate__fadeInRight"  v-if="showLogo">
+          <div class="collapse-title peer-checked:rounded-t animate__animated animate__fadeInRight" v-if="showLogo">
             <h1 class="text-2xl">
               {{ customGreet }}
             </h1>
