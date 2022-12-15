@@ -25,8 +25,8 @@
         </div>
         <div class="dropdown p-3">
           <label tabindex="0" class="btn btn-info m-1">View Profile</label>
-          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-accent rounded-box w-52" v-for="data in menu">
-            <li>
+          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-accent rounded-box w-52">
+            <li  v-for="data in menu">
               <nuxt-link :to="data.route">{{ data.name }} <div class="badge badge-primary" v-if="data.isnew">NEW 🎉</div></nuxt-link>
             </li>
           </ul>
@@ -62,6 +62,10 @@ export default {
         this.menu = [{
           "name":"Skills",
           "route":"/skills",
+          "isnew": true
+        },{
+          "name":"About",
+          "route":"/about",
           "isnew": true
         }]
       }, 300)

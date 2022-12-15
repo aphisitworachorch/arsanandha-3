@@ -5,8 +5,14 @@ module.exports = {
     extend: {
       fontFamily: {
         'apFont': ['"Space Grotesk"', 'sans-serif'],
-        'apMonoFont': ['"Space Mono"', 'monospace']
+        'apMonoFont': ['"Space Mono"', 'monospace'],
       },
+      backgroundImage: {
+        'profile': "url('/pics/arsanandhaOG.png')"
+      },
+      spacing: {
+        '128': '32rem',
+      }
     },
   },
   variants: {

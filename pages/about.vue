@@ -1,20 +1,19 @@
 <template>
-  <div class="hero min-h-screen">
+  <div class="hero min-h-screen bg-profile">
     <div class="hero-content text-center">
-      <TotoSkillsComponents></TotoSkillsComponents>
+      <TotoAboutComponents></TotoAboutComponents>
     </div>
   </div>
 </template>
 <script setup>
 import {useHead} from "nuxt/app";
-import og from '../assets/jpg/arsanandhaOG.png';
 
 useHead({
-  title: "About me",
+  title: "arsanandha.xyz",
   meta:[
     { hid: 'og-type', property: 'og:type', content: 'website' },
-    { hid: 'og-title', property: 'og:title' ,content: 'About Arsanandha'},
-    { hid: 'og-desc', property: 'og:description', content: 'My Profile' },
+    { hid: 'og-title', property: 'og:title' ,content: 'About Arsanandha Aphisitworachorch (arsanandha.xyz)'},
+    { hid: 'og-desc', property: 'og:description', content: "My Deeper Profile." },
     { hid: 'og-image', property: 'og:image',
       content: '/pics/arsanandhaOG.png'
     },
@@ -25,11 +24,11 @@ useHead({
 })
 </script>
 <script>
-import TotoSkillsComponents from "~/components/TotoSkillsComponents.vue";
+import TotoAboutComponents from "~/components/TotoAboutComponents.vue";
 
 export default {
   name: "about",
-  components:{TotoSkillsComponents}
+  components: {TotoAboutComponents}
 }
 </script>
 

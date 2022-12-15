@@ -25,12 +25,11 @@ useHead({
 })
 </script>
 <script>
+import TotoProfileComponents from "~/components/TotoProfileComponents.vue";
+
 export default {
   name: "index",
-  data() {
-    return {
-    }
-  }
+  components:{TotoProfileComponents}
 }
 
 </script>
