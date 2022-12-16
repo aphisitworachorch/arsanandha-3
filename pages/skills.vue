@@ -1,5 +1,5 @@
 <template>
-  <div class="hero min-h-screen">
+  <div class="hero min-h-screen transform-gpu subpixel-antialiased">
     <div class="hero-content text-center">
       <TotoSkillsComponents></TotoSkillsComponents>
     </div>

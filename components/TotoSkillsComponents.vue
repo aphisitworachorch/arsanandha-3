@@ -1,15 +1,15 @@
 <template>
   <div class="container font-apFont">
     <div class="flex flex-col md:flex-row m-3">
-      <div class="p-2">
+      <div class="transition-all duration-50 p-2 hover:skew-y-6">
         <div class="transition-all duration-50 avatar md:hover:pr-4">
-          <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn hover:rotate-1 hover:scale-105">
+          <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
             <nuxt-img src="/pics/arsanandha-newpro.png" alt="Profile" format="webp"/>
           </div>
         </div>
         <nuxt-img src="/svg/logo.svg" alt="arsanandha" class="p-3 pt-9 visible animate__animated animate__fadeInUp"/>
       </div>
-      <div class="p-2 text-left">
+      <div class="transition-all duration-50 p-2 text-left hover:-skew-y-6">
         <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold animate__animated animate__fadeInDown text-white" v-if="showLogo"><b>
           {{ title }}
         </b></h1>
