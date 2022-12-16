@@ -1,5 +1,5 @@
 <template>
-  <div class="hero min-h-screen bg-profile">
+  <div class="transition-all duration-100 bg-profile hero min-h-screen">
     <div class="hero-content text-center">
       <TotoAboutComponents></TotoAboutComponents>
     </div>
@@ -9,7 +9,7 @@
 import {useHead} from "nuxt/app";
 
 useHead({
-  title: "arsanandha.xyz",
+  title: "About Me",
   meta:[
     { hid: 'og-type', property: 'og:type', content: 'website' },
     { hid: 'og-title', property: 'og:title' ,content: 'About Arsanandha Aphisitworachorch (arsanandha.xyz)'},

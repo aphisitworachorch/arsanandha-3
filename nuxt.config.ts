@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
     app:{
         head:{
-            viewport: 'initial-scale=1, width=device-width, height=device-height, viewport-fit=cover',
+            viewport: 'width=device-width, initial-scale=1',
             charset: 'UTF-8',
             htmlAttrs: {
                 lang: 'en'
@@ -10,7 +10,7 @@ export default defineNuxtConfig({
         },
     },
     css: ['animate.css/animate.min.css'],
-    modules: ['@nuxtjs/tailwindcss','@nuxt/image-edge','@kevinmarrec/nuxt-pwa',['@nuxtjs/google-fonts',{
+    modules: ['@nuxtjs/tailwindcss','@nuxt/image-edge',['@nuxtjs/google-fonts',{
         families: {
             'Space Grotesk': true,
             'Space Mono': true,

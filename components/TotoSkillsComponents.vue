@@ -3,17 +3,17 @@
     <div class="flex flex-col md:flex-row m-3">
       <div class="p-2">
         <div class="transition-all duration-50 avatar md:hover:pr-4">
-          <div class="transition-all duration-50 w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn hover:rotate-1 hover:scale-105">
+          <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn hover:rotate-1 hover:scale-105">
             <nuxt-img src="/pics/arsanandha-newpro.png" alt="Profile" format="webp"/>
           </div>
         </div>
         <nuxt-img src="/svg/logo.svg" alt="arsanandha" class="p-3 pt-9 visible animate__animated animate__fadeInUp"/>
       </div>
       <div class="p-2 text-left">
-        <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold animate__animated animate__fadeInDown" v-if="showLogo"><b>
+        <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold animate__animated animate__fadeInDown text-white" v-if="showLogo"><b>
           {{ title }}
         </b></h1>
-        <p class="pl-3 animate__animated animate__fadeInDown" v-if="showLogo">Scroll for more information.</p>
+        <p class="pl-3 animate__animated animate__fadeInDown text-white" v-if="showLogo">Scroll for more information.</p>
           <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-3 pt-2 font-apMonoFont">
             <TransitionGroup :css="false" tag="div" class="w-76" @after-enter="onEnter" @leave="onLeave">
             <div class="w-76 rounded bg-primary mb-3" v-for="(info, index) in skills" :key="info.alias" :data-index="index">
@@ -30,16 +30,13 @@
             </TransitionGroup>
           </div>
         <div class="pl-3 pt-5 pb-5">
-          <nuxt-link to="/" class="btn btn-info font-bold rounded">Back</nuxt-link>
+          <nuxt-link to="/" class="btn font-bold rounded bg-gradient-to-r from-orange-500 to-red-500 hover:from-violet-500 hover:to-orange-500 text-white">Back</nuxt-link>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import totoMain from 'assets/jpg/toto-main.png';
-import totoAlternative from 'assets/jpg/toto-alternative.jpg';
-import arsanandhaNewPro from 'assets/jpg/arsanandha-newpro.png';
 import gsap from "gsap";
 
 export default {

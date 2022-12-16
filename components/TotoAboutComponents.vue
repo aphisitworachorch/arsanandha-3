@@ -2,21 +2,21 @@
   <div class="container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn drop-shadow-2xl">
     <div class="transition-all duration-50 flex flex-col md:flex-row m-3">
       <div class="p-2 text-left rounded-b-xl rounded-t-xl">
-        <nuxt-img src="/svg/logo.svg" class="w-96 pl-3 pb-5 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text"/>
+        <nuxt-img src="/svg/logo.svg" class="max-w-screen md:w-96 pl-3 pb-5 invert" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
-          <div class="collapse-title ">
-            <h1 class="text-2xl animate__animated animate__fadeInDown text-black">
+          <div class="collapse-title">
+            <h1 class="text-2xl text-black font-bold">
               {{ customGreet }}
             </h1>
           </div>
           <div class="collapse-content rounded-b">
-            <h2 class="text-xl animate__animated animate__fadeInDown break-words w-72 text-black">
+            <h2 class="text-xl break-words w-72 text-black">
               {{ positionShow }}
             </h2>
             <br/>
           </div>
           <div class="md:pl-4">
-            <div class="card w-96 md:w-80 bg-gradient-to-r from-blue-700 to-blue-900 text-white font-apMonoFont">
+            <div class="card max-w-screen md:w-80 bg-gradient-to-r from-blue-700 to-blue-900 text-white font-apMonoFont">
               <div class="card-body">
                 <h3 class="card-title">Current Employment Status</h3>
                 <p v-if="workingStatus">✔️ Employed</p>
@@ -32,9 +32,9 @@
       </div>
       <div class="p-2 text-left">
         <div class="overflow-y-scroll scrollbar-hide h-128 w-76 pt-2 font-apMonoFont">
-          <TransitionGroup :css="false" tag="div" class="pb-5" @after-enter="onEnter" @leave="onLeave">
-            <div class="pb-5" v-for="(data, index) in biography" :key="data.alias" :data-index="index">
-              <div class="card bg-inherit	shadow-xl image-full">
+          <TransitionGroup :css="false" tag="div" class="rounded" @after-enter="onEnter" @leave="onLeave">
+            <div class="pb-5 rounded" v-for="(data, index) in biography" :key="data.alias" :data-index="index">
+              <div class="card bg-info shadow-xl image-full">
                 <figure><nuxt-img :src="data.image" :alt="data.name" format="webp" class="w-96 scale-150"/></figure>
                 <div class="card-body">
                   <h2 class="card-title text-white">{{ data.name }}</h2>
@@ -129,23 +129,23 @@ export default {
         iswork: true,
         details:[{
           name: "(Internship) Benchmark Electronics",
-          message: "Work in Python Stacks (Windows IIS / Redis / Django Frameworks)",
+          message: "Work with Python Stacks (Windows IIS / Redis / Django Frameworks) to Build a Health Reimbursement Platform",
           duration: "~ 4 Months"
         },{
           name: "BizPotential",
-          message: "Work in PHP Stacks (Windows IIS / PHP / MSSQL or Oracle) with ERP Product",
+          message: "Work with PHP Stacks (Windows IIS / PHP / MSSQL or Oracle) to Build a ERP Product",
           duration: "~ 3 Months"
         },{
           name: "MeMessage (Korat.com)",
-          message: "Work in PHP Stacks (Windows IIS / PHP (CodeIgniter) / MariaDB) with e-Commerce Product",
+          message: "Work with PHP Stacks (Windows IIS / PHP (CodeIgniter) / MariaDB) to Build a e-Commerce Product",
           duration: "~ 7 Months"
         },{
           name: "ApplicationDD LTD",
-          message: "Work in Many of Technology Stacks (Windows IIS / Docker / Ubuntu / NestJS / PHP (Laravel) / TypeScript / MinIO / Python / PostgreSQL / Redis) with Software House-like",
+          message: "Work with Technology Stacks (Windows IIS / Docker / Ubuntu / NestJS / PHP (Laravel) / TypeScript / MinIO / Python / PostgreSQL / Redis) in Environment of Software House-like",
           duration: "~ 1 Year"
         },{
           name: "CommonGround",
-          message: "Work in Many of Technology Stacks (Ubuntu / GitLab CI/CD / DigitalOcean Platforms / Cloudflare / PostgreSQL / Redis / AWS S3-like / Python) with MARCOM Tech Platform",
+          message: "Work with Technology Stacks (Ubuntu / GitLab CI/CD / DigitalOcean Platforms / Cloudflare / PostgreSQL / Redis / AWS S3-like / Python) for Building MARCOM Tech Platform",
           duration: "~ 6 Months"
         }]
       }]
