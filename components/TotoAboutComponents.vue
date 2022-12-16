@@ -31,10 +31,10 @@
         </div>
       </div>
       <div class="p-2 text-left">
-        <div class="overflow-y-scroll scrollbar-hide h-128 w-76 pt-2 font-apMonoFont">
+        <div class="overflow-y-scroll scrollbar-hide h-128 w-76 pt-2 font-apMonoFont snap-y">
           <TransitionGroup :css="false" tag="div" class="rounded" @after-enter="onEnter" @leave="onLeave">
             <div class="pb-5 rounded" v-for="(data, index) in biography" :key="data.alias" :data-index="index">
-              <div class="card bg-info shadow-xl image-full">
+              <div class="card bg-info shadow-xl image-full snap-start">
                 <figure><nuxt-img :src="data.image" :alt="data.name" format="webp" class="w-96 scale-150"/></figure>
                 <div class="card-body">
                   <h2 class="card-title text-white">{{ data.name }}</h2>

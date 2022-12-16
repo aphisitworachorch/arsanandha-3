@@ -14,9 +14,9 @@
           {{ title }}
         </b></h1>
         <p class="pl-3 animate__animated animate__fadeInDown text-white" v-if="showLogo">Scroll for more information.</p>
-          <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-3 pt-2 font-apMonoFont">
+          <div class="overflow-y-scroll scrollbar-hide h-80 w-76 pl-3 pt-2 font-apMonoFont snap-y">
             <TransitionGroup :css="false" tag="div" class="w-76" @after-enter="onEnter" @leave="onLeave">
-            <div class="w-76 rounded bg-primary mb-3" v-for="(info, index) in skills" :key="info.alias" :data-index="index">
+            <div class="w-76 rounded bg-primary mb-3 snap-start" v-for="(info, index) in skills" :key="info.alias" :data-index="index">
               <div class="p-3">
                 <h1 class="text-xl text-neutral font-bold ml-2">{{ info.name }}</h1>
                 <h3 class="ml-2 text-neutral">Total {{ info.skill.length }} Skills</h3>
