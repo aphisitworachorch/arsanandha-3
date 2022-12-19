@@ -29,6 +29,9 @@
             <li  v-for="data in menu">
               <nuxt-link :to="data.route">{{ data.name }} <div class="badge badge-primary" v-if="data.isnew">NEW 🎉</div></nuxt-link>
             </li>
+            <li>
+              <a :href="resume">Resume<div class="badge badge-primary">NEW 🎉</div></a>
+            </li>
           </ul>
         </div>
       </div>
@@ -47,7 +50,8 @@ export default {
       positionShow: "",
       customWelcome: "",
       skills: [],
-      menu: []
+      menu: [],
+      resume: "https://resume.io/r/TH55tWqzE"
     }
   },
   methods: {

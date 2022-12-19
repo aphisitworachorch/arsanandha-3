@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         'apFont': ['"Space Grotesk"', 'sans-serif'],
         'apMonoFont': ['"Space Mono"', 'monospace'],
+        'apThai': ['"IBM Plex Sans Thai"', 'sans-serif']
       },
       backgroundImage: {
         'profile': "url('/pics/arsanandhaOG.png')"

@@ -10,10 +10,11 @@ export default defineNuxtConfig({
         },
     },
     css: ['animate.css/animate.min.css'],
-    modules: ['@nuxtjs/tailwindcss','@nuxt/image-edge',['@nuxtjs/google-fonts',{
+    modules: ['@nuxtjs/tailwindcss','@nuxt/image-edge','@vueuse/nuxt',['@nuxtjs/google-fonts',{
         families: {
             'Space Grotesk': true,
             'Space Mono': true,
+            'IBM Plex Sans Thai': true,
         },
         download: true,
         display: 'auto',
