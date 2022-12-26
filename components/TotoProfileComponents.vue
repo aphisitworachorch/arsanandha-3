@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="transition-all duration-50 p-2 text-left hover:-skew-y-6">
-        <nuxt-img src="/svg/logo.svg" class="w-96 p-5 animate__animated animate__fadeInDown" alt="Logo with arsanandha Text"/>
+        <nuxt-img src="/svg/ARSANANDHALogo.svg" class="w-96 p-5 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <div class="collapse-title peer-checked:rounded-t animate__animated animate__fadeInRight text-white">
             <h1 class="text-2xl">

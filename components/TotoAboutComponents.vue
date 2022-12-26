@@ -2,7 +2,7 @@
   <div class="container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn drop-shadow-2xl">
     <div class="transition-all duration-50 flex flex-col md:flex-row m-3">
       <div class="p-2 text-left rounded-b-xl rounded-t-xl">
-        <nuxt-img src="/svg/logo.svg" class="max-w-screen md:w-96 pl-3 pb-5 invert" alt="Logo with arsanandha Text"/>
+        <nuxt-img src="/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <div class="collapse-title">
             <h1 class="text-2xl text-black font-bold">
