@@ -1,7 +1,7 @@
 <template>
   <div class="container font-apFont">
     <div class="flex flex-col md:flex-row m-3">
-      <div class="transition-all duration-50 p-2 hover:skew-y-6">
+      <div class="transition-all duration-50 p-2">
         <div class="transition-all duration-50 avatar md:hover:pr-4">
           <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
             <img src="/public/pics/arsanandha-newpro.png" alt="Profile"/>
@@ -9,7 +9,7 @@
         </div>
         <img src="/public/svg/ARSANANDHALogo.svg" alt="arsanandha" class="p-3 pt-9 visible animate__animated animate__fadeInUp invert"/>
       </div>
-      <div class="transition-all duration-50 p-2 text-left hover:-skew-y-6">
+      <div class="transition-all duration-50 p-2 text-left">
         <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold animate__animated animate__fadeInDown text-white" v-if="showLogo"><b>
           {{ title }}
         </b></h1>
@@ -19,7 +19,6 @@
             <div class="w-76 rounded bg-primary mb-3 snap-start" v-for="(info, index) in skills" :key="info.alias" :data-index="index">
               <div class="p-3">
                 <h1 class="text-xl text-neutral font-bold ml-2">{{ info.name }}</h1>
-                <h3 class="ml-2 text-neutral">Total {{ info.skill.length }} Skills</h3>
                 <div class="p-1">
                   <div class="badge rounded ml-2 p-2 bg-accent hover:font-bold break-words border-none text-white" v-for="(more, index) in info.skill" :key="more.name" :data-index="index">
                     {{ more.name }}
@@ -95,6 +94,11 @@ export default {
             name: "Arduino C++",
             details: "",
             skillsLevel: 10
+          },{
+              alias: "scratch",
+              name: "MIT Scratch",
+              details: "",
+              skillsLevel: 10
           }]
         }, {
           alias: "os",
