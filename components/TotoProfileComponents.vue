@@ -2,7 +2,7 @@
   <div class="container font-apFont">
     <div class="flex flex-col md:flex-row m-3">
       <div class="transition-all duration-50 p-2">
-        <div class="avatar md:hover:pr-4">
+        <div class="transition-all duration-50 avatar md:hover:pr-4">
           <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
             <img src="/public/pics/toto-alternative.jpg" alt="Profile with 1 Person"/>
           </div>
@@ -24,8 +24,8 @@
           </div>
         </div>
         <div class="dropdown p-3">
-          <label tabindex="0" class="btn bg-gradient-to-r from-orange-500 to-red-500 hover:from-violet-500 hover:to-orange-500 m-1 text-white">View Profile</label>
-          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-box w-52">
+          <label tabindex="0" class="transition-all duration-50 btn m-1 text-white">View Profile</label>
+          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral text-white rounded-box w-52">
             <li  v-for="data in menu">
               <nuxt-link :to="data.route">{{ data.name }} <div class="badge badge-primary" v-if="data.isnew">NEW 🎉</div></nuxt-link>
             </li>

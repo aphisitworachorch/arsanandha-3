@@ -24,15 +24,15 @@ module.exports = {
     styled: true,
     themes: [{
       "ap":{
-        "primary": "#f4d28d",
-        "secondary": "#1ca583",
-        "accent": "#704cbf",
-        "neutral": "#2B232F",
-        "base-100": "#2C2D58",
-        "info": "#6F9AD3",
-        "success": "#117843",
-        "warning": "#ECB44B",
-        "error": "#F14B4E",
+        "primary": "#795548",
+        "secondary": "#FF5722",
+        "accent": "#FFC107",
+        "neutral": "#2ECC71",
+        "base-100": "#3498DB",
+        "info": "#9B59B6",
+        "success": "#E74C3C",
+        "warning": "#1ABC9C",
+        "error": "#8BC34A"
       }
     }],
     base: true,

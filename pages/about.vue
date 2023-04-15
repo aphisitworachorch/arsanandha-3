@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-profile hero min-h-screen transform-gpu subpixel-antialiased">
+  <div class="hero min-h-screen transform-gpu subpixel-antialiased">
     <div class="hero-content text-center">
       <TotoAboutComponents></TotoAboutComponents>
     </div>

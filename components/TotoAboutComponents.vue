@@ -16,7 +16,7 @@
             <br/>
           </div>
           <div class="md:pl-4">
-            <div class="card max-w-screen md:w-80 bg-gradient-to-r from-blue-700 to-blue-900 text-white font-apMonoFont">
+            <div class="card max-w-screen md:w-80 bg-secondary text-white font-apMonoFont">
               <div class="card-body">
                 <h3 class="card-title">Current Employment Status</h3>
                 <p v-if="workingStatus">✔️ Employed</p>
@@ -27,7 +27,7 @@
 
         </div>
         <div class="pl-1 md:pl-4 pt-5 pb-5 text-left">
-          <nuxt-link to="/" class="transition-all duration-50 btn bg-gradient-to-r from-orange-500 to-red-500 hover:from-violet-500 hover:to-orange-500 border-0 text-white font-bold rounded">Back</nuxt-link>
+          <nuxt-link to="/" class="transition-all duration-50 btn border-0 text-white font-bold rounded">Back</nuxt-link>
         </div>
       </div>
       <div class="p-2 text-left">
