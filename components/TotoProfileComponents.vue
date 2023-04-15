@@ -4,12 +4,12 @@
       <div class="transition-all duration-50 p-2 hover:skew-y-6">
         <div class="avatar md:hover:pr-4">
           <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
-            <nuxt-img src="/pics/toto-alternative.jpg" alt="Profile with 1 Person" format="webp"/>
+            <img src="/public/pics/toto-alternative.jpg" alt="Profile with 1 Person"/>
           </div>
         </div>
       </div>
       <div class="transition-all duration-50 p-2 text-left hover:-skew-y-6">
-        <nuxt-img src="/svg/ARSANANDHALogo.svg" class="w-96 p-5 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text"/>
+        <img src="/public/svg/ARSANANDHALogo.svg" class="w-96 p-5 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <div class="collapse-title peer-checked:rounded-t animate__animated animate__fadeInRight text-white">
             <h1 class="text-2xl">

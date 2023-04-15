@@ -72,7 +72,7 @@ export default {
       positionShow: "",
       customWelcome: "",
       biography:[],
-      workingStatus: false,
+      workingStatus: true,
     }
   },
   methods: {
