@@ -18,7 +18,7 @@
             <TransitionGroup :css="false" tag="div" class="w-76" @after-enter="onEnter" @leave="onLeave">
             <div class="w-76 rounded bg-primary mb-3 snap-start" v-for="(info, index) in skills" :key="info.alias" :data-index="index">
               <div class="p-3">
-                <h1 class="text-xl text-neutral font-bold ml-2">{{ info.name }}</h1>
+                <h1 class="text-xl text-white font-bold ml-2">{{ info.name }}</h1>
                 <div class="p-1">
                   <div class="badge rounded ml-2 p-2 bg-accent hover:font-bold break-words border-none text-white" v-for="(more, index) in info.skill" :key="more.name" :data-index="index">
                     {{ more.name }}
