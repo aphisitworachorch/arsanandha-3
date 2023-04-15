@@ -24,8 +24,8 @@ module.exports = {
     styled: true,
     themes: [{
       "ap":{
-        "primary": "#795548",
-        "secondary": "#FF5722",
+        "primary": "#4CAF50",
+        "secondary": "#00BCD4",
         "accent": "#FFC107",
         "neutral": "#2ECC71",
         "base-100": "#3498DB",

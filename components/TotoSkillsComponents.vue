@@ -29,7 +29,7 @@
             </TransitionGroup>
           </div>
         <div class="pl-3 pt-5 pb-5">
-          <nuxt-link to="/" class="btn font-bold rounded bg-gradient-to-r from-orange-500 to-red-500 hover:from-violet-500 hover:to-orange-500 text-white">Back</nuxt-link>
+          <nuxt-link to="/" class="btn font-bold rounded text-white">Back</nuxt-link>
         </div>
       </div>
     </div>
