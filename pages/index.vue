@@ -29,13 +29,7 @@ import TotoProfileComponents from "~/components/TotoProfileComponents.vue";
 
 export default {
   name: "index",
-  components:{TotoProfileComponents},
-  mounted() {
-    const checkTime = new Date();
-    if (checkTime.getHours() == 0 || checkTime.getHours() == 5) {
-      window.location.replace("/promises");
-    }
-  }
+  components:{TotoProfileComponents}
 }
 
 </script>

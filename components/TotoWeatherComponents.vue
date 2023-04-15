@@ -49,7 +49,14 @@ export default {
     }
   },
   async mounted() {
-    await this.getWeather(14.9912658, 102.1047429)
+      navigator.geolocation.getCurrentPosition(async loc => {
+          const lat = loc.coords.latitude;
+          const lng = loc.coords.longitude;
+          await this.getWeather(lat, lng);
+      },error => {
+          console.log(error.message);
+      },);
+
   }
 }
 </script>
