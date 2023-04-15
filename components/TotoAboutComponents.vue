@@ -1,22 +1,22 @@
 <template>
-  <div class="container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn drop-shadow-2xl">
+  <div class="container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeInDown drop-shadow-2xl">
     <div class="transition-all duration-50 flex flex-col md:flex-row m-3">
       <div class="p-2 text-left rounded-b-xl rounded-t-xl">
-        <img src="/public/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5" alt="Logo with arsanandha Text"/>
+        <img src="/public/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5 animate__animated animate__fadeInDown animate__delay-1s" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <div class="collapse-title">
-            <h1 class="text-2xl text-black font-bold">
+            <h1 class="text-2xl text-black font-bold  animate__animated animate__fadeInDown animate__delay-1s">
               {{ customGreet }}
             </h1>
           </div>
           <div class="collapse-content rounded-b">
-            <h2 class="text-xl break-words w-72 text-black">
+            <h2 class="text-xl break-words w-72 text-black  animate__animated animate__fadeInDown  animate__delay-2s">
               {{ positionShow }}
             </h2>
             <br/>
           </div>
           <div class="md:pl-4">
-            <div class="card max-w-screen md:w-80 bg-secondary text-white font-apMonoFont">
+            <div class="card max-w-screen md:w-80 bg-secondary text-white font-apMonoFont animate__animated animate__fadeInLeft  animate__delay-3s">
               <div class="card-body">
                 <h3 class="card-title">Current Employment Status</h3>
                 <p v-if="workingStatus">✔️ Employed</p>
@@ -26,15 +26,15 @@
           </div>
 
         </div>
-        <div class="pl-1 md:pl-4 pt-5 pb-5 text-left">
+        <div class="pl-1 md:pl-4 pt-5 pb-5 text-left animate__animated animate__fadeInRight animate__delay-5s">
           <nuxt-link to="/" class="transition-all duration-50 btn border-0 text-white font-bold rounded">Back</nuxt-link>
         </div>
       </div>
       <div class="p-2 text-left">
         <div class="overflow-y-scroll scrollbar-hide h-128 w-76 pt-2 font-apMonoFont snap-y">
-          <TransitionGroup :css="false" tag="div" class="rounded" @after-enter="onEnter" @leave="onLeave">
+          <TransitionGroup :css="false" tag="div" class="pb-5" @after-enter="onEnter" @leave="onLeave">
             <div class="pb-5 rounded" v-for="(data, index) in biography" :key="data.alias" :data-index="index">
-              <div class="card bg-info shadow-xl image-full snap-start">
+              <div class="card bg-info shadow-xl image-full snap-start animate__animated animate__fadeInUp animate__delay-4s">
                 <figure><img :src="data.image" :alt="data.name" class="w-96 scale-150"/></figure>
                 <div class="card-body">
                   <h2 class="card-title text-white">{{ data.name }}</h2>
@@ -151,7 +151,6 @@ export default {
       }]
     },
     onEnter: function(el, done) {
-      console.log(el);
       gsap.from(el, {
         opacity: 0,
         y: 100,
