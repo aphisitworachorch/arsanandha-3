@@ -181,13 +181,6 @@ export default {
                 feelsLike = Math.min(heatIndexWithAdj, windChill);
             }
 
-            // Adjust for wind direction
-            if (windDirection !== null) {
-                const windAngle = windDirection * (Math.PI / 360);
-                const windFactor = Math.abs(Math.cos(windAngle));
-                feelsLike *= windFactor;
-            }
-
             return feelsLike.toFixed(0) + "°C";
         },
         getWeather: async function (lat, lon) {
