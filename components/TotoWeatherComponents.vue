@@ -183,7 +183,7 @@ export default {
 
             // Adjust for wind direction
             if (windDirection !== null) {
-                const windAngle = windDirection * (Math.PI / 180);
+                const windAngle = windDirection * (Math.PI / 360);
                 const windFactor = Math.abs(Math.cos(windAngle));
                 feelsLike *= windFactor;
             }
