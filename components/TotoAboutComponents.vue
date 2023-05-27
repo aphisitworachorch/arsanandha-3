@@ -2,7 +2,7 @@
   <div class="container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeInDown drop-shadow-2xl">
     <div class="transition-all duration-50 flex flex-col md:flex-row m-3">
       <div class="p-2 text-left rounded-b-xl rounded-t-xl">
-        <img src="/public/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5 animate__animated animate__fadeInDown animate__delay-1s" alt="Logo with arsanandha Text"/>
+        <nuxt-img format="webp" src="/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5 animate__animated animate__fadeInDown animate__delay-1s" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <div class="collapse-title">
             <h1 class="text-2xl text-black font-bold  animate__animated animate__fadeInDown animate__delay-1s">
@@ -35,7 +35,7 @@
           <TransitionGroup :css="false" tag="div" class="pb-5" @after-enter="onEnter" @leave="onLeave">
             <div class="pb-5 rounded" v-for="(data, index) in biography" :key="data.alias" :data-index="index">
               <div class="card bg-info shadow-xl image-full snap-start animate__animated animate__fadeInUp animate__delay-4s">
-                <figure><img :src="data.image" :alt="data.name" class="w-96 scale-150"/></figure>
+                <figure><nuxt-img format="webp" :src="data.image" :alt="data.name" class="w-96 scale-150"/></figure>
                 <div class="card-body">
                   <h2 class="card-title text-white">{{ data.name }}</h2>
                   <ul v-for="(list, index) in data.details" class="text-sm list-disc pl-5 text-white font-bold" :key="list.name" :data-index="index">

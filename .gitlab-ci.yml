@@ -1,0 +1,16 @@
+stages:
+  - deploy
+
+experimental-backend-kross-deploy-code:
+  stage: deploy
+  image: docker
+  tags:
+    - "dev"
+  services:
+    - docker:dind
+  before_script:
+    - chmod +x ./setup_env.sh
+    - sh ./setup_env.sh
+  script:
+    - apk add docker-compose
+    - docker-compose -f docker-compose.yml up -d --build --force-recreate

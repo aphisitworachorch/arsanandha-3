@@ -1,4 +1,3 @@
-
 export default defineNuxtConfig({
     app:{
         head:{
@@ -21,5 +20,8 @@ export default defineNuxtConfig({
     }]],
     nitro: {
         compressPublicAssets: true,
+    },
+    experimental: {
+        watcher: 'chokidar'
     },
 })

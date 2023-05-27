@@ -1,6 +1,6 @@
 <template>
     <div class="container font-apFont" v-if="weatherExist">
-        <figure><img :src="weatherBg" class="object-cover blur-sm	 absolute left-0 top-0 h-screen w-full"/></figure>
+        <figure><nuxt-img format="webp" :src="weatherBg" class="object-cover blur-sm	 absolute left-0 top-0 h-screen w-full"/></figure>
         <div class="flex flex-col md:flex-row m-3 max-w-screen md:w-96 ">
             <div class="p-2">
                 <div class="transition-all duration-700 ease-in-out delay-75 hover:scale-105 card glass md:w-96 rounded-2xl text-primary text-left shadow-xl hover:shadow-2xl max-w-screen w-72">
