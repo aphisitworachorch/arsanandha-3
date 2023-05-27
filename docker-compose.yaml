@@ -22,5 +22,6 @@ services:
     networks:
       - frontend-service
     volumes:
+      - .:/etc/nginx/
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - /certs:/etc/nginx/certs
