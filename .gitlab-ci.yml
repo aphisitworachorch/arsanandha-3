@@ -13,4 +13,4 @@ experimental-backend-kross-deploy-code:
     - sh ./setup_env.sh
   script:
     - apk add docker-compose
-    - docker-compose -f docker-compose.yml up -d --build --force-recreate
+    - docker-compose -f docker-compose.yaml up -d --build --force-recreate
