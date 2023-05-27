@@ -15,7 +15,8 @@ services:
     restart: on-failure
 
   nginx:
-    image: nginx:latest
+    build:
+      dockerfile: nginx/Dockerfile
     ports:
       - "80:80"
       - "443:443"
