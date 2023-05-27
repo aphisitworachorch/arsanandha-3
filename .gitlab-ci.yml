@@ -5,7 +5,7 @@ experimental-backend-kross-deploy-code:
   stage: deploy
   image: docker
   tags:
-    - "dev"
+    - "frontend-ap"
   services:
     - docker:dind
   before_script:
