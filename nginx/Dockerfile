@@ -1,4 +1,4 @@
-FROM ubuntu:lts AS builder
+FROM ubuntu:latest AS builder
 
 LABEL maintainer="Yury Muski <muski.yury@gmail.com>"
 
