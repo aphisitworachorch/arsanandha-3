@@ -10,6 +10,7 @@ RUN apk --no-cache add \
     perl-utils \
     perl-ipc-run \
     rust \
+    wget \
     cargo
 
 # Clone the Quiche repository
@@ -26,6 +27,7 @@ FROM nginx:latest
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl-dev \
     libpcre3-dev \
+    wget \
     zlib1g-dev
 
 # Copy Quiche library from the builder stage
