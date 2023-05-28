@@ -8,7 +8,9 @@ RUN apk --no-cache add \
     cmake \
     perl \
     perl-utils \
-    perl-ipc-run
+    perl-ipc-run \
+    rust \
+    cargo
 
 # Clone the Quiche repository
 RUN git clone --recursive https://github.com/cloudflare/quiche.git
@@ -44,7 +46,6 @@ RUN ./configure --with-http_ssl_module \
 
 # Copy the Quiche module shared object file
 RUN cp objs/*.so /etc/nginx/modules/
-
 
 COPY ../nginx.conf /etc/nginx/nginx.conf
 COPY ../certs /etc/nginx/certs
