@@ -1,7 +1,7 @@
 stages:
   - deploy
 
-experimental-backend-kross-deploy-code:
+frontend-ap-code-deployment:
   stage: deploy
   image: docker
   tags:
