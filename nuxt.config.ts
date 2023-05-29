@@ -24,7 +24,7 @@ export default defineNuxtConfig({
             meta: [
                 { name: 'application-name', content: 'ARSANANDHA.XYZ' },
                 { name: 'theme-color', content: '#043295' },
-                { name: 'msapplication-TileColor', content: '#043295 },
+                { name: 'msapplication-TileColor', content: '#043295' },
                 { name: 'msapplication-TileImage', content: 'https://arsanandha.xyz/public/icon/mstile-144x144.png' },
                 { name: 'msapplication-square70x70logo', content: 'https://arsanandha.xyz/public/icon/mstile-70x70.png' },
                 { name: 'msapplication-square150x150logo', content: 'https://arsanandha.xyz/public/icon/mstile-150x150.png' },
