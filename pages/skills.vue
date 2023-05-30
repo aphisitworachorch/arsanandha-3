@@ -32,7 +32,3 @@ export default {
   components:{TotoSkillsComponents}
 }
 </script>
-
-<style scoped>
-
-</style>

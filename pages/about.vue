@@ -31,7 +31,3 @@ export default {
   components: {TotoAboutComponents}
 }
 </script>
-
-<style scoped>
-
-</style>

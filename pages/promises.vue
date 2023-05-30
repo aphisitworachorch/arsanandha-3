@@ -32,7 +32,3 @@ export default {
   name: "promises"
 }
 </script>
-
-<style scoped>
-
-</style>
