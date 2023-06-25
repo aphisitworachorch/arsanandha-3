@@ -13,13 +13,3 @@ services:
     networks:
       - frontend-service
     restart: on-failure
-
-  nginx:
-    build:
-      context: .
-      dockerfile: nginx/Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - frontend-service

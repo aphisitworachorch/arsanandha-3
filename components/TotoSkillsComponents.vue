@@ -2,7 +2,7 @@
   <div class="container font-apFont">
     <div class="flex flex-col md:flex-row m-3">
       <div class="transition-all duration-50 p-2">
-        <div class="transition-all duration-50 avatar md:hover:pr-4">
+        <div class="transition-all duration-50 avatar">
           <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
             <nuxt-img format="webp" src="/pics/arsanandha-newpro.png" alt="Profile"/>
           </div>
