@@ -49,4 +49,7 @@ export default defineNuxtConfig({
     experimental: {
         watcher: 'chokidar'
     },
+    security: {
+        hidePoweredBy: true
+    }
 })
