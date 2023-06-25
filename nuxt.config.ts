@@ -42,11 +42,20 @@ export default defineNuxtConfig({
         },
         download: true,
         display: 'auto',
-    }]],
+    }],'nuxt-security'],
     nitro: {
         compressPublicAssets: true,
     },
     experimental: {
         watcher: 'chokidar'
     },
+    security: {
+        headers: {
+            xXSSProtection: '1',
+            contentSecurityPolicy: false
+        },
+        xssValidator: {
+            stripIgnoreTag: true,
+        }
+    }
 })

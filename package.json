@@ -11,7 +11,8 @@
     "@nuxt/image": "^0.7.1",
     "@nuxt/image-edge": "1.0.0-28059208.2abef1b",
     "@nuxtjs/tailwindcss": "^6.7.0",
-    "nuxt": "^3.5.1"
+    "nuxt": "^3.5.1",
+    "nuxt-security": "^0.13.1"
   },
   "dependencies": {
     "@nuxt/postcss8": "^1.1.3",
