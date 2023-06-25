@@ -6,10 +6,9 @@ networks:
 
 services:
   frontend:
-    build:
-      dockerfile: Dockerfile
+    build: .
     ports:
       - "3000:3000"
     networks:
       - frontend-service
-    restart: on-failure
+    restart: always
