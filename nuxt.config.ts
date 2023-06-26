@@ -40,7 +40,8 @@ export default defineNuxtConfig({
             'Space Mono': true,
             'IBM Plex Sans Thai': true,
         },
-        preload: true,
+        download: true,
+        base64: true,
         display: 'auto',
     }]],
     nitro: {
