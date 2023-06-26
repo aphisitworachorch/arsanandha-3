@@ -2,7 +2,7 @@
   <div class="container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeInDown drop-shadow-2xl">
     <div class="transition-all duration-50 flex flex-col md:flex-row m-3">
       <div class="p-2 text-left rounded-b-xl rounded-t-xl">
-        <nuxt-img format="webp" src="/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5 animate__animated animate__fadeInDown animate__delay-1s" alt="Logo with arsanandha Text"/>
+        <nuxt-img format="webp" width="3828" height="453" src="/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5 animate__animated animate__fadeInDown animate__delay-1s" alt="Logo with arsanandha Text"/>
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <div class="collapse-title">
             <h1 class="text-2xl text-black font-bold  animate__animated animate__fadeInDown animate__delay-1s">
@@ -35,7 +35,7 @@
           <TransitionGroup :css="false" tag="div" class="pb-5" @after-enter="onEnter" @leave="onLeave">
             <div class="pb-5 rounded" v-for="(data, index) in biography" :key="data.alias" :data-index="index">
               <div class="card bg-info shadow-xl image-full snap-start animate__animated animate__fadeInUp animate__delay-4s">
-                <figure><nuxt-img format="webp" :src="data.image" :alt="data.name" class="w-96 scale-150"/></figure>
+                <figure><nuxt-img fit="cover" width="1500" height="1500" format="webp" :src="data.image" :alt="data.name" class="w-96 scale-150"/></figure>
                 <div class="card-body">
                   <h2 class="card-title text-white">{{ data.name }}</h2>
                   <ul v-for="(list, index) in data.details" class="text-sm list-disc pl-5 text-white font-bold" :key="list.name" :data-index="index">
@@ -125,7 +125,7 @@ export default {
       },{
         name: "Work Experiences",
         alias: "work_exp",
-        image: "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80",
+        image: "https://unsplash.com/photos/VBLHICVh-lI/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mjh8fHdvcmt8ZW58MHx8fHwxNjg3NzU4OTM4fDA&force=true&w=1920",
         iswork: true,
         details:[{
           name: "(Internship) Benchmark Electronics",
