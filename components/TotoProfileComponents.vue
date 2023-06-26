@@ -4,12 +4,12 @@
       <div class="transition-all duration-50 p-2">
         <div class="transition-all duration-50 avatar">
           <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
-            <nuxt-img format="webp" src="/pics/toto-alternative.jpg" width="1200" height="1200" alt="Profile with 1 Person" />
+            <nuxt-img format="webp" src="/pics/toto-alternative.jpg" width="1200" height="1200" sizes="sm:70vw md:60vw lg:900px" alt="Profile with 1 Person" />
           </div>
         </div>
       </div>
       <div class="transition-all duration-50 p-2 text-left">
-        <nuxt-img fit="cover" width="3828" height="453" format="webp" src="/svg/ARSANANDHALogo.svg" class="w-96 pl-2 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text" />
+        <nuxt-img fit="cover" sizes="sm:20vw md:60vw lg:80vw xl:100vw" width="3828" height="453" format="webp" src="/svg/ARSANANDHALogo.svg" class="w-96 pl-2 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text" />
         <div tabindex="0" class="collapse collapse-open rounded-box">
           <div class="collapse-title peer-checked:rounded-t animate__animated animate__fadeInRight text-white">
             <h1 class="text-2xl">{{ customGreet }}</h1>

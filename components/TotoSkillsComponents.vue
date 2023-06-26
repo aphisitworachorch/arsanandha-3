@@ -4,10 +4,10 @@
       <div class="transition-all duration-50 p-2">
         <div class="transition-all duration-50 avatar">
           <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">
-            <nuxt-img width="1200" height="1200" format="webp" src="/pics/arsanandha-newpro.png" alt="Profile"/>
+            <nuxt-img width="1200" height="1200" sizes="sm:70vw md:60vw lg:900px" format="webp" src="/pics/arsanandha-newpro.png" alt="Profile"/>
           </div>
         </div>
-        <nuxt-img fit="cover" width="3828" height="453" format="webp" src="/svg/ARSANANDHALogo.svg" class="w-96 pt-2 pl-2 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text" />
+        <nuxt-img fit="cover" sizes="sm:20vw md:60vw lg:80vw xl:100vw" width="3828" height="453" format="webp" src="/svg/ARSANANDHALogo.svg" class="w-96 pt-2 pl-2 animate__animated animate__fadeInDown invert" alt="Logo with arsanandha Text" />
       </div>
       <div class="transition-all duration-50 p-2 text-left">
         <h1 class="text-5xl pl-3 pb-3 pt-2 pr-6 text-bold animate__animated animate__fadeInDown text-white" v-if="showLogo"><b>
