@@ -43,7 +43,7 @@ export default defineNuxtConfig({
         download: true,
         base64: true,
         display: 'auto',
-    }]],
+    }],'nuxt-security'],
     nitro: {
         compressPublicAssets: true,
     },
