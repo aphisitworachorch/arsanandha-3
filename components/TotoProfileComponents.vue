@@ -57,8 +57,11 @@ const {
             <li>
               <a :href="resume">Resume<div class="badge badge-primary">NEW 🎉</div></a>
             </li>
-            <li>
+            <li v-if="status === 'unauthenticated'">
               <button @click="signIn('spotify')">Login to Spotify<div class="badge badge-primary">EXP 💥</div></button>
+            </li>
+            <li v-if="status === 'authenticated'">
+              <button @click="signOut()">Logout</button>
             </li>
           </ul>
         </div>
