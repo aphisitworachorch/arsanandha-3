@@ -43,30 +43,11 @@ export default defineNuxtConfig({
         download: true,
         base64: true,
         display: 'auto',
-    }],'@sidebase/nuxt-auth'],
+    }]],
     nitro: {
         compressPublicAssets: true,
     },
     experimental: {
         watcher: 'chokidar'
     },
-    auth: {
-        // The module is enabled. Change this to disable the module
-        isEnabled: true,
-        origin: 'http://localhost:3000',
-        basePath: '/api/auth',
-        provider: {
-            defaultProvider: 'credentials',
-            type: 'authjs'
-        },
-        enableSessionRefreshPeriodically: false,
-        enableSessionRefreshOnWindowFocus: true,
-        globalAppMiddleware: false,
-        defaultProvider: undefined,
-        addDefaultCallbackUrl: true,
-        globalMiddlewareOptions: {
-            allow404WithoutAuth: true,
-            addDefaultCallbackUrl: true
-        }
-    }
 })

@@ -1,34 +1,7 @@
 <script setup>
-const {
-  status,
-  data,
-  lastRefreshedAt,
-  getCsrfToken,
-  getProviders,
-  getSession,
-  signIn,
-  signOut,
-} = useAuth()
 </script>
 <template>
   <div class="container font-apFont">
-    <div class="transition-all duration-50 p-3 text-left" v-if="status === 'authenticated'">
-      <div class="card md:w-96 w-60 bg-primary shadow-xl">
-        <div class="flex flex-row m-3 items-center">
-          <div class="pr-5">
-            <div class="avatar items-center pt-2">
-              <div class="w-12 rounded-full">
-                <img :src="data.user.image"  alt="Spotify Badges"/>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h2 class="font-apMonoFont font-bold">Hi, {{ data.user.name }}!</h2>
-            <h2 class="font-apMonoFont font-light">You're Logged In!</h2>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="flex flex-col md:flex-row m-3">
       <div class="transition-all duration-50 p-2">
         <div class="transition-all duration-50 avatar">
@@ -56,12 +29,6 @@ const {
             </li>
             <li>
               <a :href="resume">Resume<div class="badge badge-primary">NEW 🎉</div></a>
-            </li>
-            <li v-if="status === 'unauthenticated'">
-              <button @click="signIn('spotify')">Login to Spotify<div class="badge badge-primary">EXP 💥</div></button>
-            </li>
-            <li v-if="status === 'authenticated'">
-              <button @click="signOut()">Logout</button>
             </li>
           </ul>
         </div>
@@ -103,7 +70,7 @@ export default {
           }
         ];
       }, 300);
-    },
+    }
   },
   created() {
     this.showName();
