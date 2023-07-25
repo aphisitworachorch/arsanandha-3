@@ -43,11 +43,17 @@ export default defineNuxtConfig({
         download: true,
         base64: true,
         display: 'auto',
-    }]],
+    }],'@nuxt-alt/auth', '@pinia/nuxt'],
     nitro: {
         compressPublicAssets: true,
     },
     experimental: {
         watcher: 'chokidar'
     },
+    auth:{
+        token: {
+            prefix: '_token.',
+            global: true,
+        }
+    }
 })
