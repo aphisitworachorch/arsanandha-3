@@ -129,24 +129,28 @@ export default {
         iswork: true,
         details:[{
           name: "(Internship) Benchmark Electronics",
-          message: "Work with Python Stacks (Windows IIS / Redis / Django Frameworks) to Build a Health Reimbursement Platform",
+          message: "Work with Python Stacks (Windows IIS / Redis / Django Frameworks) to building a Health Reimbursement Platform.",
           duration: "~ 4 Months"
         },{
           name: "BizPotential",
-          message: "Work with PHP Stacks (Windows IIS / PHP / MSSQL or Oracle) to Build a ERP Product",
+          message: "Work with PHP Stacks (Windows IIS / PHP / MSSQL or Oracle) to building a ERP Product.",
           duration: "~ 3 Months"
         },{
           name: "MeMessage (Korat.com)",
-          message: "Work with PHP Stacks (Windows IIS / PHP (CodeIgniter) / MariaDB) to Build a e-Commerce Product",
+          message: "Work with PHP Stacks (Windows IIS / PHP (CodeIgniter) / MariaDB) to building a e-Commerce Product.",
           duration: "~ 7 Months"
         },{
           name: "ApplicationDD LTD",
-          message: "Work with Technology Stacks (Windows IIS / Docker / Ubuntu / NestJS / PHP (Laravel) / TypeScript / MinIO / Python / PostgreSQL / Redis) in Environment of Software House-like",
+          message: "Work with Technology Stacks (Windows IIS / Docker / Ubuntu / NestJS / PHP (Laravel) / TypeScript / MinIO / Python / PostgreSQL / Redis) in Environment of Software House-like.",
           duration: "~ 1 Year"
         },{
           name: "CommonGround",
-          message: "Work with Technology Stacks (Ubuntu / GitLab CI/CD / DigitalOcean Platforms / Cloudflare / PostgreSQL / Redis / AWS S3-like / Python) for Building MARCOM Tech Platform",
+          message: "Work with Technology Stacks (Ubuntu / GitLab CI/CD / DigitalOcean Platforms / Cloudflare / PostgreSQL / Redis / AWS S3-like / Python) for building MARCOM Tech Platform.",
           duration: "~ 6 Months"
+        },{
+          name: "Amity Solutions",
+          message: "Working for Thailand Security Authority with Packs of Technology Stacks (Kubernetes / AWS ECR / Keycloak / NGINX Ingress / NestJS / Prisma / PostgreSQL / RabbitMQ / Redis / MinIO) for building a Full-loop Person Management System.",
+          duration: "~ 9 Months"
         }]
       }]
     },
