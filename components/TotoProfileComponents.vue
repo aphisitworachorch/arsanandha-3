@@ -17,7 +17,7 @@
             <h1 class="text-2xl">{{ customGreet }}</h1>
           </div>
           <div class="collapse-content rounded-b" v-if="showLogo">
-            <h2 class="text-xl animate__animated animate__fadeInRight break-words w-72 text-white">{{ customWelcome }}</h2>
+            <h1 id="typing" class="text-lg animate__animated animate__fadeInRight break-words w-80 text-white"></h1>
             <br/>
           </div>
         </div>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import Typed from 'typed.js';
 export default {
   name: "TotoProfileComponents",
   data() {
@@ -49,27 +50,30 @@ export default {
       resume: "https://resume.io/r/TH55tWqzE"
     };
   },
+  beforeMount() {
+    new Typed('#typing', {
+      strings: [this.customWelcome],
+      typeSpeed: 30,
+      smartBackspace: true,
+    });
+  },
   methods: {
     showName() {
-      setTimeout(() => {
-        this.customGreet = "Arsanandha Aphisitworachorch";
-        this.showLogo = true;
-        this.customWelcome = `Hi! I'm a Backend Developer
-          Involved in Cutting-edge Technology
-          with Love and Passion 💖`;
-        this.menu = [
-          {
-            name: "Skills",
-            route: "/skills",
-            isnew: true
-          },
-          {
-            name: "About",
-            route: "/about",
-            isnew: true
-          }
-        ];
-      }, 300);
+      this.customGreet = "Arsanandha Aphisitworachorch";
+      this.showLogo = true;
+      this.customWelcome = `👋 Hi! I'm a Backend Developer Involved in Backend Technology\n who wants to be a "Backend Specialist"!\n with a Love of God and a Full Passion for developing applications.`;
+      this.menu = [
+        {
+          name: "Skills",
+          route: "/skills",
+          isnew: true
+        },
+        {
+          name: "About",
+          route: "/about",
+          isnew: true
+        }
+      ];
     }
   },
   created() {

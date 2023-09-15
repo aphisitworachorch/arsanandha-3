@@ -47,9 +47,6 @@ export default defineNuxtConfig({
     nitro: {
         compressPublicAssets: true,
     },
-    experimental: {
-        watcher: 'chokidar'
-    },
     auth:{
         token: {
             prefix: '_token.',
