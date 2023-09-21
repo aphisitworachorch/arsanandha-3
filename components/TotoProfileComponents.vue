@@ -17,7 +17,7 @@
             <h1 class="text-2xl">{{ customGreet }}</h1>
           </div>
           <div class="collapse-content rounded-b" v-if="showLogo">
-            <h1 id="typing" class="text-lg animate__animated animate__fadeInRight break-words w-80 text-white"></h1>
+            <h1 class="text-lg animate__animated animate__fadeInRight break-words w-80 text-white">{{ customWelcome }}</h1>
             <br/>
           </div>
         </div>
@@ -49,13 +49,6 @@ export default {
       menu: [],
       resume: "https://resume.io/r/TH55tWqzE"
     };
-  },
-  beforeMount() {
-    new Typed('#typing', {
-      strings: [this.customWelcome],
-      typeSpeed: 30,
-      smartBackspace: true,
-    });
   },
   methods: {
     showName() {

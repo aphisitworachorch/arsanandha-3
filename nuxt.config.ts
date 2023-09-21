@@ -43,7 +43,7 @@ export default defineNuxtConfig({
         download: true,
         base64: true,
         display: 'auto',
-    }],'@nuxt-alt/auth', '@pinia/nuxt'],
+    }],'@nuxt-alt/auth', '@pinia/nuxt',"nuxt-lodash"],
     nitro: {
         compressPublicAssets: true,
     },
