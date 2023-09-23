@@ -4,7 +4,7 @@
     <h1 class="text-3xl font-apThai">รายชื่อคทากร</h1>
     <div class="flex md:flex-row flex-col flex-wrap items-center">
       <div class="p-3 items-center" v-for="data in retrieved">
-        <KatakornCardComponents :images_src="data.images_url" :details="useOmit(data,['images_url'])"></KatakornCardComponents>
+        <KatakornCardComponents :images_src="data.thumbnails" :details="useOmit(data,['images_url'])"></KatakornCardComponents>
       </div>
     </div>
   </div>
