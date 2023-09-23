@@ -107,7 +107,7 @@ export default {
         cancelButtonText: 'ไม่'
       }).then(async result => {
         if (result.isConfirmed) {
-          const { data: retrieveData, status: dataStatus } = await useFetch(`https://nicodemus.arsanandha.xyz/katakorn/candidate/${id}`,{
+          const { data: retrieveData } = await useFetch(`https://nicodemus.arsanandha.xyz/katakorn/candidate/${id}`,{
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Headers": "*",
@@ -116,7 +116,7 @@ export default {
             method: 'POST',
             responseType: 'json'
           });
-          if (retrieveData.status !== 200 || retrieveData.status !== 201) {
+          if (retrieveData.value.statusCode !== 200 || retrieveData.value.statusCode !== 201) {
             $swal.fire({
               title: 'แจ้งเตือน',
               text: 'เคาะไม่ได้ !',
