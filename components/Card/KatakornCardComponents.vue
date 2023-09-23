@@ -116,7 +116,7 @@ export default {
             method: 'POST',
             responseType: 'json'
           });
-          if (dataStatus !== 200 || dataStatus !== 201) {
+          if (data.status !== 200 || data.status !== 201) {
             $swal.fire({
               title: 'แจ้งเตือน',
               text: 'เคาะไม่ได้ !',
