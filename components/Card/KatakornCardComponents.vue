@@ -116,7 +116,7 @@ export default {
             method: 'POST',
             responseType: 'json'
           });
-          if (retrieveData.value == null || retrieveData.data == undefined) {
+          if (retrieveData.value == null || retrieveData.value == undefined) {
             $swal.fire({
               title: 'แจ้งเตือน',
               text: 'เคาะไม่ได้ !',
