@@ -1,6 +1,6 @@
 
 <template>
-  <div class="defaultNonCandidate">
+  <div :class=getCandidateStyle(details)>
     <figure>
       <nuxt-img format="webp" loading="lazy" :src="images_src" class="w-72 h-72 object-cover"/>
     </figure>
@@ -116,7 +116,7 @@ export default {
             method: 'POST',
             responseType: 'json'
           });
-          if (data.status !== 200 || data.status !== 201) {
+          if (retrieveData.status !== 200 || retrieveData.status !== 201) {
             $swal.fire({
               title: 'แจ้งเตือน',
               text: 'เคาะไม่ได้ !',
@@ -136,6 +136,9 @@ export default {
         }
       });
 
+    },
+    getCandidateStyle(details) {
+      return details?.candidated ? "candidated" : "defaultNonCandidate";
     }
   }
 }
