@@ -18,3 +18,4 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.arsanandha.rule=Host(`arsanandha.xyz`)"
       - "traefik.http.routers.arsanandha.entrypoints=https"
+      - "traefik.http.routers.arsanandha.tls=true"
