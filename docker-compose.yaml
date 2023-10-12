@@ -14,3 +14,7 @@ services:
     networks:
       - frontend-service
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.arsanandha.rule=Host(`arsanandha.xyz`)"
+      - "traefik.http.routers.arsanandha.entrypoints=web"
