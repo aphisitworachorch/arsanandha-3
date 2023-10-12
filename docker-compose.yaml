@@ -21,3 +21,4 @@ services:
       - "traefik.http.routers.arsanandha.tls=true"
       - "traefik.http.routers.arsanandha.tls.domains[0].main=arsanandha.xyz"
       - "traefik.http.routers.arsanandha.tls.domains[0].sans=*.arsanandha.xyz"
+      - "traefik.http.services.arsanandha.loadbalancer.server.port=3000"
