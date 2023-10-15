@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     showName() {
-      console.log(performance.getEntries()[0].nextHopProtocol)
       this.customGreet = "Arsanandha Aphisitworachorch";
       this.showLogo = true;
       this.customWelcome = `👋 Hi! I'm a Backend Developer Involved in Backend Technology\n who wants to be a "Backend Specialist"!\n with a Love of God and a Full Passion for developing applications.`;
