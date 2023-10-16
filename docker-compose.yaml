@@ -28,7 +28,6 @@ services:
       - "traefik.http.middlewares.arsanandha.headers.browserxssfilter=true"
       - "traefik.http.middlewares.arsanandha.headers.contentTypeNosniff=true"
       - "traefik.http.middlewares.arsanandha.headers.sslRedirect=true"
-      - "traefik.http.middlewares.arsanandha.headers.contentSecurityPolicy=default-src 'none';form-action 'none';frame-ancestors 'none';base-uri 'none'"
       - "traefik.http.middlewares.arsanandha.headers.addVaryHeader=true"
       - "traefik.http.middlewares.arsanandha.headers.referrerPolicy=same-origin"
       - "traefik.http.routers.arsanandha.middlewares=arsanandha@docker"
