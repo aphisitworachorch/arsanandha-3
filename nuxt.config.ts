@@ -43,30 +43,7 @@ export default defineNuxtConfig({
         download: true,
         base64: true,
         display: 'auto',
-    }],'@nuxt-alt/auth', '@pinia/nuxt',"nuxt-lodash", ["nuxt-security",{
-        security: {
-            nonce: true,
-            headers: {
-                contentSecurityPolicy: {
-                    'style-src': [
-                        "'self'",  // fallback value for older browsers, automatically removed if `strict-dynamic` is supported.
-                        "'nonce-{{nonce}}'",
-                    ],
-                    'img-src': ["'self'", 'https://*'],
-                    'script-src': [
-                        "'self'",  // fallback value for older browsers, automatically removed if `strict-dynamic` is supported.
-                        "'nonce-{{nonce}}'",
-                        "'strict-dynamic'"
-                    ],
-                    'script-src-attr': [
-                        "'self'",  // fallback value for older browsers, automatically removed if `strict-dynamic` is supported.
-                        "'nonce-{{nonce}}'",
-                        "'strict-dynamic'"
-                    ]
-                }
-            }
-        }
-    }]],
+    }],'@nuxt-alt/auth', '@pinia/nuxt',"nuxt-lodash"],
     nitro: {
         compressPublicAssets: true,
     },
