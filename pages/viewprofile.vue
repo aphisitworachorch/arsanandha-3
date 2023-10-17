@@ -1,6 +1,6 @@
 <template>
-  <div class="hero min-h-screen transform-gpu subpixel-antialiased bg-black">
-    <div class="hero-content text-center">
+  <div class="outerContainer">
+    <div class="innerContainer">
       <TotoKatakornViewProfile></TotoKatakornViewProfile>
     </div>
   </div>
@@ -35,3 +35,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+.outerContainer {
+  @apply hero min-h-screen transform-gpu subpixel-antialiased bg-black
+}
+.innerContainer {
+  @apply hero-content text-center
+}
+</style>

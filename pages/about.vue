@@ -1,6 +1,6 @@
 <template>
-  <div class="hero min-h-screen transform-gpu subpixel-antialiased">
-    <div class="hero-content text-center">
+  <div class="outerContainer">
+    <div class="innerContainer">
       <TotoAboutComponents></TotoAboutComponents>
     </div>
   </div>
@@ -31,3 +31,11 @@ export default {
   components: {TotoAboutComponents}
 }
 </script>
+<style scoped>
+.outerContainer {
+  @apply hero min-h-screen transform-gpu subpixel-antialiased
+}
+.innerContainer {
+  @apply hero-content text-center
+}
+</style>

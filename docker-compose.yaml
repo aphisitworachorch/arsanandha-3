@@ -28,7 +28,6 @@ services:
       - "traefik.http.middlewares.arsanandha.headers.browserxssfilter=true"
       - "traefik.http.middlewares.arsanandha.headers.contentTypeNosniff=true"
       - "traefik.http.middlewares.arsanandha.headers.sslRedirect=true"
-      - "traefik.http.middlewares.arsanandha.headers.contentSecurityPolicy=default-src 'self'; script-src 'report-sample' 'self'; style-src 'report-sample' 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; frame-src 'self'; img-src 'self' https://daniel.haxx.se; manifest-src 'self'; media-src 'self'; worker-src 'none';"
       - "traefik.http.middlewares.arsanandha.headers.addVaryHeader=true"
       - "traefik.http.middlewares.arsanandha.headers.referrerPolicy=same-origin"
       - "traefik.http.routers.arsanandha.middlewares=arsanandha@docker"

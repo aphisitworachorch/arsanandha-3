@@ -19,7 +19,7 @@
           <div class="collapse-content rounded-b" v-if="showLogo">
             <h1 class="text-lg animate__animated animate__fadeInRight break-words w-80 text-white">{{ customWelcome }}</h1>
             <br/>
-            <nuxt-img width="80" height="30" title="Show on HTTP/3 Technology" fit="cover" src="https://daniel.haxx.se/blog/wp-content/uploads/2020/08/IETF-Badge-HTTP3@3x-1200x521.png"></nuxt-img>
+            <nuxt-img width="120" height="50" title="Show on HTTP/3 Technology" fit="cover" src="pics/IETF-Badge-HTTP3@3x-1200x521.png"></nuxt-img>
           </div>
         </div>
         <div class="dropdown p-3">
