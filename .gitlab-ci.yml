@@ -5,7 +5,7 @@ frontend-ap-code-deployment:
   stage: deploy
   image: docker
   services:
-    - docker:dind
+    - docker:dind-rootless
   tags:
     - "frontend-ap"
   before_script:
