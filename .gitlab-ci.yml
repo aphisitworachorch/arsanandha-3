@@ -23,5 +23,3 @@ frontend-ap-k8s-apply:
     - "frontend-ap"
   script:
     - kubectl config get-contexts
-    - kubectl config use-context default
-    - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml --namespace default
