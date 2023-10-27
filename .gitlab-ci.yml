@@ -28,4 +28,4 @@ frontend-ap-k8s-apply:
     - kubectl config use-context default
     - kubectl config get-contexts
     - kubectl get namespace
-    - helm install arsanandha-frontend ./
+    - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml --namespace=default
