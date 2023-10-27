@@ -4,13 +4,14 @@ stages:
 frontend-ap-code-deployment:
   stage: deploy
   image: docker
-  tags:
-    - "frontend-ap"
   services:
     - docker:dind
+  tags:
+    - "frontend-ap"
   before_script:
     - chmod +x ./setup_env.sh
     - sh ./setup_env.sh
   script:
-    - apk add docker-compose
-    - docker-compose -f docker-compose.yaml up -d --build --force-recreate
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/group/project/image:latest
+    - docker push $CI_REGISTRY/group/project/image:latest
