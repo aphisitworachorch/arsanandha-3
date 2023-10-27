@@ -1,8 +1,9 @@
 stages:
+  - build
   - deploy
 
-frontend-ap-code-deployment:
-  stage: deploy
+frontend-ap-docker-build:
+  stage: build
   image: docker
   tags:
     - "frontend-ap"
@@ -13,3 +14,11 @@ frontend-ap-code-deployment:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest .
     - docker push $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest
+
+frontend-ap-k8s-apply:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [ "" ]
+    script:
+      - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml
