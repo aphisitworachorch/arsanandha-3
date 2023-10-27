@@ -18,7 +18,10 @@ frontend-ap-docker-build:
 frontend-ap-k8s-apply:
   stage: deploy
   image: bitnami/kubectl:latest
+  entrypoint: ['']
   tags:
     - "frontend-ap"
   script:
-    - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml
+    - kubectl config get-contexts
+    - kubectl config use-context default
+    - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml --namespace default
