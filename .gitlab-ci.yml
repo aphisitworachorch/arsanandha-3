@@ -18,5 +18,7 @@ frontend-ap-docker-build:
 frontend-ap-k8s-apply:
   stage: deploy
   image: bitnami/kubectl:latest
+  tags:
+    - "frontend-ap"
   script:
     - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml
