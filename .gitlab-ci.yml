@@ -18,7 +18,6 @@ frontend-ap-docker-build:
 frontend-ap-k8s-apply:
   stage: deploy
   image: bitnami/kubectl:latest
-  entrypoint: ['']
   tags:
     - "frontend-ap"
   script:
