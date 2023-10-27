@@ -27,3 +27,5 @@ frontend-ap-k8s-apply:
     - kubectl config set-context default --cluster=${KUBE_CLUSTER_NAME} --user=${KUBE_USER}
     - kubectl config use-context default
     - kubectl config get-contexts
+    - kubectl get namespace
+    - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml --namespace=default
