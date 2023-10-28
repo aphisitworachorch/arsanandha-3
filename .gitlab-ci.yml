@@ -18,6 +18,8 @@ frontend-ap-docker-build:
 frontend-ap-k8s-apply:
   stage: deploy
   image: bitnami/kubectl:latest
+  tags:
+    - "frontend-ap"
   script:
     - kubectl config set-cluster ${KUBE_CLUSTER_NAME} --server="${KUBE_SERVER}"
     - kubectl config set clusters.${KUBE_CLUSTER_NAME}.certificate-authority-data ${KUBE_CERTIFICATE_AUTHORITY_DATA}
