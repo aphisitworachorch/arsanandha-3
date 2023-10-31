@@ -6,14 +6,16 @@ frontend-ap-docker-build:
   stage: build
   tags:
     - "frontend-ap"
-  image: rancher/rancher
+  image: ubuntu:latest
+  services:
+    - docker:dind
   before_script:
     - chmod +x ./setup_env.sh
     - sh ./setup_env.sh
   script:
-    - nerdctl login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - nerdctl build -t $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest .
-    - nerdctl push $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest .
+    - docker push $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest
 
 frontend-ap-k8s-apply:
   stage: deploy
