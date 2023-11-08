@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ap-frontend
+  namespace: arsanandha
   labels:
     app: ap-frontend
 spec:
@@ -16,7 +17,7 @@ spec:
         app: ap-frontend
     spec:
       imagePullSecrets:
-        - name: regcred
+        - name: arsanandha-frontend-repo
       containers:
         - name: ap-frontend
           image: registry.gitlab.com/arsanandha.ap/ap-frontend/ap-frontend:latest
@@ -31,6 +32,7 @@ metadata:
   labels:
     app: ap-frontend-service
   name: ap-frontend-service
+  namespace: arsanandha
 spec:
   selector:
     app: ap-frontend
@@ -45,15 +47,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ap-frontend-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/proxy-body-size: 20m
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-proxy-protocol: "true"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/enable-cors: "true"
+  namespace: arsanandha
 spec:
-  ingressClassName: nginx
   rules:
     - host: arsanandha.xyz
       http:
@@ -61,11 +56,11 @@ spec:
           - pathType: Prefix
             path: /
             backend:
-                service:
-                  name: ap-frontend-service
-                  port:
-                    number: 3000
+              service:
+                name: ap-frontend-service
+                port:
+                  number: 3000
   tls:
     - hosts:
         - arsanandha.xyz
-      secretName: arsanandha
+      secretName: arsanandha-xyz
