@@ -151,6 +151,10 @@ export default {
           name: "Amity Solutions",
           message: "Working for Thailand Security Authority with Packs of Technology Stacks (Kubernetes / AWS ECR / Keycloak / NGINX Ingress / NestJS / Prisma / PostgreSQL / RabbitMQ / Redis / MinIO) for building a Full-loop Person Management System.",
           duration: "~ 9 Months"
+        },{
+          name: "Socket9",
+          message: "New Roles of Backend Developers, Who turned yourself to DevOps Developer!",
+          duration: "~ Current"
         }]
       }]
     },
