@@ -21,7 +21,7 @@ spec:
       containers:
         - name: ap-frontend
           image: registry.gitlab.com/arsanandha.ap/ap-frontend/ap-frontend:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
       restartPolicy: Always
@@ -48,6 +48,11 @@ kind: Ingress
 metadata:
   name: ap-frontend-ingress
   namespace: arsanandha
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.domains.0.main: arsanandha.xyz
 spec:
   rules:
     - host: arsanandha.xyz
