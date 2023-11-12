@@ -43,29 +43,25 @@ spec:
       name: ap-port-3000
   type: ClusterIP
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: ap-frontend-ingress
+  name: frontend-api-ingress-route
   namespace: arsanandha
-  annotations:
-    kubernetes.io/ingress.class: "traefik"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.tls.domains.0.main: arsanandha.xyz
 spec:
-  rules:
-    - host: arsanandha.xyz
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: ap-frontend-service
-                port:
-                  number: 3000
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`arsanandha.xyz`) && PathPrefix(`/`)"
+      kind: Rule
+      services:
+        - name: ap-frontend-service
+          port: 3000
+          passHostHeader: true
   tls:
-    - hosts:
-        - arsanandha.xyz
-      secretName: arsanandha-xyz
+    secretName: arsanandha-xyz
+    options:
+      name: arsanandha-tls-options
+      namespace: arsanandha
+    domains:
+      - main: arsanandha.xyz
