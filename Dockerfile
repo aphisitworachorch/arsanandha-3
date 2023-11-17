@@ -1,6 +1,11 @@
 # Use a large Node.js base image to build the application and name it "build"
 FROM node:lts-alpine as build
 
+RUN apk update && \
+    apk add --update git && \
+    apk add --update openssh
+
+
 # Exact same steps as before
 WORKDIR /app
 
