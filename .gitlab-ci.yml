@@ -14,7 +14,7 @@ frontend-ap-docker-build:
     - chmod +x ./setup_env.sh
     - sh ./setup_env.sh
   script:
-    - echo $CI_BUILD_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker build -t $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING .
     - docker push $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING
 
