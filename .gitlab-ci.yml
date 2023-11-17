@@ -2,6 +2,9 @@ stages:
   - build
   - deploy
 
+variables:
+  VERSIONING: "v0.0.$CI_PIPELINE_IID"
+
 frontend-ap-docker-build:
   stage: build
   tags:
@@ -12,8 +15,8 @@ frontend-ap-docker-build:
     - sh ./setup_env.sh
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest .
-    - docker push $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:latest
+    - docker build -t $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING .
+    - docker push $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING
 
 frontend-ap-k8s-apply:
   stage: deploy
@@ -29,3 +32,4 @@ frontend-ap-k8s-apply:
     - kubectl config get-contexts
     - kubectl get namespace
     - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml
+    - kubectl set image deployment/ap-frontend ap-frontend=$CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING --namespace=arsanandha
