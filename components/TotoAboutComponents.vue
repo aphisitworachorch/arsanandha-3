@@ -1,5 +1,5 @@
 <template>
-  <div class="container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeInDown drop-shadow-2xl">
+  <div class="transition-all ease-in-out delay-75 container font-apFont bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg p-3 md:p-6 rounded-b-xl rounded-t-xl animate__animated animate__fadeInDown drop-shadow-2xl">
     <div class="transition-all duration-50 ease-in-out delay-75 transform-gpu subpixel-antialiased flex flex-col md:flex-row m-3">
       <div class="p-2 text-left rounded-b-xl rounded-t-xl">
         <nuxt-img format="webp" sizes="sm:20vw md:60vw lg:80vw xl:100vw" width="3828" height="453" src="/svg/ARSANANDHALogo.svg" class="max-w-screen md:w-96 pl-3 pb-5 animate__animated animate__fadeInDown animate__delay-1s" alt="Logo with arsanandha Text"/>
