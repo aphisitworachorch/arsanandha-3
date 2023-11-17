@@ -41,7 +41,7 @@
                   <ul v-for="(list, index) in data.details" class="text-sm list-disc pl-5 text-white font-bold" :key="list.name" :data-index="index">
                     <li>
                       {{ list.name }}
-                      <ul v-if="data.iswork" class="md:w-96 font-light">
+                      <ul v-if="data.isWork" class="md:w-96 font-light">
                         <li>"Duration {{ list.duration }}"</li>
                       </ul>
                       <ul v-if="list.message != null" class="italic break-words md:w-96 font-light">
@@ -76,87 +76,13 @@ export default {
     }
   },
   methods: {
-    showName: function() {
+    showName: async function() {
       this.customGreet = "Arsanandha Aphisitworachorch";
       this.showLogo = true;
       this.positionShow = "Backend Developer";
       this.customWelcome = `Hi! I'm Backend Developer
               Who Involved Cutting-edge Technology
               with Love and Passion 💖`;
-      this.biography = [{
-        name: "Educational",
-        alias: "educational",
-        iswork: false,
-        image: "https://images.unsplash.com/photo-1604134967494-8a9ed3adea0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-        details:[{
-          name: "Kietikun Wittaya School (Middle School)",
-          message: "Study from Grade 7-9"
-        },{
-          name: "Assumption College Nakhon Ratchasima (High School)",
-          message: "Study from Grade 10-12"
-        },{
-          name: "Suranaree University of Technology (College)",
-          message: "Study in (Enterprise Software) from Year 1-4"
-        }]
-      },{
-        name: "Volunteering",
-        alias: "volunteering",
-        iswork: false,
-        image: "https://images.unsplash.com/photo-1461532257246-777de18cd58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
-        details:[{
-          name: "Bible.com Localization",
-          message: "Translation for Bible Plan (English-to-Thai)"
-        },{
-          name: "W501 Musixmatch Lyrics",
-          message: "Sync & Tag W501 Christian Songs"
-        },{
-          name: "Nexus Church Team",
-          message: "Serving God with Technology and Holiness with Real-world Situations"
-        },{
-          name: "SUT Student Council",
-          message: "In roles of `Public Relations` and Make `Graphics Design` for `สภานักศึกษามหาวิทยาลัยเทคโนโลยีสุรนารี`"
-        },{
-          name: "SUT Student Dormitory Committee",
-          message: "In roles of `Public Relations` and Make `Graphics Design` for `หอพักสุรนิเวศ 7` and Execute/Administrate for General Student Dormitory Discipline"
-        },{
-          name: "Sippanondha Camp",
-          message: "In roles of `Public Relations` and Make `VTR` for `ค่ายสิปปนนท์`"
-        }]
-      },{
-        name: "Work Experiences",
-        alias: "work_exp",
-        image: "https://unsplash.com/photos/VBLHICVh-lI/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mjh8fHdvcmt8ZW58MHx8fHwxNjg3NzU4OTM4fDA&force=true&w=1920",
-        iswork: true,
-        details:[{
-          name: "(Internship) Benchmark Electronics",
-          message: "Work with Python Stacks (Windows IIS / Redis / Django Frameworks) to building a Health Reimbursement Platform.",
-          duration: "~ 4 Months"
-        },{
-          name: "BizPotential",
-          message: "Work with PHP Stacks (Windows IIS / PHP / MSSQL or Oracle) to building a ERP Product.",
-          duration: "~ 3 Months"
-        },{
-          name: "MeMessage (Korat.com)",
-          message: "Work with PHP Stacks (Windows IIS / PHP (CodeIgniter) / MariaDB) to building a e-Commerce Product.",
-          duration: "~ 7 Months"
-        },{
-          name: "ApplicationDD LTD",
-          message: "Work with Technology Stacks (Windows IIS / Docker / Ubuntu / NestJS / PHP (Laravel) / TypeScript / MinIO / Python / PostgreSQL / Redis) in Environment of Software House-like.",
-          duration: "~ 1 Year"
-        },{
-          name: "CommonGround",
-          message: "Work with Technology Stacks (Ubuntu / GitLab CI/CD / DigitalOcean Platforms / Cloudflare / PostgreSQL / Redis / AWS S3-like / Python) for building MARCOM Tech Platform.",
-          duration: "~ 6 Months"
-        },{
-          name: "Amity Solutions",
-          message: "Working for Thailand Security Authority with Packs of Technology Stacks (Kubernetes / AWS ECR / Keycloak / NGINX Ingress / NestJS / Prisma / PostgreSQL / RabbitMQ / Redis / MinIO) for building a Full-loop Person Management System.",
-          duration: "~ 9 Months"
-        },{
-          name: "Socket9",
-          message: "New Roles of Backend Developers, Who turned yourself to DevOps Developer!",
-          duration: "~ Current"
-        }]
-      }]
     },
     onEnter: function(el, done) {
       gsap.from(el, {
@@ -174,10 +100,23 @@ export default {
         onComplete: done
       })
     },
+    async fetchPortfolioData() {
+      const { data, refresh } = await useFetch('https://nicodemus.arsanandha.xyz/profile',{
+        headers:{
+          'x-api-key': '81ba41d9-5d3e-4b4e-9063-aa8b79360f8d',
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Credentials": "true",
+        },
+        server: true
+      });
+      this.biography = data.value.data;
+    }
   },
-  created() {
-    this.showName();
-  }
+  async beforeMount() {
+    await this.showName();
+    await this.fetchPortfolioData();
+  },
 }
 </script>
 
