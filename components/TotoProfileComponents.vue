@@ -5,8 +5,8 @@
     <div  :style="dynamicColorClass" class="card lg:card-side shadow-xl">
       <figure><nuxt-img fit="cover" ref="myImg" format="webp" src="/pics/arsanandha-newpro.png" sizes="lg:400px" alt="Profile with 1 Person" /></figure>
       <div class="card-body text-left">
-        <h2 class="card-title text-2xl text-black">{{ customGreet }}</h2>
-        <p class="break-words w-80 text-xl text-black">{{ customWelcome }}</p>
+        <h2 :style="dynamicTextClass" class="card-title text-2xl text-black">{{ customGreet }}</h2>
+        <p :style="dynamicTextClass" class="break-words w-80 text-xl text-black">{{ customWelcome }}</p>
         <div class="card-actions justify-end">
           <div class="dropdown p-3">
             <label tabindex="0" class="transition-all duration-50 btn m-1 text-white">View Profile</label>
@@ -36,7 +36,8 @@ export default {
       menu: [],
       resume: "https://resume.io/r/TH55tWqzE",
       dynamicColorClass: {},
-      dynamicButtonClass: {}
+      dynamicButtonClass: {},
+      dynamicTextClass: {}
     };
   },
   methods: {
@@ -72,9 +73,14 @@ export default {
         })[0],
         button: data?.value?.values.map(x => {
           return {
-            'color': x
+            'background-color': x
           }
         })[1],
+        text: data?.value?.values.map(x => {
+          return {
+            'background-color': x
+          }
+        })[2],
       };
     }
   },
@@ -83,6 +89,7 @@ export default {
     const getColor = await this.getDominant();
     this.dynamicColorClass = getColor.background;
     this.dynamicButtonClass = getColor.button;
+    this.dynamicTextClass = getColor.text;
   }
 };
 </script>
