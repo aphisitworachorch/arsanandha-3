@@ -4,7 +4,6 @@
       <TotoProfileComponents></TotoProfileComponents>
     </div>
   </div>
-  <Footers class="fixed bottom-0"></Footers>
 </template>
 <script setup>
 import {useHead} from "nuxt/app";

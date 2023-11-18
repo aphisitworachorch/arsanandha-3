@@ -49,9 +49,9 @@ export default defineNuxtConfig({
     },
     runtimeConfig:{
         public:{
-            API_URL: process.env.API_URL,
-            API_KEY: process.env.API_KEY
-        }
+            API_URL: process.env.API_URL
+        },
+        API_KEY: process.env.API_KEY
     },
     auth:{
         token: {

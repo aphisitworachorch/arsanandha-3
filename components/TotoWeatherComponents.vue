@@ -190,7 +190,10 @@ export default {
                 body: JSON.stringify({"lat": lat.toString(), "lon": lon.toString()})
             };
 
-            const data = await fetch('https://weather-api.arsanandha.xyz/weather/get', options)
+            const data = await useFetch('https://weather-api.arsanandha.xyz/weather/get', {
+              server: true,
+              ...options
+            })
                 .then(response => response.json())
                 .catch(err => console.error(err));
 

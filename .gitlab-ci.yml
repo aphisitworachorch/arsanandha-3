@@ -33,8 +33,8 @@ frontend-ap-k8s-apply:
         name: arsanandha-frontend-secret
       type: Opaque
       data:
-        API_URL: $(echo -n "$API_URL" | base64 | tr -d \\n)
-        API_KEY: $(echo -n "$API_KEY" | base64 | tr -d \\n)" > $SECRET_FILE
+        NUXT_PUBLIC_API_URL: $(echo -n "$API_URL" | base64 | tr -d \\n)
+        NUXT_API_KEY: $(echo -n "$API_KEY" | base64 | tr -d \\n)" > $SECRET_FILE
   script:
     - kubectl config set-cluster ${KUBE_CLUSTER_NAME} --server="${KUBE_SERVER}"
     - kubectl config set clusters.${KUBE_CLUSTER_NAME}.certificate-authority-data ${KUBE_CERTIFICATE_AUTHORITY_DATA}
