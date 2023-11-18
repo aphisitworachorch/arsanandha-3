@@ -10,7 +10,7 @@
         <div class="card-actions justify-end">
           <div class="dropdown p-3">
             <label tabindex="0" class="transition-all duration-50 btn m-1 text-white">View Profile</label>
-            <ul tabindex="0" class="dropdown-content menu p-2 shadow text-white rounded-box w-60 bg-a">
+            <ul tabindex="0" class="dropdown-content menu p-2 shadow text-white rounded-box w-60 bg-accent">
               <li v-for="mn in menu" :key="mn.name">
                 <nuxt-link :to="mn.route">{{ mn.name }} <div class="badge badge-primary" v-if="mn.isnew">NEW 🎉</div></nuxt-link>
               </li>
@@ -22,28 +22,6 @@
         </div>
       </div>
     </div>
-<!--    <div class="flex flex-col md:flex-row m-3">-->
-<!--      <div class="transition-all duration-50 p-2">-->
-<!--        <div class="transition-all duration-50 avatar">-->
-<!--          <div class="transition-all duration-50 max-w-screen md:w-96 rounded-b-xl rounded-t-xl animate__animated animate__fadeIn">-->
-<!--            <nuxt-img fit="cover" format="webp" src="/pics/toto-alternative.jpg" width="1200" sizes="sm:70vw md:60vw lg:900px" alt="Profile with 1 Person" />-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="transition-all duration-50 p-2 text-left">-->
-<!--        <div tabindex="0" class="collapse collapse-open rounded-box">-->
-<!--          <div class="collapse-title peer-checked:rounded-t animate__animated animate__fadeInRight text-white">-->
-<!--            <h1 class="text-2xl">{{ customGreet }}</h1>-->
-<!--          </div>-->
-<!--          <div class="collapse-content rounded-b" v-if="showLogo">-->
-<!--            <h1 class="text-lg animate__animated animate__fadeInRight break-words w-80 text-white">{{ customWelcome }}</h1>-->
-<!--            <br/>-->
-<!--            <nuxt-img width="120" height="50" title="Show on HTTP/3 Technology" fit="cover" src="pics/IETF-Badge-HTTP3@3x-1200x521.png"></nuxt-img>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--      </div>-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -100,7 +78,7 @@ export default {
       };
     }
   },
-  async created() {
+  async beforeMount() {
     this.showName();
     const getColor = await this.getDominant();
     this.dynamicColorClass = getColor.background;
