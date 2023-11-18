@@ -3,7 +3,7 @@
 <template>
   <div class="container font-apFont">
     <div  :style="dynamicColorClass" class="card lg:card-side shadow-xl">
-      <figure><nuxt-img fit="cover" ref="myImg" format="webp" src="/pics/toto-alternative.jpg" sizes="lg:400px" alt="Profile with 1 Person" /></figure>
+      <figure><nuxt-img fit="cover" ref="myImg" format="webp" src="/pics/arsanandha-newpro.png" sizes="lg:400px" alt="Profile with 1 Person" /></figure>
       <div class="card-body text-left">
         <h2 class="card-title text-2xl text-black">{{ customGreet }}</h2>
         <p class="break-words w-80 text-xl text-black">{{ customWelcome }}</p>
@@ -60,7 +60,7 @@ export default {
     async getDominant() {
       const { data } = await useFetch('/api/getColor',{
         query:{
-          image: 'pics/toto-alternative.jpg'
+          image: 'pics/arsanandha-newpro.png'
         },
         method: 'GET'
       });
@@ -69,16 +69,16 @@ export default {
           return {
             'background-color': x
           }
-        })[0],
+        })[3],
         button: data?.value?.values.map(x => {
           return {
             'color': x
           }
-        })[2],
+        })[1],
       };
     }
   },
-  async beforeMount() {
+  async created() {
     this.showName();
     const getColor = await this.getDominant();
     this.dynamicColorClass = getColor.background;
