@@ -101,14 +101,15 @@ export default {
       })
     },
     async fetchPortfolioData() {
-      const { data, refresh } = await useFetch('https://nicodemus.arsanandha.xyz/profile',{
+      const { data, refresh } = await useFetch(`${this.$config.public.API_URL}/profile`,{
         headers:{
-          'x-api-key': '81ba41d9-5d3e-4b4e-9063-aa8b79360f8d',
+          'x-api-key': this.$config.public.API_KEY,
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "*",
           "Access-Control-Allow-Credentials": "true",
         },
-        server: true
+        server: true,
+        lazy: true,
       });
       this.biography = data.value.data;
     }

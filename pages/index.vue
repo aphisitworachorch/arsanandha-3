@@ -4,10 +4,12 @@
       <TotoProfileComponents></TotoProfileComponents>
     </div>
   </div>
+  <Footers class="fixed bottom-0"></Footers>
 </template>
 <script setup>
 import {useHead} from "nuxt/app";
 import og from '../assets/jpg/arsanandhaOG.png';
+import Footers from "~/components/Footers.vue";
 
 useHead({
   title: "arsanandha.xyz",

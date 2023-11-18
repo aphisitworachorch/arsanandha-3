@@ -47,10 +47,19 @@ export default defineNuxtConfig({
     nitro: {
         compressPublicAssets: true,
     },
+    runtimeConfig:{
+        public:{
+            API_URL: process.env.API_URL,
+            API_KEY: process.env.API_KEY
+        }
+    },
     auth:{
         token: {
             prefix: '_token.',
             global: true,
         }
+    },
+    vite: {
+        optimizeDeps: { exclude: ["@colour-extractor/colour-extractor"] },
     }
 })

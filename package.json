@@ -17,6 +17,7 @@
     "nuxt-security": "^0.13.1"
   },
   "dependencies": {
+    "@colour-extractor/colour-extractor": "^1.0.1",
     "@nuxt-alt/auth": "^2.7.6",
     "@nuxt-alt/http": "^1.7.0",
     "@nuxt/postcss8": "^1.1.3",
@@ -28,6 +29,7 @@
     "animate.css": "^4.1.1",
     "autoprefixer": "^10.4.16",
     "daisyui": "^3.9.4",
+    "dominant-color": "^0.0.1",
     "esbuild": "^0.17.19",
     "gsap": "^3.12.2",
     "lodash": "^4.17.21",

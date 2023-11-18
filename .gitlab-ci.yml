@@ -23,6 +23,18 @@ frontend-ap-k8s-apply:
   image: bitnami/kubectl:latest
   tags:
     - "frontend-ap"
+  variables:
+    SECRET_FILE: 'secret-file.yaml'
+  before_script:
+    - |
+      echo "apiVersion: v1
+      kind: Secret
+      metadata:
+        name: arsanandha-frontend-secret
+      type: Opaque
+      data:
+        API_URL: $(echo -n "$API_URL" | base64 | tr -d \\n)
+        API_KEY: $(echo -n "$API_KEY" | base64 | tr -d \\n)" > $SECRET_FILE
   script:
     - kubectl config set-cluster ${KUBE_CLUSTER_NAME} --server="${KUBE_SERVER}"
     - kubectl config set clusters.${KUBE_CLUSTER_NAME}.certificate-authority-data ${KUBE_CERTIFICATE_AUTHORITY_DATA}
@@ -31,5 +43,6 @@ frontend-ap-k8s-apply:
     - kubectl config use-context default
     - kubectl config get-contexts
     - kubectl get namespace
+    - kubectl apply -f $SECRET_FILE --namespace=arsanandha
     - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml
     - kubectl set image deployment/ap-frontend ap-frontend=$CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING --namespace=arsanandha

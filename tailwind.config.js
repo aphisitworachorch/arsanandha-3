@@ -1,6 +1,4 @@
 module.exports = {
-  mode: "jit",
-  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
@@ -15,9 +13,6 @@ module.exports = {
         '128': '32rem',
       }
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [require("daisyui"),require('tailwindcss-animatecss'),require('tailwind-scrollbar-hide')],
   daisyui: {
