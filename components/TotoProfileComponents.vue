@@ -10,7 +10,7 @@
         <div class="card-actions justify-end">
           <div class="dropdown p-3">
             <label tabindex="0" class="transition-all duration-50 btn m-1 text-white">View Profile</label>
-            <ul tabindex="0" class="dropdown-content menu p-2 shadow text-white rounded-box w-60 bg-accent">
+            <ul tabindex="0" :style="dynamicButtonClass" class="dropdown-content menu p-2 shadow text-white rounded-box w-60">
               <li v-for="mn in menu" :key="mn.name">
                 <nuxt-link :to="mn.route">{{ mn.name }} <div class="badge badge-primary" v-if="mn.isnew">NEW 🎉</div></nuxt-link>
               </li>
@@ -69,7 +69,7 @@ export default {
           return {
             'background-color': x
           }
-        })[3],
+        })[0],
         button: data?.value?.values.map(x => {
           return {
             'color': x

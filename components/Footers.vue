@@ -6,8 +6,6 @@
     <aside class="items-center grid-flow-col">
       <nuxt-img class="invert animate__animated animate__fadeInLeft animate__delay-2s" width="200" height="50" src="/svg/ARSANANDHALogo.svg"></nuxt-img>
     </aside>
-    <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-    </nav>
   </footer>
 </template>
 
