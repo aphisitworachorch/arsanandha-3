@@ -101,9 +101,10 @@ export default {
       })
     },
     async fetchPortfolioData() {
-      const { data, refresh } = await useFetch(`${this.$config.public.API_URL}/profile`,{
+      const runtimeConfig = useRuntimeConfig();
+      const { data, refresh } = await useFetch(`${runtimeConfig.public.API_URL}/profile`,{
         headers:{
-          'x-api-key': this.$config.API_KEY,
+          'x-api-key': runtimeConfig.API_KEY,
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "*",
           "Access-Control-Allow-Credentials": "true",
