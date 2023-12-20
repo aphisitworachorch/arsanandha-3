@@ -13,6 +13,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm cache clean --force
+RUN npm install --cpu=x64 --os=linux --libc=musl sharp
 RUN npm install --platform=linux --arch=x64
 RUN npm run build
 
