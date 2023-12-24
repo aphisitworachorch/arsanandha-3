@@ -75,9 +75,8 @@ metadata:
   name: stripprefix-birthday
   namespace: arsanandha
 spec:
-  stripPrefix:
-    prefixes:
-      - /birthday
+  replacePath:
+    path: /birthday
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
