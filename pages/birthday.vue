@@ -1,6 +1,7 @@
 <template>
   <div class="outerContainer">
     <div class="innerContainer">
+      <h2 class="font-apMonoFont text-3xl text-center">26</h2>
     </div>
   </div>
 </template>
