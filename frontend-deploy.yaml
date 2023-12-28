@@ -51,6 +51,8 @@ kind: IngressRoute
 metadata:
   name: frontend-api-ingress-route
   namespace: arsanandha
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
 spec:
   entryPoints:
     - websecure
@@ -62,43 +64,8 @@ spec:
           port: 3000
           passHostHeader: true
   tls:
-    secretName: arsanandha-xyz
     options:
       name: arsanandha-tls-options
       namespace: arsanandha
     domains:
       - main: arsanandha.xyz
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: stripprefix-birthday
-  namespace: arsanandha
-spec:
-  replacePath:
-    path: /birthday
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: 26-api-ingress-route
-  namespace: arsanandha
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: "Host(`26.arsanandha.xyz`) && PathPrefix(`/`)"
-      kind: Rule
-      services:
-        - name: ap-frontend-service
-          port: 3000
-          passHostHeader: true
-      middlewares:
-        - name: stripprefix-birthday
-  tls:
-    secretName: arsanandha-xyz
-    options:
-      name: arsanandha-tls-options
-      namespace: arsanandha
-    domains:
-      - main: 26.arsanandha.xyz
