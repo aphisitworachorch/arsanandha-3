@@ -61,6 +61,8 @@ spec:
         - name: ap-frontend-service
           port: 3000
           passHostHeader: true
+      middlewares:
+        - name: arsanandha-xyz-frontend-header
   tls:
     certResolver: letsencrypt
     options:
