@@ -51,8 +51,6 @@ kind: IngressRoute
 metadata:
   name: frontend-api-ingress-route
   namespace: arsanandha
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-issuer
 spec:
   entryPoints:
     - websecure
@@ -64,6 +62,7 @@ spec:
           port: 3000
           passHostHeader: true
   tls:
+    certResolver: letsencrypt
     options:
       name: arsanandha-tls-options
       namespace: arsanandha
