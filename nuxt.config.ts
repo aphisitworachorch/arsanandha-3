@@ -54,10 +54,25 @@ export default defineNuxtConfig({
         API_KEY: process.env.API_KEY
     },
     auth:{
-        token: {
-            prefix: '_token.',
-            global: true,
-        }
+        strategies: {
+            local: {
+                token: {
+                    property: 'data.accessToken',
+                    global: true,
+                    required: true,
+                    type: 'Bearer'
+                },
+                user: {
+                    property: 'data',
+                    autoFetch: true
+                },
+                endpoints: {
+                    login: { url: '/api/auth/login', method: 'post' },
+                    logout: { url: '/api/auth/logout', method: 'post' },
+                    user: { url: '/api/auth/user', method: 'get' }
+                }
+            }
+        },
     },
     vite: {
         optimizeDeps: { exclude: ["@colour-extractor/colour-extractor"] },
