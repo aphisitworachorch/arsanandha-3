@@ -1,5 +1,4 @@
-import {topColoursHex} from "@colour-extractor/colour-extractor";
-import {getColorFromURL, getPaletteFromURL} from "color-thief-node";
+import * as ColorThief from 'colorthief';
 function componentToHex(c: number) {
     const hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
@@ -13,7 +12,7 @@ interface IQueryImage {
 export default defineEventHandler(async (event) => {
     const query:IQueryImage = await readBody(event);
     if (query.image) {
-        const getcolor = await getPaletteFromURL(query.image);
+        const getcolor = await ColorThief.getPalette(query.image,3);
         return {
             values: [rgbToHex(getcolor[0]),rgbToHex(getcolor[1]),rgbToHex(getcolor[2])]
         };
