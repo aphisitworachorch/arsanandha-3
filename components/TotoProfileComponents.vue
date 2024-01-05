@@ -55,7 +55,7 @@ async function getProfileImage() {
   dataObject.images = data?.value?.data.image_src;
 }
 async function getDominant() {
-  const {data} = await useFetch('/api/getColor', {
+  const {data} = await useFetch('/api/profile/getColor', {
     body:{
       image: dataObject.images
     },
