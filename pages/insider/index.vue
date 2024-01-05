@@ -4,8 +4,8 @@ import {useHead} from "nuxt/app";
 useHead({
   title: "Insider"
 })
+
 definePageMeta({
-  middleware: ['auth'],
   layout: 'insider'
 });
 
@@ -22,7 +22,7 @@ definePageMeta({
 import InsiderMyselfPageComponents from "~/components/Insiders/InsiderMyselfPageComponents.vue";
 
 export default {
-  name: "me",
+  name: "index",
   components: {InsiderMyselfPageComponents}
 }
 </script>

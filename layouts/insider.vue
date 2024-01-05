@@ -4,7 +4,7 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
 </script>
 
 <template>
-  <div class="navbar bg-violet-950 font-apMonoFont">
+  <div  v-if="$auth.loggedIn" class="navbar bg-violet-950 font-apMonoFont">
     <div class="flex-none">
       <div class="dropdown dropdown-content dropdown-bottom">
         <button class="btn btn-square btn-ghost" tabindex="0">
@@ -31,7 +31,7 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
     </div>
     <div class="flex text-right">
       <div class="dropdown dropdown-end">
-        <div class="text-sm break-words" tabindex="0" role="button">
+        <div v-if="$auth.loggedIn" class="text-sm break-words" tabindex="0" role="button">
           <p class="font-bold">Welcome</p>
           <p>{{ currentUser.name }}</p>
         </div>

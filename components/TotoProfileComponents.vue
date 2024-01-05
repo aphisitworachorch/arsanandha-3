@@ -108,13 +108,13 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
                 <a :href="dataObject.resume">Resume</a>
               </li>
               <li v-if="!$auth.loggedIn">
-                <a href="/login">Insider Login <div class="badge badge-neutral">🔑 INSIDER</div></a>
+                <nuxt-link to="/insider/login">Insider Login <div class="badge badge-neutral">🔑 INSIDER</div></nuxt-link>
               </li>
               <li v-if="$auth.loggedIn">
-                <a href="/insider/me">Insider Access <div class="badge badge-neutral">🔑 INSIDER</div></a>
+                <nuxt-link href="/insider/me">Insider Access <div class="badge badge-neutral">🔑 INSIDER</div></nuxt-link>
               </li>
               <li v-if="$auth.loggedIn">
-                <a @click="$auth.logout()">Logout <div class="badge badge-neutral">🔑 INSIDER</div></a>
+                <nuxt-link @click="$auth.logout()">Logout <div class="badge badge-neutral">🔑 INSIDER</div></nuxt-link>
               </li>
             </ul>
           </div>

@@ -60,7 +60,7 @@ export default defineNuxtConfig({
                     property: 'data.accessToken',
                     global: true,
                     required: true,
-                    type: 'Bearer'
+                    type: 'Bearer',
                 },
                 user: {
                     property: 'data',
@@ -70,11 +70,14 @@ export default defineNuxtConfig({
                     login: { url: '/api/auth/login', method: 'post' },
                     logout: { url: '/api/auth/logout', method: 'post' },
                     user: { url: '/api/auth/user', method: 'get' }
-                }
+                },
             }
         },
-    },
-    vite: {
-        optimizeDeps: { exclude: ["@colour-extractor/colour-extractor"] },
+        redirect: {
+            login:'/insider/login',
+            logout:'/insider/logout',
+            callback:'/insider/login',
+            home: '/'
+        }
     }
 })

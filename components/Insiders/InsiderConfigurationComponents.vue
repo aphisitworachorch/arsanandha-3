@@ -15,7 +15,12 @@ const dataConfig = reactive({
   profile:{
     image_src: '',
     image_name: '',
-    image_type: ''
+    image_type: '',
+    details:{
+      name: '',
+      introduction: '',
+      position: ''
+    }
   }
 })
 
@@ -181,13 +186,28 @@ await getProfileImage();
         <form @submit.prevent="saveProfile">
           <div class="form-control">
             <label class="label cursor-pointer">
-              <div class="flex w-full justify-center items-center">
-                <div class="avatar">
-                  <div class="w-96 rounded">
-                    <img :src="dataConfig.profile.image_src" />
+              <div class="flex w-full justify-center items-center transform-gpu transition-all hover:pb-10 hover:pt-10 hover:rotate-6 hover:scale-105 grayscale hover:grayscale-0">
+                <div class="card w-96 h-48 shadow-xl image-full">
+                  <figure><img class="object-cover w-full h-96" :src="dataConfig.profile.image_src"/></figure>
+                  <div class="card-body">
+                    <h2 class="card-title">{{ dataConfig.profile.details.name }}</h2>
+                    <p>{{ dataConfig.profile.details.position }}</p>
+                    <p>{{ dataConfig.profile.details.introduction }}</p>
                   </div>
                 </div>
               </div>
+            </label>
+            <label class="label cursor-pointer">
+              <span class="label-text text-white">Name</span>
+              <input v-model="dataConfig.profile.details.name" type="text" class="input input-bordered input-md w-72 bg-white text-black font-bold" />
+            </label>
+            <label class="label cursor-pointer">
+              <span class="label-text text-white">Position</span>
+              <input v-model="dataConfig.profile.details.position" type="text" class="input input-bordered input-md w-72 bg-white text-black font-bold" />
+            </label>
+            <label class="label cursor-pointer">
+              <span class="label-text text-white">Introduction</span>
+              <textarea v-model="dataConfig.profile.details.introduction" class="textarea w-72 bg-white text-black font-bold resize-none"/>
             </label>
             <label class="label cursor-pointer">
               <span class="label-text text-white">Upload Profile</span>
