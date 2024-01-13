@@ -93,6 +93,10 @@ frontend-ap-k8s-apply:
     - export KUBECONFIG=$KUBECONFIG
     - 'sed -i -e "s/appVersion: 1.16.0/appVersion: "$HELM_VERSIONING"/g" ./arsanandha-frontend/Chart.yaml'
     - 'sed -i -e "s/version: 0.1.0/version: "$VERSIONING_BASE"/g" ./arsanandha-frontend/Chart.yaml'
+    - 'sed -i -e "s|{{codename}}|$CURRENT_CODENAME|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{image-repository}}|$IMAGE_REPOSITORY|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{image-name}}|$IMAGE_NAME|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{image-tag}}|$VERSIONING|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{nuxt-api-key}}|$API_KEY|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{nuxt-public-api-url}}|$API_URL|g" ./arsanandha-frontend/values.yaml'
     - cat ./arsanandha-frontend/values.yaml
