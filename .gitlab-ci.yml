@@ -1,9 +1,32 @@
 stages:
+  - codename-release
   - build
+  - container-image-scan
   - deploy
 
 variables:
-  VERSIONING: "v0.0.$CI_PIPELINE_IID"
+  VERSIONING_BASE: "0.0.$CI_PIPELINE_IID"
+  VERSIONING: "v0.0.$VERSIONING_BASE"
+  HELM_VERSIONING: "1.0.$VERSIONING_BASE"
+  PROJECT_NAME: "arsanandha-frontend"
+  IMAGE_NAME: "arsanandha-frontend"
+  DOCKER_BUILD: "$IMAGE_NAME:$VERSIONING"
+  IMAGE_REPOSITORY: "$CI_REGISTRY/arsanandha.ap/$PROJECT_NAME"
+  K8S_NAMESPACE: "arsanandha"
+
+codename-releaser:
+  stage: codename-release
+  tags:
+    - "frontend-ap"
+  image: alpine
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - CODENAME="$(curl https://codename.arsanandha.xyz/codename/generator)"
+    - echo "CURRENT_CODENAME=$CODENAME" >> codename.env
+  artifacts:
+    reports:
+      dotenv: codename.env
 
 frontend-ap-docker-build:
   stage: build
@@ -21,31 +44,61 @@ frontend-ap-docker-build:
     - chmod +x ./setup_env.sh
     - sh ./setup_env.sh
   script:
+    - echo "Current Codename is $CURRENT_CODENAME"
     - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING .
-    - docker push $CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING
+    - docker build -t $IMAGE_REPOSITORY/$DOCKER_BUILD .
+    - docker push $IMAGE_REPOSITORY/$DOCKER_BUILD
 
-frontend-ap-k8s-apply:
-  stage: deploy
-  image: bitnami/kubectl:latest
+frontend-ap-container-image-scan:
+  stage: container-image-scan
+  image: docker:24.0.5
   tags:
     - "frontend-ap"
   variables:
-    SECRET_FILE: 'secret-file.yaml'
+    GIT_STRATEGY: none
+    TRIVY_TIMEOUT: 60m
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  allow_failure: false
+  interruptible: true
+  timeout: 60m
+  when: on_success
+  services:
+    - docker:24.0.5-dind
+  before_script:
+    - export TRIVY_VERSION=$(wget -qO - "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+    - echo $TRIVY_VERSION
+    - wget --no-verbose https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -O - | tar -zxvf -
+    - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - docker pull $IMAGE_REPOSITORY/$DOCKER_BUILD
+    - ./trivy image --format cyclonedx --output cyclonedx.json --severity MEDIUM,HIGH,CRITICAL $IMAGE_REPOSITORY/$DOCKER_BUILD
+    - ./trivy sbom cyclonedx.json --format template --template "@contrib/html.tpl" -o report.html --severity MEDIUM,HIGH,CRITICAL
+    - ./trivy sbom cyclonedx.json --format template --template "@contrib/gitlab.tpl" -o report.json --severity MEDIUM,HIGH,CRITICAL
+  artifacts:
+    when: always
+    name: "arsanandha-frontend:$VERSIONING"
+    paths:
+      - $CI_PROJECT_DIR/report.html
+      - $CI_PROJECT_DIR/report-js.json
+
+frontend-ap-k8s-apply:
+  stage: deploy
+  image: dtzar/helm-kubectl:latest
+  tags:
+    - "frontend-ap"
   before_script:
     - export KUBECONFIG=$KUBECONFIG
-    - |
-      echo "apiVersion: v1
-      kind: Secret
-      metadata:
-        name: arsanandha-frontend-secret
-      type: Opaque
-      data:
-        NUXT_PUBLIC_API_URL: $(echo -n "$API_URL" | base64 | tr -d \\n)
-        NUXT_API_KEY: $(echo -n "$API_KEY" | base64 | tr -d \\n)" > $SECRET_FILE
+    - 'sed -i -e "s/appVersion: 1.16.0/appVersion: "$HELM_VERSIONING"/g" ./arsanandha-frontend/Chart.yaml'
+    - 'sed -i -e "s/version: 0.1.0/version: "$VERSIONING_BASE"/g" ./arsanandha-frontend/Chart.yaml'
+    - 'sed -i -e "s|{{nuxt-api-key}}|$API_KEY|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{nuxt-public-api-url}}|$API_URL|g" ./arsanandha-frontend/values.yaml'
+    - cat ./arsanandha-frontend/values.yaml
   script:
     - kubectl config get-contexts
     - kubectl get namespace
-    - kubectl apply -f $SECRET_FILE --namespace=arsanandha
-    - kubectl apply -f $CI_PROJECT_DIR/frontend-deploy.yaml
-    - kubectl set image deployment/ap-frontend ap-frontend=$CI_REGISTRY/arsanandha.ap/ap-frontend/ap-frontend:$VERSIONING --namespace=arsanandha
+    - helm upgrade --install -f ./arsanandha-frontend/values.yaml ${PROJECT_NAME} ./arsanandha-frontend -n $K8S_NAMESPACE --dry-run --debug --create-namespace
+    - helm upgrade --install -f ./arsanandha-frontend/values.yaml ${PROJECT_NAME} ./arsanandha-frontend -n $K8S_NAMESPACE --create-namespace
+    - kubectl get pods -n $K8S_NAMESPACE

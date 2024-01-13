@@ -1,0 +1,55 @@
+replicaCount: 1
+
+image:
+  repository: {{image-repository}}
+  imageName: {{image-name}}
+  pullPolicy: Always
+  tag: {{image-tag}}
+
+imagePullSecrets:
+  - name: arsanandha-frontend-repo
+nameOverride: ""
+fullnameOverride: ""
+
+codename: {{codename}}
+
+service:
+  type: ClusterIP
+  port: 3000
+
+resources:
+   limits:
+     cpu: 300m
+     memory: 250Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+livenessProbe:
+  tcpSocket:
+    port: 3000
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 3000
+  initialDelaySeconds: 5
+  periodSeconds: 3
+
+ingressData:
+  domain: "arsanandha.xyz"
+
+credentials:
+  nuxtAPIKey: {{nuxt-api-key}}
+
+applicationData:
+  nuxtPublicAPIURL: {{nuxt-public-api-url}}
