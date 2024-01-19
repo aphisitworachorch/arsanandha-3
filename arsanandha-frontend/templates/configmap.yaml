@@ -8,3 +8,15 @@ data:
   {{ if .Values.applicationData.nuxtPublicAPIURL }}
   NUXT_PUBLIC_API_URL: "{{ .Values.applicationData.nuxtPublicAPIURL }}"
   {{ end }}
+  {{ if .Values.applicationData.azureADRedirectURI }}
+  NUXT_AZ_TENANT_ID: {{ .Values.applicationData.azureADTenantId }}
+  {{ end }}
+  {{ if .Values.applicationData.azureADClientId }}
+  NUXT_AZ_CLIENT_ID: {{ .Values.applicationData.azureADClientId }}
+  {{ end }}
+  {{ if .Values.applicationData.azureADAudience }}
+  NUXT_AZ_AUDIENCE: {{ .Values.applicationData.azureADAudience }}
+  {{ end }}
+  {{ if .Values.applicationData.azureADRedirectURI }}
+  NUXT_AZ_REDIRECT_URI: {{ .Values.applicationData.azureADRedirectURI }}
+  {{ end }}

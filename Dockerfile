@@ -1,5 +1,10 @@
+ARG NODE_VERSION="lts"
+
+# change with the Linux Alpine version of your choice
+ARG ALPINE_VERSION="3.19"
+
 # Use a large Node.js base image to build the application and name it "build"
-FROM node:lts-alpine as build
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as build
 
 RUN apk update && \
     apk add --update git && \
@@ -17,7 +22,7 @@ RUN npm install --platform=linux --arch=x64
 RUN npm run build
 
 # Create a new Docker image and name it "prod"
-FROM node:lts-alpine as prod
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as prod
 
 WORKDIR /app
 

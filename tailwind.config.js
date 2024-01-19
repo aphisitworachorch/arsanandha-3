@@ -19,13 +19,13 @@ module.exports = {
     styled: true,
     themes: [{
       "ap":{
-        "primary": "#042c5a",
+        "primary": "#0d60c2",
         "secondary": "#072a7d",
         "accent": "#1993be",
         "neutral": "#3c66bc",
-        "base-100": "#002c48",
-        "info": "#9B59B6",
-        "success": "#E74C3C",
+        "base-100": "#019eff",
+        "info": "#27a963",
+        "success": "#8da90f",
         "warning": "#f3730a",
         "error": "#bc0808"
       }

@@ -3,6 +3,7 @@ import InsiderNavBar from "~/layouts/insider.vue";
 
 const $auth = useAuth()
 const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.data) : null;
+const testX = await $auth.$storage.getUniversal("_token.aad");
 const dataDef = reactive({
   datetime: {}
 })
@@ -22,15 +23,8 @@ onUnmounted(() => {
 <template>
   <div class="container font-apMonoFont" >
     <div class="card w-96 text-left glassmorhpism rounded-2xl p-5">
-      <figure v-if="!$auth.loggedIn">
-        <marquee class="text-white" direction="left" speed="1">Welcome to arsanandha.xyz!</marquee>
-      </figure>
-      <div v-if="$auth.loggedIn" class="card-title text-white pt-6">Welcome, {{ currentUser?.name }}</div>
-      <div v-if="!$auth.loggedIn" class="text-white text-6xl">
-        <p>Hi!, Insider</p>
-        <p class="text-sm">Now is {{ dataDef.datetime }}</p>
-        <nuxt-link to="/insider/login"><button class="btn btn-primary">Login to Insider</button></nuxt-link>
-      </div>
+      <div v-if="$auth.loggedIn" class="card-title text-white ">Welcome, {{ currentUser?.name }}</div>
+      <p class="text-sm">Now is {{ dataDef.datetime }}</p>
     </div>
   </div>
 </template>

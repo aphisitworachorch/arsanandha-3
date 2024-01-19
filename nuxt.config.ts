@@ -41,17 +41,61 @@ export default defineNuxtConfig({
             'IBM Plex Sans Thai': true,
         },
         download: true,
-        base64: true,
         display: 'auto',
-    }],'@nuxt-alt/auth', '@pinia/nuxt',"nuxt-lodash"],
+    }],'@nuxt-alt/auth', '@pinia/nuxt',"nuxt-lodash",'nuxt-security'],
     nitro: {
-        compressPublicAssets: true,
+        compressPublicAssets: {
+            brotli: true,
+        },
     },
     runtimeConfig:{
         public:{
             API_URL: process.env.API_URL
         },
         API_KEY: process.env.API_KEY
+    },
+    security:{
+        nonce: true,
+        ssg: {
+            hashScripts: true,
+            hashStyles: false
+        },
+        xssValidator:{
+            throwError: true
+        },
+        requestSizeLimiter: {
+            maxRequestSizeInBytes: 104857600,
+            maxUploadFileRequestInBytes: 20971520,
+            throwError: true,
+        },
+        headers: {
+            crossOriginEmbedderPolicy: 'credentialless',
+            xXSSProtection: '1; mode=block',
+            xDNSPrefetchControl: 'on',
+            contentSecurityPolicy: {
+                'script-src': [
+                    "'self'",
+                    "https:",
+                    "'unsafe-inline'",
+                    "'strict-dynamic'",
+                    "'nonce-{{nonce}}'"
+                ],
+                'style-src': [
+                    "'self'",
+                    "https:",
+                    "'unsafe-inline'"
+                ],
+                'img-src': ['self','data:','https:','http:', 'https://*.arsanandha.xyz', '*.unsplash.com', 'unsplash.com'],
+                'font-src': ["'self'", "https:", "data:"],
+                'base-uri': ["'none'"],
+                'object-src': ["'none'"],
+                'script-src-attr': ["'none'"],
+                'form-action': ["'self'"],
+                'frame-ancestors': ["'self'"],
+                'upgrade-insecure-requests': true
+            }
+        },
+        sri: true
     },
     auth:{
         strategies: {
@@ -71,7 +115,35 @@ export default defineNuxtConfig({
                     logout: { url: '/api/auth/logout', method: 'post' },
                     user: { url: '/api/auth/user', method: 'get' }
                 },
-            }
+            },
+            azure_ad: {
+                scheme: '~/schemes/azure-ad',
+                endpoints: {
+                    authorization: `https://login.microsoftonline.com/${process.env.AZ_TENANT_ID}/oauth2/v2.0/authorize`,
+                    token: `https://login.microsoftonline.com/${process.env.AZ_TENANT_ID}/oauth2/v2.0/token`,
+                    userInfo: `/api/auth/user`,
+                    logout: '/'
+                },
+                redirectUri: process.env.AZ_REDIRECT_URI,
+                token: {
+                    property: 'access_token',
+                    type: 'Bearer',
+                    maxAge: 1800
+                },
+                refreshToken: {
+                    property: 'refresh_token',
+                    maxAge: 60 * 60 * 24 * 30
+                },
+                responseType: 'code',
+                grantType: 'authorization_code',
+                accessType: 'online',
+                audience: process.env.AZ_AUDIENCE,
+                clientId: process.env.AZ_CLIENT_ID,
+                clientSecret: process.env.AZ_CLIENT_SECRET,
+                codeChallengeMethod: 'S256',
+                scope: [`https://arsanandha.onmicrosoft.com/${process.env.AZ_AUDIENCE}/Insider.All`],
+                autoLogout: true
+            },
         },
         redirect: {
             login:'/insider/login',

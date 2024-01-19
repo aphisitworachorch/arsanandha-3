@@ -8,6 +8,7 @@ variables:
   VERSIONING_BASE: "$CI_PIPELINE_IID"
   VERSIONING: "v0.2.$VERSIONING_BASE"
   HELM_VERSIONING: "1.2.$VERSIONING_BASE"
+  HELM_APP_VERSION: "0.2.$VERSIONING_BASE"
   PROJECT_NAME: "ap-frontend"
   IMAGE_NAME: "arsanandha-frontend"
   DOCKER_BUILD: "$IMAGE_NAME:$VERSIONING"
@@ -92,13 +93,18 @@ frontend-ap-k8s-apply:
   before_script:
     - export KUBECONFIG=$KUBECONFIG
     - 'sed -i -e "s/appVersion: 1.16.0/appVersion: "$HELM_VERSIONING"/g" ./arsanandha-frontend/Chart.yaml'
-    - 'sed -i -e "s/version: 0.1.0/version: "$VERSIONING_BASE"/g" ./arsanandha-frontend/Chart.yaml'
+    - 'sed -i -e "s/version: 0.1.0/version: "$HELM_APP_VERSION"/g" ./arsanandha-frontend/Chart.yaml'
     - 'sed -i -e "s|{{codename}}|$CURRENT_CODENAME|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{image-repository}}|$IMAGE_REPOSITORY|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{image-name}}|$IMAGE_NAME|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{image-tag}}|$VERSIONING|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{nuxt-api-key}}|$API_KEY|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{nuxt-public-api-url}}|$API_URL|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{azure-ad-redirect-uri}}|$AZURE_AD_REDIRECT_URI|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{azure-ad-tenant-id}}|$AZURE_AD_TENANT_ID|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{azure-ad-audience}}|$AZURE_AD_AUDIENCE|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{azure-ad-client-id}}|$AZURE_AD_CLIENT_ID|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{azure-ad-client-secret}}|$AZURE_AD_CLIENT_SECRET|g" ./arsanandha-frontend/values.yaml'
     - cat ./arsanandha-frontend/values.yaml
   script:
     - kubectl config get-contexts
