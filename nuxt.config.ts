@@ -97,6 +97,17 @@ export default defineNuxtConfig({
         },
         sri: true
     },
+    routeRules:{
+        '/weather':{
+            security:{
+                headers: {
+                    permissionsPolicy:{
+                        'geolocation':['self','https://arsanandha.xyz','https://*.arsanandha.xyz']
+                    }
+                }
+            }
+        }
+    },
     auth:{
         strategies: {
             local: {

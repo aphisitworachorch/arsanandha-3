@@ -1,65 +1,25 @@
 <template>
-    <div class="container font-apFont" v-if="weatherExist">
-        <figure><nuxt-img format="webp" :src="weatherBg" class="object-cover blur-sm	 absolute left-0 top-0 h-screen w-full"/></figure>
-        <div class="flex flex-col md:flex-row m-3 max-w-screen md:w-96 ">
-            <div class="p-2">
-                <div class="transition-all duration-700 ease-in-out delay-75 hover:scale-105 card glass md:w-96 rounded-2xl text-primary text-left shadow-xl hover:shadow-2xl max-w-screen w-72">
-                    <div class="card-body p-6">
-                        <div>
-                            <h5 class="text-white transition-all duration-300 ease-in-out text-md font-apThai font-bold">
-                                เวลาดึงข้อมูล ณ
-                            </h5>
-                            <h5 class="text-white transition-all duration-300 ease-in-out text-sm font-apThai">
-                                {{ timeFetch }}
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="transition-all duration-700 ease-in-out delay-75 hover:scale-105 card glass md:w-96 md:h-96 rounded-2xl text-primary relative text-left shadow-xl hover:shadow-2xl max-w-screen w-72 h-72">
-                    <div class="card-body">
-                        <div class="card-title absolute left-0 top-0 p-3">
-                            <h1 class="text-white transition-all duration-300 ease-in-out md:text-6xl text-3xl font-apThai">
-                                สภาพอากาศ
-                            </h1>
-                        </div>
-                        <div class=" absolute left-0 md:top-16 md:p-5 top-14 p-3">
-                            <h3 class="text-white transition-all duration-300 ease-in-out md:text-xl text-md font-apThai">
-                                📍 {{ location }}
-                            </h3>
-                        </div>
-                        <div class="text-white absolute bottom-0 right-2 p-2">
-                            <p class="md:text-xl text-md font-light text-right">
-                                °C
-                            </p>
-                            <h2 class="text-7xl font-bold text-right">
-                                {{ temperature }}
-                            </h2>
-                            <p class="md:text-xl text-lg font-light text-right font-apThai">
-                                {{ thaiCondition }}
-                            </p>
-                            <p class="text-sm font-light text-right font-apThai">
-                                รู้สึกเหมือน {{ heatIndex }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="transition-all duration-700 ease-in-out delay-75 hover:scale-105 card glass md:w-96 rounded-2xl text-primary text-left shadow-xl hover:shadow-2xl max-w-screen w-72">
-                    <div class="card-body p-6">
-                        <div>
-                            <h5 class="text-white transition-all duration-300 ease-in-out text-md font-apThai font-bold">
-                                บริการข้อมูลโดย
-                            </h5>
-                            <h5 class="text-white transition-all duration-300 ease-in-out text-sm font-apThai">
-                                กรมอุตุนิยมวิทยา / OpenStreetMap (via Nominatim)
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="loader" v-if="!weatherExist"></div>
+  <div class="container font-apFont shadow-xl" v-if="weatherExist">
+    <div class="animate__animated animate__fadeIn animate__delay-1s mockup-code bg-black text-left w-96">
+      <div class="flex flex-col">
+        <pre class="animate__animated animate__fadeIn animate__delay-2s" data-prefix=">"><code class="text-2xl">Weather Condition ☁️</code></pre>
+        <pre data-prefix=""></pre>
+        <pre class="animate__animated animate__fadeIn animate__delay-2s" data-prefix="~"><code>Here is Photo: <a :href="this.weatherBg" class="hover:text-success" target="_blank">Click 📷</a></code></pre>
+        <pre data-prefix=""></pre>
+        <div v-for="(d,idx) in this.location">
+          <pre class="animate__animated animate__fadeIn animate__delay-2s" :data-prefix="idx === 0 ? '>' : '-'" ><code>{{ idx === 0 ? 'Location: ' : '📍 '}}{{ d }}</code></pre>
         </div>
+        <pre data-prefix=""></pre>
+        <pre class="animate__animated animate__fadeIn animate__delay-3s" data-prefix=">"><code>Temperature: {{ this.temperature }}°C</code></pre>
+        <pre class="animate__animated animate__fadeIn animate__delay-3s" data-prefix=">"><code>Condition: {{ this.thaiCondition }}</code></pre>
+        <pre class="animate__animated animate__fadeIn animate__delay-3s" data-prefix=">"><code>Time: {{ this.timeFetch }}</code></pre>
+        <pre class="animate__animated animate__fadeIn animate__delay-3s" data-prefix=">"><code>Feels like: {{ this.heatIndex }}</code></pre>
+        <pre data-prefix=""></pre>
+        <pre class="animate__animated animate__fadeIn animate__delay-4s" data-prefix=">"><code>Provided by <a :href="this.weatherBg" class="hover:text-success" target="_blank">TMD</a></code></pre>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 
@@ -187,23 +147,23 @@ export default {
             const options = {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({"lat": lat.toString(), "lon": lon.toString()})
+                body: {"lat": lat.toString(), "lon": lon.toString()}
             };
 
-            const data = await useFetch('https://weather-api.arsanandha.xyz/weather/get', {
+            const { data } = await useFetch('https://weather-api.arsanandha.xyz/weather/get', {
               server: true,
               ...options
-            })
-                .then(response => response.json())
-                .catch(err => console.error(err));
+            });
+
+            const parsedData = data.value.data;
 
             this.weatherExist = true;
-            this.temperature = parseInt(data.data.temperature, 0);
-            this.location = data.data.Location.display_name;
-            this.thaiCondition = `${this.weatherEnum[data.data.condition]["thai_condition"]}`;
-            this.weatherBg = this.weatherEnum[data.data.condition]["image"];
-            this.timeFetch = new Date(Date.parse(data.data.timestamp));
-            this.heatIndex = this.feelsLikeCal(data.data.temperature, data.data.relative_humidity, data.data.wind_speed, data.data.wind_direction);
+            this.temperature = parseInt(parsedData.temperature, 0);
+            this.location = parsedData.Location.display_name?.split(", ");
+            this.thaiCondition = `${this.weatherEnum[parsedData.condition]["thai_condition"]}`;
+            this.weatherBg = this.weatherEnum[parsedData.condition]["image"];
+            this.timeFetch = new Date(Date.parse(parsedData.timestamp)).toISOString();
+            this.heatIndex = this.feelsLikeCal(parsedData.temperature, parsedData.relative_humidity, parsedData.wind_speed, parsedData.wind_direction);
         }
     },
     async mounted() {
@@ -220,4 +180,20 @@ export default {
 </script>
 
 <style scoped>
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 120px;
+  aspect-ratio: 1;
+  --_g: no-repeat radial-gradient(farthest-side, #fffcfc 94%,#0000);
+  background:
+      var(--_g) 0    0,
+      var(--_g) 100% 0,
+      var(--_g) 100% 100%,
+      var(--_g) 0    100%;
+  background-size: 40% 40%;
+  animation: l38 .5s infinite;
+}
+@keyframes l38 {
+  100% {background-position: 100% 0,100% 100%,0 100%,0 0}
+}
 </style>
