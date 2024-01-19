@@ -2,4 +2,12 @@
 .output
 .nuxt
 .git
+arsanandha-frontend
+.env
+.gitlab-ci.yml
+.idea
+README.md
+setup_env.sh
+frontend-deploy.yaml
+docker-compose.yaml
 docs

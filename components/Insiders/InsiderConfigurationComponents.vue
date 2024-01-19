@@ -146,7 +146,7 @@ await getProfileImage();
 
 <template>
   <div class="container font-apMonoFont text-left">
-    <div class="collapse collapse-arrow glassmorhpism p-3.5">
+    <div class="collapse collapse-arrow glassmorhpism p-3.5 lg:w-full sm:w-full md:w-full w-96">
       <input type="radio" name="my-accordion-2" checked/>
       <div class="collapse-title text-xl font-medium text-white">
         Weather Scrape Configuration
@@ -177,17 +177,17 @@ await getProfileImage();
         </form>
       </div>
     </div>
-    <div class="collapse collapse-arrow glassmorhpism p-3.5 mt-5">
+    <div class="collapse collapse-arrow glassmorhpism p-3.5 mt-5 lg:w-full sm:w-full md:w-full w-96">
       <input type="radio" name="my-accordion-2" checked/>
       <div class="collapse-title text-xl font-medium text-white">
         Main Profile Image
       </div>
-      <div class="collapse-content">
+      <div class="collapse-content w-full">
         <form @submit.prevent="saveProfile">
           <div class="form-control">
             <label class="label cursor-pointer">
-              <div class="flex w-full justify-center items-center transform-gpu transition-all hover:pb-10 hover:pt-10 hover:rotate-6 hover:scale-105 grayscale hover:grayscale-0">
-                <div class="card w-96 h-48 shadow-xl image-full">
+              <div class="flex relative justify-center transform-gpu transition-all hover:pb-10 hover:pt-10 hover:scale-105 grayscale hover:grayscale-0 ">
+                <div class="card w-80 h-60 shadow-xl image-full lg:w-128 sm:w-128 md:w-128 xl:w-128 2xl:w-128">
                   <figure><img class="object-cover w-full h-96" :src="dataConfig.profile.image_src"/></figure>
                   <div class="card-body">
                     <h2 class="card-title">{{ dataConfig.profile.details.name }}</h2>
@@ -199,15 +199,15 @@ await getProfileImage();
             </label>
             <label class="label cursor-pointer">
               <span class="label-text text-white">Name</span>
-              <input v-model="dataConfig.profile.details.name" type="text" class="input input-bordered input-md w-72 bg-white text-black font-bold" />
+              <input v-model="dataConfig.profile.details.name" type="text" class="input input-bordered input-md w-64 bg-white text-black font-bold" />
             </label>
             <label class="label cursor-pointer">
               <span class="label-text text-white">Position</span>
-              <input v-model="dataConfig.profile.details.position" type="text" class="input input-bordered input-md w-72 bg-white text-black font-bold" />
+              <input v-model="dataConfig.profile.details.position" type="text" class="input input-bordered input-md w-56 bg-white text-black font-bold" />
             </label>
             <label class="label cursor-pointer">
               <span class="label-text text-white">Introduction</span>
-              <textarea v-model="dataConfig.profile.details.introduction" class="textarea w-72 bg-white text-black font-bold resize-none"/>
+              <textarea v-model="dataConfig.profile.details.introduction" class="textarea w-48 bg-white text-black font-bold resize-none"/>
             </label>
             <label class="label cursor-pointer">
               <span class="label-text text-white">Upload Profile</span>

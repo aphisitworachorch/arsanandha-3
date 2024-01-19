@@ -50,6 +50,11 @@ ingressData:
 
 credentials:
   nuxtAPIKey: {{nuxt-api-key}}
+  azureADClientSecret: {{azure-ad-client-secret}}
 
 applicationData:
   nuxtPublicAPIURL: {{nuxt-public-api-url}}
+  azureADRedirectURI: {{azure-ad-redirect-uri}}
+  azureADTenantId: {{azure-ad-tenant-id}}
+  azureADAudience: {{azure-ad-audience}}
+  azureADClientId: {{azure-ad-client-id}}
