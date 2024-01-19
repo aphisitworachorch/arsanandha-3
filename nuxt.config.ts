@@ -116,6 +116,7 @@ export default defineNuxtConfig({
         }
     },
     auth:{
+        plugins:['~/plugins/auth.ts'],
         strategies: {
             local: {
                 token: {
