@@ -52,7 +52,7 @@ export default defineNuxtConfig({
         public:{
             API_URL: process.env.API_URL
         },
-        API_KEY: process.env.API_KEY
+        API_KEY: process.env.API_KEY,
     },
     security:{
         nonce: true,
@@ -130,12 +130,12 @@ export default defineNuxtConfig({
             azure_ad: {
                 scheme: '~/schemes/azure-ad',
                 endpoints: {
-                    authorization: `https://login.microsoftonline.com/${process.env.AZ_TENANT_ID}/oauth2/v2.0/authorize`,
-                    token: `https://login.microsoftonline.com/${process.env.AZ_TENANT_ID}/oauth2/v2.0/token`,
+                    authorization: `https://login.microsoftonline.com/${process.env.NUXT_AZ_TENANT_ID}/oauth2/v2.0/authorize`,
+                    token: `https://login.microsoftonline.com/${process.env.NUXT_AZ_TENANT_ID}/oauth2/v2.0/token`,
                     userInfo: `/api/auth/user`,
                     logout: '/'
                 },
-                redirectUri: process.env.AZ_REDIRECT_URI,
+                redirectUri: process.env.NUXT_AZ_REDIRECT_URI,
                 token: {
                     property: 'access_token',
                     type: 'Bearer',
@@ -148,11 +148,11 @@ export default defineNuxtConfig({
                 responseType: 'code',
                 grantType: 'authorization_code',
                 accessType: 'online',
-                audience: process.env.AZ_AUDIENCE,
-                clientId: process.env.AZ_CLIENT_ID,
-                clientSecret: process.env.AZ_CLIENT_SECRET,
+                audience: process.env.NUXT_AZ_AUDIENCE,
+                clientId: process.env.NUXT_AZ_CLIENT_ID,
+                clientSecret: process.env.NUXT_AZ_CLIENT_SECRET,
                 codeChallengeMethod: 'S256',
-                scope: [`https://arsanandha.onmicrosoft.com/${process.env.AZ_AUDIENCE}/Insider.All`],
+                scope: [`https://arsanandha.onmicrosoft.com/${process.env.NUXT_AZ_AUDIENCE}/Insider.All`],
                 autoLogout: true
             },
         },
