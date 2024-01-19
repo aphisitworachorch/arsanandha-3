@@ -53,6 +53,11 @@ export default defineNuxtConfig({
             API_URL: process.env.API_URL
         },
         API_KEY: process.env.API_KEY,
+        AZ_TENANT_ID: process.env.AZ_TENANT_ID,
+        AZ_REDIRECT_URI: process.env.AZ_REDIRECT_URI,
+        AZ_AUDIENCE: process.env.AZ_AUDIENCE,
+        AZ_CLIENT_ID: process.env.AZ_CLIENT_ID,
+        AZ_CLIENT_SECRET: process.env.AZ_CLIENT_SECRET
     },
     security:{
         nonce: true,
