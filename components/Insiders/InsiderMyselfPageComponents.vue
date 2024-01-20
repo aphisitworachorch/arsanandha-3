@@ -3,7 +3,6 @@ import InsiderNavBar from "~/layouts/insider.vue";
 
 const $auth = useAuth()
 const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.data) : null;
-const testX = await $auth.$storage.getUniversal("_token.aad");
 const dataDef = reactive({
   datetime: {}
 })

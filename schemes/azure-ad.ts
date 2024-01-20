@@ -14,7 +14,7 @@ export default class AzureAdScheme extends Oauth2Scheme {
             method: 'GET',
             url: this.options.endpoints.userInfo,
             headers:{
-                Authorization: this.$auth.$storage.getUniversal("_token.aad")
+                Authorization: this.$auth.$storage.getUniversal("_token.azure_ad")
             }
         }).then((response) => {
             const user = getProp(response._data, this.options.user.property)
