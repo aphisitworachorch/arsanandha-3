@@ -8,15 +8,18 @@ data:
   {{ if .Values.applicationData.nuxtPublicAPIURL }}
   NUXT_PUBLIC_API_URL: "{{ .Values.applicationData.nuxtPublicAPIURL }}"
   {{ end }}
-  {{ if .Values.applicationData.azureADRedirectURI }}
-  NUXT_AZ_TENANT_ID: {{ .Values.applicationData.azureADTenantId }}
+  {{ if .Values.applicationData.azureADTenantId }}
+  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_ENDPOINTS_AUTHORIZATION: {{ printf "https://login.microsoftonline.com/%s/oauth2/v2.0/authorize" .Values.applicationData.azureADTenantId }}
+  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_ENDPOINTS_TOKEN: {{ printf "https://login.microsoftonline.com/%s/oauth2/v2.0/token" .Values.applicationData.azureADTenantId }}
   {{ end }}
-  {{ if .Values.applicationData.azureADClientId }}
-  NUXT_AZ_CLIENT_ID: {{ .Values.applicationData.azureADClientId }}
+  {{ if .Values.applicationData.azureADRedirectURI}}
+  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_REDIRECT_URI: {{ .Values.applicationData.azureADRedirectURI }}
   {{ end }}
   {{ if .Values.applicationData.azureADAudience }}
-  NUXT_AZ_AUDIENCE: {{ .Values.applicationData.azureADAudience }}
+  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_AUDIENCE: {{ .Values.applicationData.azureADAudience }}
+  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_SCOPE: |
+    [{{ printf "https://arsanandha.onmicrosoft.com/%s/Insider.All" .Values.applicationData.azureADAudience }}]
   {{ end }}
-  {{ if .Values.applicationData.azureADRedirectURI }}
-  NUXT_AZ_REDIRECT_URI: {{ .Values.applicationData.azureADRedirectURI }}
+  {{ if .Values.applicationData.azureADClientId}}
+  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_CLIENT_ID: {{ .Values.applicationData.azureADClientId }}
   {{ end }}

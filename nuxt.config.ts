@@ -48,18 +48,74 @@ export default defineNuxtConfig({
             brotli: true,
         },
     },
+    auth:{
+        strategies: {
+            local: {
+                token: {
+                    property: 'data.accessToken',
+                    global: true,
+                    required: true,
+                    type: 'Bearer',
+                },
+                user: {
+                    property: 'data',
+                    autoFetch: true
+                },
+                endpoints: {
+                    login: { url: '/api/auth/login', method: 'post' },
+                    logout: { url: '/api/auth/logout', method: 'post' },
+                    user: { url: '/api/auth/user', method: 'get' }
+                },
+            },
+            azure_ad: {
+                scheme: '~/schemes/azure-ad',
+                endpoints: {
+                    userInfo: `/api/auth/user`,
+                    logout: '/'
+                },
+                token: {
+                    property: 'access_token',
+                    type: 'Bearer',
+                    maxAge: 1800
+                },
+                refreshToken: {
+                    property: 'refresh_token',
+                    maxAge: 60 * 60 * 24 * 30
+                },
+                responseType: 'code',
+                grantType: 'authorization_code',
+                accessType: 'online',
+                codeChallengeMethod: 'S256',
+                autoLogout: true
+            }
+        },
+        redirect: {
+            login:'/insider/login',
+            logout:'/insider/logout',
+            callback:'/insider/login',
+            home: '/'
+        }
+    },
     runtimeConfig:{
         public:{
-            API_URL: process.env.API_URL
+            API_URL: process.env.API_URL,
+            auth:{
+                strategies:{
+                    azure_ad: {
+                        endpoints: {
+                            authorization: '',
+                            token: '',
+                        },
+                        redirectUri: '',
+                        audience: '',
+                        clientId: '',
+                        clientSecret: '',
+                        scope: [''],
+                    }
+                }
+            }
         },
         API_KEY: process.env.API_KEY,
-        private:{
-            AZ_TENANT_ID: process.env.AZ_TENANT_ID,
-            AZ_REDIRECT_URI: process.env.AZ_REDIRECT_URI,
-            AZ_AUDIENCE: process.env.AZ_AUDIENCE,
-            AZ_CLIENT_ID: process.env.AZ_CLIENT_ID,
-            AZ_CLIENT_SECRET: process.env.AZ_CLIENT_SECRET,
-        },
     },
     security:{
         nonce: true,
@@ -113,62 +169,6 @@ export default defineNuxtConfig({
                     }
                 }
             }
-        }
-    },
-    auth:{
-        plugins:['~/plugins/auth.ts'],
-        strategies: {
-            local: {
-                token: {
-                    property: 'data.accessToken',
-                    global: true,
-                    required: true,
-                    type: 'Bearer',
-                },
-                user: {
-                    property: 'data',
-                    autoFetch: true
-                },
-                endpoints: {
-                    login: { url: '/api/auth/login', method: 'post' },
-                    logout: { url: '/api/auth/logout', method: 'post' },
-                    user: { url: '/api/auth/user', method: 'get' }
-                },
-            },
-            azure_ad: {
-                scheme: '~/schemes/azure-ad',
-                endpoints: {
-                    authorization: `https://login.microsoftonline.com/${process.env.AZ_TENANT_ID}/oauth2/v2.0/authorize`,
-                    token: `https://login.microsoftonline.com/${process.env.AZ_TENANT_ID}/oauth2/v2.0/token`,
-                    userInfo: `/api/auth/user`,
-                    logout: '/'
-                },
-                redirectUri: process.env.AZ_REDIRECT_URI,
-                token: {
-                    property: 'access_token',
-                    type: 'Bearer',
-                    maxAge: 1800
-                },
-                refreshToken: {
-                    property: 'refresh_token',
-                    maxAge: 60 * 60 * 24 * 30
-                },
-                responseType: 'code',
-                grantType: 'authorization_code',
-                accessType: 'online',
-                audience: process.env.AZ_AUDIENCE,
-                clientId: process.env.AZ_CLIENT_ID,
-                clientSecret: process.env.AZ_CLIENT_SECRET,
-                codeChallengeMethod: 'S256',
-                scope: [`https://arsanandha.onmicrosoft.com/${process.env.AZ_AUDIENCE}/Insider.All`],
-                autoLogout: true
-            },
-        },
-        redirect: {
-            login:'/insider/login',
-            logout:'/insider/logout',
-            callback:'/insider/login',
-            home: '/'
         }
     }
 })
