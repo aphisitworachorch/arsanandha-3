@@ -17,8 +17,7 @@ data:
   {{ end }}
   {{ if .Values.applicationData.azureADAudience }}
   NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_AUDIENCE: {{ .Values.applicationData.azureADAudience }}
-  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_SCOPE: |
-    [{{ printf "https://arsanandha.onmicrosoft.com/%s/Insider.All" .Values.applicationData.azureADAudience }}]
+  NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_SCOPE: {{ printf "https://arsanandha.onmicrosoft.com/%s/Insider.All" .Values.applicationData.azureADAudience }}
   {{ end }}
   {{ if .Values.applicationData.azureADClientId}}
   NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_CLIENT_ID: {{ .Values.applicationData.azureADClientId }}
