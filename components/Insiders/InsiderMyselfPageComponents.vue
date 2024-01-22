@@ -23,7 +23,7 @@ onUnmounted(() => {
   <div class="container font-apMonoFont" >
     <div class="card w-96 text-left glassmorhpism rounded-2xl p-5">
       <div v-if="$auth.loggedIn" class="card-title text-white ">Welcome, {{ currentUser?.name }}</div>
-      <p class="text-sm">Now is {{ dataDef.datetime }}</p>
+      <p class="text-sm text-white">Now is {{ dataDef.datetime }}</p>
     </div>
   </div>
 </template>

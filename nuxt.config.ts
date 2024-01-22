@@ -47,6 +47,12 @@ export default defineNuxtConfig({
         compressPublicAssets: {
             brotli: true,
         },
+        storage: {
+            redis: {
+                driver: "redis",
+                url: "",
+            },
+        },
     },
     auth:{
         strategies: {
@@ -113,7 +119,7 @@ export default defineNuxtConfig({
                         scope: [''],
                     }
                 }
-            }
+            },
         },
         API_KEY: process.env.API_KEY,
     },
@@ -169,6 +175,15 @@ export default defineNuxtConfig({
                     }
                 }
             }
-        }
+        },
+        "/": {
+            swr: 60 * 60,
+        },
+        "/about": {
+            swr: 60 * 60,
+        },
+        "/skills": {
+            swr: 60 * 60,
+        },
     }
 })
