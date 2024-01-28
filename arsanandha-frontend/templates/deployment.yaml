@@ -17,9 +17,14 @@ spec:
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
         sidecar.istio.io/inject: "true"
+        sidecar.istio.io/proxyCPU: "200m"
+        sidecar.istio.io/proxyCPULimit: "400m"
+        sidecar.istio.io/proxyMemory: "64Mi"
+        sidecar.istio.io/proxyMemoryLimit: "128Mi"
         codename: {{ .Values.codename }}
       labels:
         {{- include "arsanandha-frontend.labels" . | nindent 8 }}
+        app.kubernetes.io/name: {{ .Chart.Name }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
