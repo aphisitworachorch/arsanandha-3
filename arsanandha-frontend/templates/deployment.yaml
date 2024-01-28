@@ -20,7 +20,7 @@ spec:
         sidecar.istio.io/proxyCPU: "200m"
         sidecar.istio.io/proxyCPULimit: "400m"
         sidecar.istio.io/proxyMemory: "64Mi"
-        sidecar.istio.io/proxyMemoryLimit: "128Mi"
+        sidecar.istio.io/proxyMemoryLimit: "256Mi"
         codename: {{ .Values.codename }}
       labels:
         {{- include "arsanandha-frontend.labels" . | nindent 8 }}
