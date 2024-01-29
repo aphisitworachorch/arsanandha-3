@@ -63,14 +63,14 @@ async function getDominant() {
   });
   return {
     background: {
-      'background-color': data?.value?.values[0]
+      'background-color': data?.value?.values?.[0]
     },
     button: {
-      'background-color': data?.value?.values[1],
-      'color': data?.value?.values[0]
+      'background-color': data?.value?.values?.[1],
+      'color': data?.value?.values?.[0]
     },
     text: {
-      'color': data?.value?.values[0]
+      'color': data?.value?.values?.[0]
     },
   };
 }

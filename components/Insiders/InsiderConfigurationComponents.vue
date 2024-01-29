@@ -28,7 +28,7 @@ function onFileChange(e) {
   let files = e.target.files || e.dataTransfer.files;
   if (!files.length)
     return;
-  createImage(files[0]);
+  createImage(files?.[0]);
 }
 
 function createImage(file: Blob) {
@@ -164,11 +164,11 @@ await getProfileImage();
             </label>
             <label class="label cursor-pointer">
               <span class="label-text text-white">CRON</span>
-              <input v-model="dataConfig.weather.cronJob[0]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob[1]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob[2]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob[3]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob[4]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob?.[0]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob?.[1]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob?.[2]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob?.[3]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob?.[4]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
             </label>
             <label class="label cursor-pointer">
               <button class="btn btn-secondary">Save</button>
