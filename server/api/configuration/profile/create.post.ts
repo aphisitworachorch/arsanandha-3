@@ -14,11 +14,6 @@ export default defineEventHandler(async (event) => {
          * Login
          */
         const runtimeConfig = useRuntimeConfig();
-        const form = new FormData();
-        const content = Buffer.from(body?.image_src.split(',')[1],"base64");
-        form.append("image_src",new Blob([content],{
-            type: body?.image_type
-        }), body?.image_name);
         return await $fetch(`${runtimeConfig.public.API_URL}/insider/configuration/profile`, {
             method: 'post',
             headers: {
@@ -30,8 +25,12 @@ export default defineEventHandler(async (event) => {
             },
             server: true,
             lazy: true,
-            body: form
-        }).catch(error => console.log(error));
+            body: {
+                image_payload: body?.image_src.split(',')[1],
+                image_mimetype: body?.image_type,
+                image_filename: body?.image_name
+            }
+        }).catch(error => console.log(error.response));
     }catch(error){
         console.log(error);
     }

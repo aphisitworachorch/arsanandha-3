@@ -21,3 +21,10 @@ spec:
               add:
                 X-FRONTEND-VERSION: {{ .Chart.AppVersion }}
                 X-APPLICATION-BUILD-NAME: {{ .Values.codename }}
+      retries:
+        attempts: 5
+        perTryTimeout: 10s
+        retryOn: >-
+          gateway-error,connect-failure,refused-stream,5xx,deadline-exceeded,unavailable,cancelled
+        timeout: 30s
+      maxRequestBodyBytes: 100Mi

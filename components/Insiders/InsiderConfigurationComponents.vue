@@ -3,7 +3,7 @@ import InsiderNavBar from "~/layouts/insider.vue";
 import {SweetAlertResult} from "sweetalert2";
 
 const $auth = useAuth()
-const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.data) : null;
+const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d?._data?.data) : null;
 const { $swal } = useNuxtApp()
 
 const dataConfig = reactive({
@@ -36,7 +36,7 @@ function createImage(file: Blob) {
   const reader = new FileReader();
 
   reader.onload = (e) => {
-    dataConfig.profile.image_src = e.target.result;
+    dataConfig.profile.image_src = e?.target?.result;
     dataConfig.profile.image_name = file.name;
     dataConfig.profile.image_type = file.type;
   };
@@ -125,8 +125,8 @@ async function getWeather() {
       'Authorization': $auth?.strategy?.token?.get()
     }
   });
-  dataConfig.weather.enableLINENotify = data?.value?.data.enableLINENotify;
-  dataConfig.weather.enableWeatherScrape = data?.value?.data.enableWeatherScrape;
+  dataConfig.weather.enableLINENotify = data?.value?.data?.enableLINENotify;
+  dataConfig.weather.enableWeatherScrape = data?.value?.data?.enableWeatherScrape;
   dataConfig.weather.cronJob = data?.value?.data?.cronJob?.split(" ");
 }
 
@@ -164,11 +164,11 @@ await getProfileImage();
             </label>
             <label class="label cursor-pointer">
               <span class="label-text text-white">CRON</span>
-              <input v-model="dataConfig.weather.cronJob?.[0]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob?.[1]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob?.[2]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob?.[3]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
-              <input v-model="dataConfig.weather.cronJob?.[4]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob[0]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob[1]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob[2]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob[3]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
+              <input v-model="dataConfig.weather.cronJob[4]" type="text" class="input input-bordered input-sm h-12 w-12 bg-white text-black mr-0.5 p-1 text-md font-bold text-center" />
             </label>
             <label class="label cursor-pointer">
               <button class="btn btn-secondary">Save</button>
