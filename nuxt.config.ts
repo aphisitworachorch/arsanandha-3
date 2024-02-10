@@ -177,13 +177,19 @@ export default defineNuxtConfig({
             }
         },
         "/": {
-            swr: 60 * 60,
+            cache: {
+                maxAge: 60
+            }
         },
         "/about": {
-            swr: 60 * 60,
+            cache: {
+                maxAge: 60
+            }
         },
         "/skills": {
-            swr: 60 * 60,
+            cache: {
+                maxAge: 60
+            }
         },
     }
 })

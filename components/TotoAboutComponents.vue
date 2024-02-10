@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AboutCardComponents from "~/components/Card/AboutCardComponents.vue";
+
 const dataObject = reactive({
   text: "as soon as possible.",
   customGreet: "",
@@ -66,23 +68,7 @@ async function fetchPortfolioData() {
         <div class="overflow-y-scroll scrollbar-hide h-128 w-76 pt-2 font-apMonoFont snap-y">
           <TransitionGroup :css="false" tag="div" class="pb-5">
             <div class="pb-5 rounded" v-for="(data, index) in dataObject.biography" :key="data.alias" :data-index="index">
-              <div class="card bg-info shadow-xl image-full snap-start animate__animated animate__fadeInUp animate__delay-4s">
-                <figure><nuxt-img fit="cover" width="1500" height="1500" format="webp" :src="data.image" :alt="data.name" class="w-96 scale-150"/></figure>
-                <div class="card-body">
-                  <h2 class="card-title text-white">{{ data.name }}</h2>
-                  <ul v-for="(list, index) in data.details" class="text-sm list-disc pl-5 text-white font-bold" :key="list.name" :data-index="index">
-                    <li>
-                      {{ list.name }}
-                      <ul v-if="data?.isWork" class="md:w-96 font-light">
-                        <li>"Duration {{ list.duration }}"</li>
-                      </ul>
-                      <ul v-if="list.message != null" class="italic break-words md:w-96 font-light">
-                        <li>{{ list.message }}</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <AboutCardComponents v-bind:biography-data="data"></AboutCardComponents>
             </div>
           </TransitionGroup>
         </div>
