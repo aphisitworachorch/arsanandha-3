@@ -25,7 +25,7 @@ body, html {
   height: 100%;
 }
 .bgCon{
-  background-image: url("/pics/AP-WEB-BG.webp");
+  background-image: url("https://archive.arsanandha.xyz/usertile32.jpg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
