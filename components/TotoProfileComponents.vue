@@ -19,6 +19,7 @@ const dataObject = reactive({
   dynamicColorClass: {},
   dynamicButtonClass: {},
   dynamicTextClass: {},
+  dynamicSVGClass: {},
   loaded: false,
   userInfo: {},
   images: ""
@@ -54,11 +55,12 @@ async function getProfileImage() {
   });
   dataObject.images = data?.value?.data.image_src;
 }
+
 async function getDominant() {
   const {data} = await useFetch('/api/profile/getColor', {
     headers: {'Content-Type': 'application/json'},
     body:{
-      image: dataObject.images
+      image: dataObject.images,
     },
     method: 'POST'
   });
@@ -68,11 +70,14 @@ async function getDominant() {
     },
     button: {
       'background-color': data?.value?.values?.[1],
-      'color': data?.value?.values?.[0]
+      'color': data?.value?.values?.[2]
     },
     text: {
-      'color': data?.value?.values?.[0]
+      'color': data?.value?.values?.[2]
     },
+    svg: {
+      'fill': data?.value?.values?.[2],
+    }
   };
 }
 
@@ -82,6 +87,7 @@ const getColor = await getDominant();
 dataObject.dynamicColorClass = getColor.background;
 dataObject.dynamicButtonClass = getColor.button;
 dataObject.dynamicTextClass = getColor.text;
+dataObject.dynamicSVGClass = getColor.svg;
 
 onMounted(() => {
   dataObject.loaded = true;
@@ -100,17 +106,20 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
 
 <template>
   <div class="container font-apFont animate__animated animate__zoomIn">
-    <div :style="dataObject.dynamicColorClass" class="card rounded-b-none lg:card-side lg:w-full sm:w-full md:w-full w-80">
-      <figure class="object-cover animate__animated animate__fadeIn animate__delay-1s"><nuxt-img ref="profileImage" format="webp" :src="dataObject.images" class="object-cover xl:w-96 xl:h-128 lg:w-80 lg:h-128 md:w-128 md:h-96 sm:w-128 sm:h-64" alt="Profile with 1 Person" /></figure>
+    <div :style="$auth.loggedIn ? { 'background-color': '#3271CD' } : dataObject.dynamicColorClass" class="card rounded-b-none lg:card-side lg:w-full sm:w-full md:w-full w-80">
+      <figure class="object-cover animate__animated animate__fadeIn animate__delay-1s">
+        <nuxt-img v-if="!$auth.loggedIn" ref="profileImage" format="webp" :src="dataObject.images" class="object-cover xl:w-96 xl:h-128 lg:w-80 lg:h-128 md:w-128 md:h-96 w-128 h-64" alt="Profile with 1 Person" />
+        <nuxt-img v-if="$auth.loggedIn" ref="profileImage" format="webp" src="pics/SS_Thumbnail.png" class="object-cover xl:w-96 xl:h-128 lg:w-80 lg:h-128 md:w-128 md:h-96 w-128 h-64" alt="Profile with 1 Person" />
+      </figure>
       <div class="card-body text-left animate__animated animate__fadeIn animate__delay-2s">
-        <h2 class="card-title text-2xl text-black font-bold animate__animated animate__fadeIn animate__delay-3s invert" :style="dataObject.dynamicTextClass">{{ dataObject.customGreet }}</h2>
-        <p class="text-sm text-black font-bold animate__animated animate__fadeIn animate__delay-3s invert" :style="dataObject.dynamicTextClass">{{ dataObject.currentPosition }}</p>
-        <p class="break-words lg:w-96 sm:w-96 md:w-96 w-full text-xl text-black font-apMonoFont animate__animated animate__fadeIn animate__delay-4s invert" :style="dataObject.dynamicTextClass">" {{ dataObject.customWelcome }} "</p>
+        <h2 class="card-title text-2xl text-black font-bold animate__animated animate__fadeIn animate__delay-3s" :style="$auth.loggedIn ? { 'color': 'white' } : dataObject.dynamicTextClass">{{ dataObject.customGreet }}</h2>
+        <p class="text-sm text-black font-bold animate__animated animate__fadeIn animate__delay-3s" :style="$auth.loggedIn ? { 'color': 'white' } : dataObject.dynamicTextClass">{{ dataObject.currentPosition }}</p>
+        <p class="break-words lg:w-96 sm:w-96 md:w-96 w-full text-xl text-black font-apMonoFont animate__animated animate__fadeIn animate__delay-4s" :style="$auth.loggedIn ? { 'color': 'white' } : dataObject.dynamicTextClass">" {{ dataObject.customWelcome }} "</p>
         <div class="card-actions justify-end pt-5">
           <div class="dropdown p-3 grid-flow-col">
             <label tabindex="0" v-if="$auth.loggedIn" :style="isAAD.strategy === 'azure_ad' ? { 'background-color': '#0080FF' } : dataObject.dynamicButtonClass" class="transition-all duration-50 rounded-xl p-5 m-1 text-white animate__animated animate__fadeIn animate__delay-6s ">🚪 Menu</label>
             <label tabindex="0" v-if="!$auth.loggedIn" :style="isAAD.strategy === 'azure_ad' ? { 'background-color': '#0080FF' } : dataObject.dynamicButtonClass" class="transition-all duration-50 rounded-xl p-5 m-1 text-white animate__animated animate__fadeIn animate__delay-6s ">View Profile</label>
-            <ul tabindex="0" :style="isAAD.strategy === 'azure_ad' ? { 'background-color': '#0080FF' } : dataObject.dynamicButtonClass" class="dropdown-content menu p-2 shadow text-white rounded-box w-60">
+            <ul tabindex="0" :style="isAAD.strategy === 'azure_ad' ? { 'background-color': '#0080FF','color':'white' } : dataObject.dynamicButtonClass" class="dropdown-content menu p-2 shadow rounded-box w-60">
               <li v-if="!$auth.loggedIn" v-for="mn in dataObject.menu" :key="mn.name">
                 <nuxt-link :to="mn.route">{{ mn.name }} <div class="badge badge-primary" v-if="mn.isnew">NEW 🎉</div></nuxt-link>
               </li>
@@ -131,9 +140,9 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
         </div>
       </div>
     </div>
-    <div :style="dataObject.dynamicColorClass"  class="-z-10 card rounded-t-none rounded-b-2xl shadow-xl items-center p-4 text-neutral-content lg:w-full sm:w-full md:w-full w-80">
-      <nuxt-img v-if="$auth.loggedIn" class="invert animate__animated animate__fadeIn animate__delay-5s " width="200" height="50" src="/svg/INSIDER-AP-SVG.svg"></nuxt-img>
-      <nuxt-img v-if="!$auth.loggedIn" class="invert animate__animated animate__fadeIn animate__delay-5s " width="200" height="50" src="/svg/ARSANANDHALogo.svg"></nuxt-img>
+    <div :style="$auth.loggedIn ? { 'background-color': '#3271CD' } : dataObject.dynamicColorClass"  class="-z-10 card rounded-t-none rounded-b-2xl shadow-xl items-center p-4 text-neutral-content lg:w-full sm:w-full md:w-full w-80">
+      <nuxt-img :style="dataObject.dynamicSVGClass" v-if="$auth.loggedIn" class="animate__animated animate__fadeIn animate__delay-5s " width="200" height="50" src="/svg/INSIDER-AP-SVG.svg"></nuxt-img>
+      <nuxt-img :style="dataObject.dynamicSVGClass" v-if="!$auth.loggedIn" class="animate__animated animate__fadeIn animate__delay-5s " width="200" height="50" src="/svg/ARSANANDHALogo.svg"></nuxt-img>
     </div>
   </div>
 </template>
