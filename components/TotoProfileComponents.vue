@@ -105,7 +105,7 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
 </script>
 
 <template>
-  <div class="container font-apFont animate__animated animate__zoomIn">
+  <div class="container font-apFont">
     <div :style="$auth.loggedIn ? { 'background-color': '#3271CD' } : dataObject.dynamicColorClass" class="card rounded-b-none lg:card-side lg:w-full sm:w-full md:w-full w-80">
       <figure class="object-cover animate__animated animate__fadeIn animate__delay-1s">
         <nuxt-img v-if="!$auth.loggedIn" ref="profileImage" format="webp" :src="dataObject.images" class="object-cover xl:w-96 xl:h-128 lg:w-80 lg:h-128 md:w-128 md:h-96 w-128 h-64" alt="Profile with 1 Person" />

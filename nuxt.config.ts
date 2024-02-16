@@ -191,5 +191,8 @@ export default defineNuxtConfig({
                 maxAge: 60
             }
         },
+    },
+    particles: {
+        mode: 'slim'
     }
 })

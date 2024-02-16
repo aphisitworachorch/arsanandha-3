@@ -126,6 +126,7 @@ const options = {
 }
 
 const onLoad = (container: Container) => {
+  container.refresh()
   container.play()
 }
 
