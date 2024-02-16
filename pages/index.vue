@@ -126,9 +126,7 @@ const options = {
 }
 
 const onLoad = (container: Container) => {
-  // Do something with the container
-  container.pause()
-  setTimeout(() => container.play(), 7000)
+  container.play()
 }
 
 useHead({
