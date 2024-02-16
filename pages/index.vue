@@ -36,9 +36,9 @@ const options = {
         "nb_sides": 3
       },
       "image": {
-        "src": "https://pngimg.com/d/cloud_PNG24.png",
-        "width": 1171,
-        "height": 500
+        "src": "pics/9-cloud-png-image.png",
+        "width": 505.5,
+        "height": 255.3333333333333
       }
     },
     "opacity": {
