@@ -107,9 +107,9 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
 <template>
   <div class="container font-apFont">
     <div :style="$auth.loggedIn ? { 'background-color': '#3271CD' } : dataObject.dynamicColorClass" class="card rounded-b-none lg:card-side lg:w-full sm:w-full md:w-full w-80">
-      <figure class="object-cover animate__animated animate__fadeIn animate__delay-1s">
-        <nuxt-img v-if="!$auth.loggedIn" ref="profileImage" format="webp" :src="dataObject.images" class="object-cover xl:w-96 xl:h-128 lg:w-80 lg:h-128 md:w-128 md:h-96 w-128 h-64" alt="Profile with 1 Person" />
-        <nuxt-img v-if="$auth.loggedIn" ref="profileImage" format="webp" src="pics/SS_Thumbnail.png" class="object-cover xl:w-96 xl:h-128 lg:w-80 lg:h-128 md:w-128 md:h-96 w-128 h-64" alt="Profile with 1 Person" />
+      <figure class="object-cover animate__animated animate__fadeIn animate__delay-1s flex">
+        <nuxt-img ref="profileBackground" format="webp" src="pics/26-OG.jpg" class="avatarBackground" alt="Profile Background" />
+        <nuxt-img ref="profileImage" format="webp" src="pics/transparent-ap.png" class="avatarObject" alt="Profile with 1 Person" />
       </figure>
       <div class="card-body text-left animate__animated animate__fadeIn animate__delay-2s">
         <h2 class="card-title text-2xl text-black font-bold animate__animated animate__fadeIn animate__delay-3s" :style="$auth.loggedIn ? { 'color': 'white' } : dataObject.dynamicTextClass">{{ dataObject.customGreet }}</h2>
@@ -148,4 +148,10 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
 </template>
 
 <style scoped>
+.avatarObject {
+  @apply object-cover max-[390px]:w-96 max-[390px]:h-60 max-[414px]:w-80 max-[550px]:h-60 max-[768px]:w-128 max-[768px]:h-72 max-[1020px]:w-128 max-[1020px]:h-72 w-96 h-128 origin-bottom transition-all transform-gpu ease-in-out duration-500 translate-y-72 hover:translate-y-24 max-[390px]:translate-x-0 max-[390px]:translate-y-24 max-[390px]:hover:translate-x-36 max-[390px]:object-contain max-[390px]:object-left max-[414px]:translate-x-0 max-[414px]:translate-y-24 max-[414px]:hover:translate-x-36 max-[414px]:object-contain max-[414px]:object-left max-[430px]:-translate-x-20 max-[430px]:translate-y-24 max-[430px]:hover:translate-x-20 max-[430px]:object-contain max-[550px]:translate-x-0 max-[550px]:translate-y-24 max-[550px]:hover:translate-x-36 max-[550px]:object-contain max-[1020px]:-translate-x-36 max-[1020px]:translate-y-32 max-[1020px]:hover:translate-x-36 max-[1020px]:object-contain
+}
+.avatarBackground {
+  @apply object-cover max-[390px]:w-96 max-[390px]:h-60 max-[414px]:w-80 max-[550px]:h-60 max-[768px]:w-128 max-[768px]:h-72 max-[1020px]:w-128 max-[1020px]:h-72 w-96 h-128 absolute inset-0 -z-10 max-[390px]:rounded-t-2xl max-[414px]:rounded-t-2xl max-[550px]:rounded-t-2xl max-[768px]:rounded-t-2xl max-[1020px]:rounded-t-2xl rounded-tl-2xl
+}
 </style>
