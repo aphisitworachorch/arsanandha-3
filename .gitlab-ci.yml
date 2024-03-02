@@ -105,6 +105,8 @@ frontend-ap-k8s-apply:
     - 'sed -i -e "s|{{azure-ad-audience}}|$AZURE_AD_AUDIENCE|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{azure-ad-client-id}}|$AZURE_AD_CLIENT_ID|g" ./arsanandha-frontend/values.yaml'
     - 'sed -i -e "s|{{azure-ad-client-secret}}|$AZURE_AD_CLIENT_SECRET|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{brew-api-url}}|$BREW_API_URL|g" ./arsanandha-frontend/values.yaml'
+    - 'sed -i -e "s|{{brew-api-key}}|$BREW_API_KEY|g" ./arsanandha-frontend/values.yaml'
     - cat ./arsanandha-frontend/values.yaml
   script:
     - kubectl config get-contexts
