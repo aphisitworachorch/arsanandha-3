@@ -105,6 +105,7 @@ export default defineNuxtConfig({
     runtimeConfig:{
         public:{
             API_URL: process.env.API_URL,
+            BREWER_API_URL: process.env.BREWER_API_URL,
             auth:{
                 strategies:{
                     azure_ad: {
@@ -122,6 +123,7 @@ export default defineNuxtConfig({
             },
         },
         API_KEY: process.env.API_KEY,
+        BREWER_API_KEY: process.env.BREWER_API_KEY
     },
     security:{
         nonce: true,
