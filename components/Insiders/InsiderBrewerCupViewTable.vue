@@ -10,7 +10,7 @@ const dataConfig = reactive({
   brewerList: [],
   paginate:{
     search: "",
-    pageSize: 10,
+    pageSize: 300,
     pageNumber: 1
   },
   masterTypeData:{
@@ -65,7 +65,7 @@ async function searchData() {
   }
 }
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await searchData();
 })
 </script>
@@ -77,10 +77,6 @@ onMounted(async () => {
         <div class="flex flex-row">
           <div class="mr-2">
             <input type="text" @change="searchData" v-model="dataConfig.paginate.search" placeholder="ชื่อ - นามสกุล" class="input input-bordered bg-white text-black w-full max-w-xs font-apThai" />
-          </div>
-          <div class="mr-2">
-            <button class="btn btn-info mr-2 text-white" @click="prevPage"><</button>
-            <button class="btn btn-info text-white" @click="nextPage">></button>
           </div>
         </div>
       </div>
