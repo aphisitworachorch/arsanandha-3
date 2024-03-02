@@ -22,3 +22,6 @@ data:
   {{ if .Values.applicationData.azureADClientId}}
   NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_CLIENT_ID: {{ .Values.applicationData.azureADClientId }}
   {{ end }}
+  {{ if .Values.applicationData.nuxtBrewerAPIURL}}
+  NUXT_PUBLIC_BREWER_API_URL: {{ .Values.applicationData.nuxtBrewerAPIURL }}
+  {{ end }}
