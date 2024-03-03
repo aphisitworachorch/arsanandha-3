@@ -1,14 +1,6 @@
 import {FormData} from "node-fetch-native";
 export default defineEventHandler(async (event) => {
     try{
-        const authorization = event.headers.get('authorization');
-        if (!authorization) {
-            return {
-                statusCode: 403,
-                message: "Unauthorized",
-                data: ""
-            }
-        }
         const body = await readBody(event);
         /**
          * Login

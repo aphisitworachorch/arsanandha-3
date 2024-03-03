@@ -2,8 +2,6 @@
 import InsiderNavBar from "~/layouts/insider.vue";
 import {SweetAlertResult} from "sweetalert2";
 
-const $auth = useAuth()
-const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d?._data?.data) : null;
 const {$swal} = useNuxtApp()
 
 const dataConfig = reactive({
@@ -52,10 +50,7 @@ async function searchData() {
   try {
     const fetchData = useFetch('/api/configuration/brewer/list',{
       method: "POST",
-      body: dataConfig.paginate,
-      headers:{
-        'Authorization': $auth?.strategy?.token?.get()
-      },
+      body: dataConfig.paginate
     })
     if (fetchData.data.value?.message === "Successful") {
       dataConfig.brewerList = fetchData.data.value?.data?.result;
@@ -65,9 +60,8 @@ async function searchData() {
   }
 }
 
-onBeforeMount(async () => {
-  await searchData();
-})
+await searchData();
+
 </script>
 
 <template>
@@ -77,6 +71,9 @@ onBeforeMount(async () => {
         <div class="flex flex-row">
           <div class="mr-2">
             <input type="text" @change="searchData" v-model="dataConfig.paginate.search" placeholder="ชื่อ - นามสกุล" class="input input-bordered bg-white text-black w-full max-w-xs font-apThai" />
+          </div>
+          <div class="mr-2">
+            <button class="btn btn-info" @click="searchData">โหลดข้อมูลใหม่</button>
           </div>
         </div>
       </div>
@@ -94,7 +91,6 @@ onBeforeMount(async () => {
             <th>มีสังกัดหรือไม่</th>
             <th>สังกัด</th>
             <th>ไซส์เสื้อ</th>
-            <th></th>
           </tr>
         </thead>
         <tbody v-for="(data,index) in dataConfig.brewerList">
@@ -109,16 +105,6 @@ onBeforeMount(async () => {
           <td>{{ data.haveAffiliations ? "✅" : "❌" }}</td>
           <td>{{ data?.affiliations }}</td>
           <td>{{ dataConfig.masterTypeSize[data.shirtSize] }}</td>
-          <td>
-            <div class="flex flex-row">
-              <div>
-                <button class="btn btn-outline btn-info">Edit</button>
-              </div>
-              <div class="pl-2">
-                <button class="btn btn-outline btn-error">Delete</button>
-              </div>
-            </div>
-          </td>
         </tbody>
       </table>
     </div>

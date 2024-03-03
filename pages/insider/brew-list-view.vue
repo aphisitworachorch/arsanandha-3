@@ -5,10 +5,6 @@ import InsiderBrewerCupViewTable from "~/components/Insiders/InsiderBrewerCupVie
 useHead({
   title: "Configuration"
 })
-definePageMeta({
-  middleware: ['auth'],
-  layout: 'insider'
-});
 </script>
 <template>
   <div class="outerContainer bgCon">
@@ -22,7 +18,7 @@ definePageMeta({
 import InsiderConfigurationComponents from "~/components/Insiders/InsiderConfigurationComponents.vue";
 
 export default {
-  name: "me",
+  name: "brew-list-view",
   components: {InsiderConfigurationComponents}
 }
 </script>
