@@ -33,17 +33,22 @@ const dataConfig = reactive({
   }
 })
 
-async function prevPage() {
-  if (dataConfig.paginate.pageNumber < 1) {
-    dataConfig.paginate.pageNumber = 0;
+async function downloadFile() {
+  try {
+    fetch('/api/configuration/brewer/download',{
+      method: "GET"
+    }).then( res => res.blob() ).then( blob => {
+      const file = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = file;
+      a.download = `export_file_${Date.now()}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  }catch(error){
+    throw error;
   }
-  dataConfig.paginate.pageNumber--;
-  await searchData();
-}
-
-async function nextPage() {
-  dataConfig.paginate.pageNumber++;
-  await searchData();
 }
 
 async function searchData() {
@@ -74,6 +79,9 @@ await searchData();
           </div>
           <div class="mr-2">
             <button class="btn btn-info" @click="searchData">โหลดข้อมูลใหม่</button>
+          </div>
+          <div class="mr-2">
+            <button class="btn btn-info" @click="downloadFile">ดาวน์โหลด Excel</button>
           </div>
         </div>
       </div>
