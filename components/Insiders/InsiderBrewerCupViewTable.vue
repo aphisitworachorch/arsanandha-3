@@ -11,6 +11,12 @@ const dataConfig = reactive({
     pageSize: 300,
     pageNumber: 1
   },
+  group:{
+    "BREWING": 0,
+    "CUP_TASTER": 0,
+    "MULTIPLE_TYPES": 0,
+    "TOTAL": 0
+  },
   masterTypeData:{
     BREWING_NORMAL: "Brewing (3500 บาท)",
     CUP_TASTER_NORMAL: "Cup Taster (2000 บาท)",
@@ -51,6 +57,19 @@ async function downloadFile() {
   }
 }
 
+async function getSummary() {
+  try {
+    const fetchData = useFetch('/api/configuration/brewer/summary',{
+      method: "GET"
+    })
+    if (fetchData.data.value?.message === "Successful") {
+      dataConfig.group = fetchData.data.value?.data;
+    }
+  }catch(error){
+    throw error;
+  }
+}
+
 async function searchData() {
   try {
     const fetchData = useFetch('/api/configuration/brewer/list',{
@@ -59,6 +78,7 @@ async function searchData() {
     })
     if (fetchData.data.value?.message === "Successful") {
       dataConfig.brewerList = fetchData.data.value?.data?.result;
+      await getSummary();
     }
   }catch(error){
     throw error;
@@ -66,13 +86,30 @@ async function searchData() {
 }
 
 await searchData();
+await getSummary();
 
 </script>
 
 <template>
-  <div class="container font-apMonoFont text-left">
+  <div class="container font-apMonoFont text-left w-dvw">
     <div class="overflow-x-auto bg-white rounded-xl">
-      <div class="justify-items-end  m-3 font-apThai">
+      <div class="m-3 font-apThai">
+        <div class="flex flex-row text-center">
+          <div class="mr-2">
+            ยอด Brewing <h1 class="font-bold text-2xl">{{ dataConfig.group.BREWING }}</h1>
+          </div>
+          <div class="mr-2">
+            ยอด Cup Taster <h1 class="font-bold text-2xl">{{ dataConfig.group.CUP_TASTER }}</h1>
+          </div>
+          <div class="mr-2">
+            ยอด สองประเภท <h1 class="font-bold text-2xl">{{ dataConfig.group.MULTIPLE_TYPES }}</h1>
+          </div>
+          <div class="mr-2">
+            รวมทั้งหมด <h1 class="font-bold text-2xl">{{ dataConfig.group.TOTAL }}</h1>
+          </div>
+        </div>
+      </div>
+      <div class="justify-items-end m-3 font-apThai">
         <div class="flex flex-row">
           <div class="mr-2">
             <input type="text" @change="searchData" v-model="dataConfig.paginate.search" placeholder="ชื่อ - นามสกุล" class="input input-bordered bg-white text-black w-full max-w-xs font-apThai" />
@@ -85,7 +122,7 @@ await searchData();
           </div>
         </div>
       </div>
-      <table class="table font-apThai table-auto ">
+      <table class="table font-apThai table-auto">
         <thead>
           <tr>
             <th></th>
