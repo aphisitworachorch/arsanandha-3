@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import InsiderNavBar from "~/layouts/insider.vue";
 import {SweetAlertResult} from "sweetalert2";
 
 const {$swal} = useNuxtApp()
@@ -88,6 +87,115 @@ async function searchData() {
 await searchData();
 await getSummary();
 
+async function addCompetitionRound(applicationId: string, competitionTypes: string){
+  if (applicationId !== ""){
+    if (competitionTypes == "BREWING_NORMAL" || competitionTypes == "BREWING_EARLY_BIRD") {
+      await $swal.fire({
+        title: 'บันทึกสายแข่ง',
+        html: `
+      <div>
+        <input id="groupNumberBrewing" class="swal2-input" placeholder="หมายเลขการแข่งขัน Brewing"/>
+      </div>
+      `,
+        showCancelButton: true,
+        allowOutsideClick: false,
+        cancelButtonText: "ยกเลิก",
+        confirmButtonText: "ยืนยันการบันทึก"
+      }).then(async (result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          const {data} = await useFetch('/api/configuration/brewer/round', {
+            method: 'POST',
+            body: {
+              applicationId: applicationId,
+              groupNumberBrewing: document.getElementById("groupNumberBrewing")?.value,
+            }
+          });
+          if (data?.value?.message == "Successful") {
+            await searchData();
+            await $swal.fire({
+              position: "top-end",
+              toast: true,
+              title: 'แจ้งเตือน',
+              text: 'บันทึกการตั้งค่าสำเร็จ',
+              icon: 'success',
+              allowOutsideClick: false,
+            })
+          }
+        }
+      });
+    } else if (competitionTypes == "CUP_TASTER_NORMAL" || competitionTypes == "CUP_TASTER_EARLY_BIRD") {
+      await $swal.fire({
+        title: 'บันทึกสายแข่ง',
+        html: `
+      <div>
+        <input id="groupNumberCupTaster" class="swal2-input" placeholder="หมายเลขการแข่งขัน Cup Taster"/>
+      </div>
+      `,
+        showCancelButton: true,
+        allowOutsideClick: false,
+        cancelButtonText: "ยกเลิก",
+        confirmButtonText: "ยืนยันการบันทึก"
+      }).then(async (result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          const {data} = await useFetch('/api/configuration/brewer/round', {
+            method: 'POST',
+            body: {
+              applicationId: applicationId,
+              groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
+            }
+          });
+          if (data?.value?.message == "Successful") {
+            await searchData();
+            await $swal.fire({
+              position: "top-end",
+              toast: true,
+              title: 'แจ้งเตือน',
+              text: 'บันทึกการตั้งค่าสำเร็จ',
+              icon: 'success',
+              allowOutsideClick: false,
+            })
+          }
+        }
+      });
+    } else {
+      await $swal.fire({
+        title: 'บันทึกสายแข่ง',
+        html: `
+      <div>
+        <input id="groupNumberBrewing" class="swal2-input" placeholder="หมายเลขการแข่งขัน Brewing"/>
+        <input id="groupNumberCupTaster" class="swal2-input" placeholder="หมายเลขการแข่งขัน Cup Taster"/>
+      </div>
+      `,
+        showCancelButton: true,
+        allowOutsideClick: false,
+        cancelButtonText: "ยกเลิก",
+        confirmButtonText: "ยืนยันการบันทึก"
+      }).then(async (result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          const {data} = await useFetch('/api/configuration/brewer/round', {
+            method: 'POST',
+            body: {
+              applicationId: applicationId,
+              groupNumberBrewing: document.getElementById("groupNumberBrewing")?.value,
+              groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
+            }
+          });
+          if (data?.value?.message == "Successful") {
+            await searchData();
+            await $swal.fire({
+              position: "top-end",
+              toast: true,
+              title: 'แจ้งเตือน',
+              text: 'บันทึกการตั้งค่าสำเร็จ',
+              icon: 'success',
+              allowOutsideClick: false,
+            })
+          }
+        }
+      });
+    }
+  }
+}
 </script>
 
 <template>
@@ -131,10 +239,8 @@ await getSummary();
             <th>ชื่อ-นามสกุล อังกฤษ</th>
             <th>หมายเลขการสมัคร</th>
             <th>ชื่อเล่น</th>
-            <th>อายุ</th>
-            <th>เบอร์โทรศัพท์</th>
-            <th>มีสังกัดหรือไม่</th>
-            <th>สังกัด</th>
+            <th>รอบแข่ง Brewing</th>
+            <th>รอบแข่ง Cup Taster</th>
             <th>ไซส์เสื้อ</th>
           </tr>
         </thead>
@@ -145,11 +251,10 @@ await getSummary();
           <td>{{ data.firstNameEN }} {{ data.lastNameEN }}</td>
           <td><kbd>{{ data.applicationAliasId }}</kbd></td>
           <td>{{ data.nickName }}</td>
-          <td>{{ data.age }}</td>
-          <td>{{ data.telNo }}</td>
-          <td>{{ data.haveAffiliations ? "✅" : "❌" }}</td>
-          <td>{{ data?.affiliations }}</td>
+          <td>{{ data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD" ? data.groupNumberBrewing : "ไม่มีรายการ" }}</td>
+          <td>{{ data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD" ? data.groupNumberCupTaster : "ไม่มีรายการ" }}</td>
           <td>{{ dataConfig.masterTypeSize[data.shirtSize] }}</td>
+          <td><button class="btn btn-info w-24" @click="addCompetitionRound(data.applicationId, data.competitionTypes)">เพิ่มสายการแข่ง</button></td>
         </tbody>
       </table>
     </div>

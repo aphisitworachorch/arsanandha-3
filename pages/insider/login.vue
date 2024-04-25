@@ -1,3 +1,12 @@
+<script setup>
+import {useHead} from "nuxt/app";
+
+useHead({
+  title: "Login"
+})
+
+</script>
+
 <template>
   <div class="outerContainer bgCon">
     <div class="innerContainer">
@@ -10,7 +19,7 @@
 import InsidersLoginPageComponents from "~/components/Insiders/InsidersLoginPageComponents.vue";
 
 export default {
-  name: "about",
+  name: "login",
   components: {InsidersLoginPageComponents}
 }
 </script>
