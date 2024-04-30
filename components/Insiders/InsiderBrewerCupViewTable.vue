@@ -58,6 +58,24 @@ async function downloadFile() {
   }
 }
 
+async function downloadCombinedFile() {
+  try {
+    fetch('/api/configuration/brewer/download-combined',{
+      method: "GET"
+    }).then( res => res.blob() ).then( blob => {
+      const file = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = file;
+      a.download = `export_combined_file_${Date.now()}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  }catch(error){
+    throw error;
+  }
+}
+
 async function getSummary() {
   try {
     const fetchData = await $fetch('/api/configuration/brewer/summary',{
@@ -89,22 +107,7 @@ async function searchData() {
 await searchData();
 await getSummary();
 
-function uponToCompetitionResultStyle(competitionResults: object) {
-  return competitionResults?.compulsoryRoundPassed && !competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? {
-    "background-color": "green",
-    "color":"white"
-  } : competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? {
-    "background-color": "yellow"
-  } : competitionResults?.semiFinalRoundTwoPassed && !competitionResults?.finalRoundPassed ? {
-    "background-color": "red",
-    "color":"white"
-  } : competitionResults?.finalRoundPassed ? {
-    "background-color": "magenta",
-    "color":"white"
-  } : {};
-}
-
-function getCompetitionText(competitionResults: object) {
+function getCompetitionText(competitionResults: object[]) {
   return competitionResults?.compulsoryRoundPassed && !competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? "ผ่านรอบคัดเลือก" : competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? "ผ่านรอบเซมิไฟนอล" : competitionResults?.semiFinalRoundTwoPassed && !competitionResults?.finalRoundPassed ? "ผ่านรอบเซมิไฟนอล 2" : competitionResults?.finalRoundPassed ? "เข้ารอบไฟนอล" : "ยังไม่เข้ารอบ";
 }
 
@@ -112,19 +115,23 @@ async function updateCompetitorsWinner(applicationId: string, competitionTypes: 
   if (applicationId !== ""){
     const classifyRounds = competitorsData?.compulsoryRoundPassed && !competitorsData?.semiFinalRoundPassed && !competitorsData?.semiFinalRoundTwoPassed ? {
       roundText: "รอบ Semi-Final 1",
-      roundEnum: "SEMI_1_ROUNDS"
+      roundEnum: "SEMI_1_ROUNDS",
+      roundType: competitorsData?.typeOfCompetitions
     } : competitorsData?.semiFinalRoundPassed && !competitorsData?.semiFinalRoundTwoPassed ? {
       roundText: "รอบ Semi-Final 2",
-      roundEnum: "SEMI_2_ROUNDS"
+      roundEnum: "SEMI_2_ROUNDS",
+      roundType: competitorsData?.typeOfCompetitions
     } : competitorsData?.semiFinalRoundTwoPassed ? {
       roundText: "รอบ Final",
-      roundEnum: "FINAL_ROUNDS"
+      roundEnum: "FINAL_ROUNDS",
+      roundType: competitorsData?.typeOfCompetitions
     } : {
       roundText: "รอบคัดเลือก",
-      roundEnum: "COMPULSORY_ROUNDS"
+      roundEnum: "COMPULSORY_ROUNDS",
+      roundType: competitorsData?.typeOfCompetitions
     };
 
-    if (competitionTypes == "BREWING_NORMAL" || competitionTypes == "BREWING_EARLY_BIRD") {
+    if (competitionTypes == "BREW") {
       await $swal.fire({
         title: `ผ่านเข้ารอบ ${classifyRounds.roundText} (Brew)`,
         icon: 'question',
@@ -157,7 +164,7 @@ async function updateCompetitorsWinner(applicationId: string, competitionTypes: 
         }
       });
 
-    } else if (competitionTypes == "CUP_TASTER_NORMAL" || competitionTypes == "CUP_TASTER_EARLY_BIRD") {
+    } else if (competitionTypes == "CUP") {
       await $swal.fire({
         title: `ผ่านเข้ารอบ ${classifyRounds.roundText} (Cup)`,
         icon: 'question',
@@ -167,59 +174,6 @@ async function updateCompetitorsWinner(applicationId: string, competitionTypes: 
         confirmButtonText: "ใช่ เข้ารอบ"
       }).then(async (result: SweetAlertResult) => {
         if (result.isConfirmed) {
-          const data = await $fetch('/api/configuration/brewer/pass-round', {
-            method: 'POST',
-            body: {
-              applicationId: applicationId,
-              competitionRounds: classifyRounds.roundEnum,
-              typeOfCompetitions: "CUP"
-            }
-          });
-          if (data?.message == "Successful") {
-            await searchData();
-            await nextTick();
-            await $swal.fire({
-              position: "top-end",
-              toast: true,
-              title: 'แจ้งเตือน',
-              text: 'บันทึกการตั้งค่าสำเร็จ',
-              icon: 'success',
-              allowOutsideClick: false,
-            })
-          }
-        }
-      });
-    } else {
-      await $swal.fire({
-        title: "ต้องการเลือกการเข้ารอบรายการใด (Brew/Cup)",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Brewer Cup",
-        denyButtonText: `Cup Taster`
-      }).then(async (result: SweetAlertResult) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          const data = await $fetch('/api/configuration/brewer/pass-round', {
-            method: 'POST',
-            body: {
-              applicationId: applicationId,
-              competitionRounds: classifyRounds.roundEnum,
-              typeOfCompetitions: "BREW"
-            }
-          });
-          if (data?.message == "Successful") {
-            await searchData();
-            await nextTick();
-            await $swal.fire({
-              position: "top-end",
-              toast: true,
-              title: 'แจ้งเตือน',
-              text: 'บันทึกการตั้งค่าสำเร็จ',
-              icon: 'success',
-              allowOutsideClick: false,
-            })
-          }
-        } else if (result.isDenied) {
           const data = await $fetch('/api/configuration/brewer/pass-round', {
             method: 'POST',
             body: {
@@ -387,6 +341,9 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
           <div class="mr-2">
             <button class="btn btn-info" @click="downloadFile">ดาวน์โหลด Excel</button>
           </div>
+          <div class="mr-2">
+            <button class="btn btn-info" @click="downloadCombinedFile">ดาวน์โหลด Excel แยก</button>
+          </div>
         </div>
       </div>
       <table class="table font-apThai table-auto">
@@ -405,7 +362,7 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
             <th></th>
           </tr>
         </thead>
-        <tbody v-for="(data,index) in dataConfig.brewerList" :style="uponToCompetitionResultStyle(data.competitionResults)">
+        <tbody v-for="(data,index) in dataConfig.brewerList">
           <td>{{ index+1 }}</td>
           <td>{{ dataConfig.masterTypeData[data.competitionTypes] }}</td>
           <td>{{ data.firstNameTH }} {{ data.lastNameTH }}</td>
@@ -416,13 +373,19 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
           <td>{{ data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD" ? data.groupNumberCupTaster : "ไม่มีรายการ" }}</td>
           <td>{{ dataConfig.masterTypeSize[data.shirtSize] }}</td>
           <td>
-            <div class="badge badge-info text-white w-36">{{ getCompetitionText(data.competitionResults) }}</div>
+            <div v-show='data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD"' class="badge badge-info text-white w-36 mb-2 text-xs h-12 text-center">BREW(S) : {{ getCompetitionText(data.competitionResults[0]) }}</div>
+            <div v-show='data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD"' class="badge badge-accent text-white w-36 text-xs h-12 text-center">CUP(S) : {{ getCompetitionText(data.competitionResults[0]) }}</div>
+            <div v-show='data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD"' class="badge badge-info text-white w-36 mb-2 text-xs h-12 text-center">BREW(D) : {{ getCompetitionText(data.competitionResults[0]) }}</div>
+            <div v-show='data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD"' class="badge badge-accent text-white w-36 text-xs h-12 text-center">CUP(D) : {{ getCompetitionText(data.competitionResults[1]) }}</div>
           </td>
           <td v-show='!((data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD") && data.groupNumberBrewing != null || (data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD") && data.groupNumberCupTaster != null)'>
             <button class="btn btn-info w-24" @click="addCompetitionRound(data.applicationId, data.competitionTypes)">เพิ่มสายการแข่ง</button>
           </td>
-          <td v-show='!data?.competitionResults?.finalRoundPassed'>
-            <button class="btn btn-warning w-32" @click="updateCompetitorsWinner(data.applicationId, data.competitionTypes, data.competitionResults)">อัพเดตการเข้ารอบ</button>
+          <td>
+            <button v-show='!data?.competitionResults[0]?.finalRoundPassed && data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD"' class="btn btn-warning w-32 mb-2" @click="updateCompetitorsWinner(data.applicationId, 'BREW', data.competitionResults?.[0])">อัพเดตการเข้ารอบ</button>
+            <button v-show='!data?.competitionResults[0]?.finalRoundPassed && data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD"' class="btn btn-accent w-32 mb-2" @click="updateCompetitorsWinner(data.applicationId, 'CUP', data.competitionResults?.[0])">อัพเดตการเข้ารอบ</button>
+            <button v-show='!data?.competitionResults[0]?.finalRoundPassed && data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD"' class="btn btn-success w-32 mb-2" @click="updateCompetitorsWinner(data.applicationId, 'BREW', data.competitionResults?.[0])">อัพเดตการเข้ารอบ (Brew)</button>
+            <button v-show='!data?.competitionResults[1]?.finalRoundPassed && data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD"' class="btn btn-success w-32" @click="updateCompetitorsWinner(data.applicationId, 'CUP', data.competitionResults?.[1])">อัพเดตการเข้ารอบ (Cup)</button>
           </td>
         </tbody>
       </table>

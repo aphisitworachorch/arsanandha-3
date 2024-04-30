@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
          */
 
         const runtimeConfig = useRuntimeConfig();
-        return await $fetch(`${runtimeConfig.public.BREWER_API_URL}/applications/export`, {
+        return await $fetch(`${runtimeConfig.public.BREWER_API_URL}/applications/getExcelCombined`, {
             method: 'get',
             headers: {
                 'x-api-key': runtimeConfig.BREWER_API_KEY,
