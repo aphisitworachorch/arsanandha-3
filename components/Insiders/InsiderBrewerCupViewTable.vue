@@ -126,7 +126,7 @@ async function updateCompetitorsWinner(applicationId: string, competitionTypes: 
 
     if (competitionTypes == "BREWING_NORMAL" || competitionTypes == "BREWING_EARLY_BIRD") {
       await $swal.fire({
-        title: `ผ่านเข้ารอบ ${classifyRounds.roundText}`,
+        title: `ผ่านเข้ารอบ ${classifyRounds.roundText} (Brew)`,
         icon: 'question',
         showCancelButton: true,
         allowOutsideClick: false,
@@ -139,6 +139,7 @@ async function updateCompetitorsWinner(applicationId: string, competitionTypes: 
             body: {
               applicationId: applicationId,
               competitionRounds: classifyRounds.roundEnum,
+              typeOfCompetitions: "BREW"
             }
           });
           if (data?.message == "Successful") {
@@ -158,27 +159,25 @@ async function updateCompetitorsWinner(applicationId: string, competitionTypes: 
 
     } else if (competitionTypes == "CUP_TASTER_NORMAL" || competitionTypes == "CUP_TASTER_EARLY_BIRD") {
       await $swal.fire({
-        title: 'บันทึกสายแข่ง',
-        html: `
-      <div>
-        <input id="groupNumberCupTaster" class="swal2-input" placeholder="หมายเลขการแข่งขัน Cup Taster"/>
-      </div>
-      `,
+        title: `ผ่านเข้ารอบ ${classifyRounds.roundText} (Cup)`,
+        icon: 'question',
         showCancelButton: true,
         allowOutsideClick: false,
         cancelButtonText: "ยกเลิก",
-        confirmButtonText: "ยืนยันการบันทึก"
+        confirmButtonText: "ใช่ เข้ารอบ"
       }).then(async (result: SweetAlertResult) => {
         if (result.isConfirmed) {
-          const data = await $fetch('/api/configuration/brewer/round', {
+          const data = await $fetch('/api/configuration/brewer/pass-round', {
             method: 'POST',
             body: {
               applicationId: applicationId,
-              groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
+              competitionRounds: classifyRounds.roundEnum,
+              typeOfCompetitions: "CUP"
             }
           });
           if (data?.message == "Successful") {
             await searchData();
+            await nextTick();
             await $swal.fire({
               position: "top-end",
               toast: true,
@@ -192,29 +191,46 @@ async function updateCompetitorsWinner(applicationId: string, competitionTypes: 
       });
     } else {
       await $swal.fire({
-        title: 'บันทึกสายแข่ง',
-        html: `
-      <div>
-        <input id="groupNumberBrewing" class="swal2-input" placeholder="หมายเลขการแข่งขัน Brewing"/>
-        <input id="groupNumberCupTaster" class="swal2-input" placeholder="หมายเลขการแข่งขัน Cup Taster"/>
-      </div>
-      `,
+        title: "ต้องการเลือกการเข้ารอบรายการใด (Brew/Cup)",
+        showDenyButton: true,
         showCancelButton: true,
-        allowOutsideClick: false,
-        cancelButtonText: "ยกเลิก",
-        confirmButtonText: "ยืนยันการบันทึก"
+        confirmButtonText: "Brewer Cup",
+        denyButtonText: `Cup Taster`
       }).then(async (result: SweetAlertResult) => {
+        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          const data = await $fetch('/api/configuration/brewer/round', {
+          const data = await $fetch('/api/configuration/brewer/pass-round', {
             method: 'POST',
             body: {
               applicationId: applicationId,
-              groupNumberBrewing: document.getElementById("groupNumberBrewing")?.value,
-              groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
+              competitionRounds: classifyRounds.roundEnum,
+              typeOfCompetitions: "BREW"
             }
           });
           if (data?.message == "Successful") {
             await searchData();
+            await nextTick();
+            await $swal.fire({
+              position: "top-end",
+              toast: true,
+              title: 'แจ้งเตือน',
+              text: 'บันทึกการตั้งค่าสำเร็จ',
+              icon: 'success',
+              allowOutsideClick: false,
+            })
+          }
+        } else if (result.isDenied) {
+          const data = await $fetch('/api/configuration/brewer/pass-round', {
+            method: 'POST',
+            body: {
+              applicationId: applicationId,
+              competitionRounds: classifyRounds.roundEnum,
+              typeOfCompetitions: "CUP"
+            }
+          });
+          if (data?.message == "Successful") {
+            await searchData();
+            await nextTick();
             await $swal.fire({
               position: "top-end",
               toast: true,

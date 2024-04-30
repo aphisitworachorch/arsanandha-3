@@ -18,7 +18,8 @@ export default defineEventHandler(async (event) => {
             lazy: true,
             body: {
                 competitionRounds: body?.competitionRounds,
-                applicationId: body.applicationId
+                applicationId: body.applicationId,
+                typeOfCompetitions: body?.typeOfCompetitions
             }
         }).catch(error => console.log(error.response));
     }catch(error){
