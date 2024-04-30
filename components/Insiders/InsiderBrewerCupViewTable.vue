@@ -2,13 +2,15 @@
 import {SweetAlertResult} from "sweetalert2";
 
 const {$swal} = useNuxtApp()
+const instance = getCurrentInstance();
 
 const dataConfig = reactive({
   brewerList: [],
   paginate:{
     search: "",
     pageSize: 300,
-    pageNumber: 1
+    pageNumber: 1,
+    competitionRounds: undefined,
   },
   group:{
     "BREWING": 0,
@@ -35,7 +37,7 @@ const dataConfig = reactive({
     48: "4XL (อก 48)",
     50: "5XL (อก 50)",
     52: "6XL (อก 52)",
-  }
+  },
 })
 
 async function downloadFile() {
@@ -58,11 +60,11 @@ async function downloadFile() {
 
 async function getSummary() {
   try {
-    const fetchData = useFetch('/api/configuration/brewer/summary',{
+    const fetchData = await $fetch('/api/configuration/brewer/summary',{
       method: "GET"
     })
-    if (fetchData.data.value?.message === "Successful") {
-      dataConfig.group = fetchData.data.value?.data;
+    if (fetchData?.message === "Successful") {
+      dataConfig.group = fetchData?.data;
     }
   }catch(error){
     throw error;
@@ -71,14 +73,14 @@ async function getSummary() {
 
 async function searchData() {
   try {
-    const fetchData = useFetch('/api/configuration/brewer/list',{
+    const fetchData = await $fetch('/api/configuration/brewer/list',{
       method: "POST",
       body: dataConfig.paginate
     })
-    if (fetchData.data.value?.message === "Successful") {
-      dataConfig.brewerList = fetchData.data.value?.data?.result;
-      await getSummary();
+    if (fetchData?.message === "Successful") {
+      dataConfig.brewerList = fetchData?.data?.result;
     }
+    await getSummary();
   }catch(error){
     throw error;
   }
@@ -87,31 +89,61 @@ async function searchData() {
 await searchData();
 await getSummary();
 
-async function addCompetitionRound(applicationId: string, competitionTypes: string){
+function uponToCompetitionResultStyle(competitionResults: object) {
+  return competitionResults?.compulsoryRoundPassed && !competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? {
+    "background-color": "green",
+    "color":"white"
+  } : competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? {
+    "background-color": "yellow"
+  } : competitionResults?.semiFinalRoundTwoPassed && !competitionResults?.finalRoundPassed ? {
+    "background-color": "red",
+    "color":"white"
+  } : competitionResults?.finalRoundPassed ? {
+    "background-color": "magenta",
+    "color":"white"
+  } : {};
+}
+
+function getCompetitionText(competitionResults: object) {
+  return competitionResults?.compulsoryRoundPassed && !competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? "ผ่านรอบคัดเลือก" : competitionResults?.semiFinalRoundPassed && !competitionResults?.semiFinalRoundTwoPassed ? "ผ่านรอบเซมิไฟนอล" : competitionResults?.semiFinalRoundTwoPassed && !competitionResults?.finalRoundPassed ? "ผ่านรอบเซมิไฟนอล 2" : competitionResults?.finalRoundPassed ? "เข้ารอบไฟนอล" : "ยังไม่เข้ารอบ";
+}
+
+async function updateCompetitorsWinner(applicationId: string, competitionTypes: string, competitorsData?: object) {
   if (applicationId !== ""){
+    const classifyRounds = competitorsData?.compulsoryRoundPassed && !competitorsData?.semiFinalRoundPassed && !competitorsData?.semiFinalRoundTwoPassed ? {
+      roundText: "รอบ Semi-Final 1",
+      roundEnum: "SEMI_1_ROUNDS"
+    } : competitorsData?.semiFinalRoundPassed && !competitorsData?.semiFinalRoundTwoPassed ? {
+      roundText: "รอบ Semi-Final 2",
+      roundEnum: "SEMI_2_ROUNDS"
+    } : competitorsData?.semiFinalRoundTwoPassed ? {
+      roundText: "รอบ Final",
+      roundEnum: "FINAL_ROUNDS"
+    } : {
+      roundText: "รอบคัดเลือก",
+      roundEnum: "COMPULSORY_ROUNDS"
+    };
+
     if (competitionTypes == "BREWING_NORMAL" || competitionTypes == "BREWING_EARLY_BIRD") {
       await $swal.fire({
-        title: 'บันทึกสายแข่ง',
-        html: `
-      <div>
-        <input id="groupNumberBrewing" class="swal2-input" placeholder="หมายเลขการแข่งขัน Brewing"/>
-      </div>
-      `,
+        title: `ผ่านเข้ารอบ ${classifyRounds.roundText}`,
+        icon: 'question',
         showCancelButton: true,
         allowOutsideClick: false,
         cancelButtonText: "ยกเลิก",
-        confirmButtonText: "ยืนยันการบันทึก"
+        confirmButtonText: "ใช่ เข้ารอบ"
       }).then(async (result: SweetAlertResult) => {
         if (result.isConfirmed) {
-          const {data} = await useFetch('/api/configuration/brewer/round', {
+          const data = await $fetch('/api/configuration/brewer/pass-round', {
             method: 'POST',
             body: {
               applicationId: applicationId,
-              groupNumberBrewing: document.getElementById("groupNumberBrewing")?.value,
+              competitionRounds: classifyRounds.roundEnum,
             }
           });
-          if (data?.value?.message == "Successful") {
+          if (data?.message == "Successful") {
             await searchData();
+            await nextTick();
             await $swal.fire({
               position: "top-end",
               toast: true,
@@ -123,6 +155,7 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
           }
         }
       });
+
     } else if (competitionTypes == "CUP_TASTER_NORMAL" || competitionTypes == "CUP_TASTER_EARLY_BIRD") {
       await $swal.fire({
         title: 'บันทึกสายแข่ง',
@@ -137,14 +170,14 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
         confirmButtonText: "ยืนยันการบันทึก"
       }).then(async (result: SweetAlertResult) => {
         if (result.isConfirmed) {
-          const {data} = await useFetch('/api/configuration/brewer/round', {
+          const data = await $fetch('/api/configuration/brewer/round', {
             method: 'POST',
             body: {
               applicationId: applicationId,
               groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
             }
           });
-          if (data?.value?.message == "Successful") {
+          if (data?.message == "Successful") {
             await searchData();
             await $swal.fire({
               position: "top-end",
@@ -172,7 +205,7 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
         confirmButtonText: "ยืนยันการบันทึก"
       }).then(async (result: SweetAlertResult) => {
         if (result.isConfirmed) {
-          const {data} = await useFetch('/api/configuration/brewer/round', {
+          const data = await $fetch('/api/configuration/brewer/round', {
             method: 'POST',
             body: {
               applicationId: applicationId,
@@ -180,7 +213,117 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
               groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
             }
           });
-          if (data?.value?.message == "Successful") {
+          if (data?.message == "Successful") {
+            await searchData();
+            await $swal.fire({
+              position: "top-end",
+              toast: true,
+              title: 'แจ้งเตือน',
+              text: 'บันทึกการตั้งค่าสำเร็จ',
+              icon: 'success',
+              allowOutsideClick: false,
+            })
+          }
+        }
+      });
+    }
+  }
+}
+
+async function addCompetitionRound(applicationId: string, competitionTypes: string){
+  if (applicationId !== ""){
+    if (competitionTypes == "BREWING_NORMAL" || competitionTypes == "BREWING_EARLY_BIRD") {
+      await $swal.fire({
+        title: 'บันทึกสายแข่ง',
+        html: `
+      <div>
+        <input id="groupNumberBrewing" class="swal2-input" placeholder="หมายเลขการแข่งขัน Brewing"/>
+      </div>
+      `,
+        showCancelButton: true,
+        allowOutsideClick: false,
+        cancelButtonText: "ยกเลิก",
+        confirmButtonText: "ยืนยันการบันทึก"
+      }).then(async (result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          const data = await $fetch('/api/configuration/brewer/round', {
+            method: 'POST',
+            body: {
+              applicationId: applicationId,
+              groupNumberBrewing: document.getElementById("groupNumberBrewing")?.value,
+            }
+          });
+          if (data?.message == "Successful") {
+            await searchData();
+            await $swal.fire({
+              position: "top-end",
+              toast: true,
+              title: 'แจ้งเตือน',
+              text: 'บันทึกการตั้งค่าสำเร็จ',
+              icon: 'success',
+              allowOutsideClick: false,
+            })
+          }
+        }
+      });
+    } else if (competitionTypes == "CUP_TASTER_NORMAL" || competitionTypes == "CUP_TASTER_EARLY_BIRD") {
+      await $swal.fire({
+        title: 'บันทึกสายแข่ง',
+        html: `
+      <div>
+        <input id="groupNumberCupTaster" class="swal2-input" placeholder="หมายเลขการแข่งขัน Cup Taster"/>
+      </div>
+      `,
+        showCancelButton: true,
+        allowOutsideClick: false,
+        cancelButtonText: "ยกเลิก",
+        confirmButtonText: "ยืนยันการบันทึก"
+      }).then(async (result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          const data = await $fetch('/api/configuration/brewer/round', {
+            method: 'POST',
+            body: {
+              applicationId: applicationId,
+              groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
+            }
+          });
+          if (data?.message == "Successful") {
+            await searchData();
+            await $swal.fire({
+              position: "top-end",
+              toast: true,
+              title: 'แจ้งเตือน',
+              text: 'บันทึกการตั้งค่าสำเร็จ',
+              icon: 'success',
+              allowOutsideClick: false,
+            })
+          }
+        }
+      });
+    } else {
+      await $swal.fire({
+        title: 'บันทึกสายแข่ง',
+        html: `
+      <div>
+        <input id="groupNumberBrewing" class="swal2-input" placeholder="หมายเลขการแข่งขัน Brewing"/>
+        <input id="groupNumberCupTaster" class="swal2-input" placeholder="หมายเลขการแข่งขัน Cup Taster"/>
+      </div>
+      `,
+        showCancelButton: true,
+        allowOutsideClick: false,
+        cancelButtonText: "ยกเลิก",
+        confirmButtonText: "ยืนยันการบันทึก"
+      }).then(async (result: SweetAlertResult) => {
+        if (result.isConfirmed) {
+          const data = await $fetch('/api/configuration/brewer/round', {
+            method: 'POST',
+            body: {
+              applicationId: applicationId,
+              groupNumberBrewing: document.getElementById("groupNumberBrewing")?.value,
+              groupNumberCupTaster: document.getElementById("groupNumberCupTaster")?.value,
+            }
+          });
+          if (data?.message == "Successful") {
             await searchData();
             await $swal.fire({
               position: "top-end",
@@ -242,9 +385,11 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
             <th>รอบแข่ง Brewing</th>
             <th>รอบแข่ง Cup Taster</th>
             <th>ไซส์เสื้อ</th>
+            <th>สถานะ</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody v-for="(data,index) in dataConfig.brewerList">
+        <tbody v-for="(data,index) in dataConfig.brewerList" :style="uponToCompetitionResultStyle(data.competitionResults)">
           <td>{{ index+1 }}</td>
           <td>{{ dataConfig.masterTypeData[data.competitionTypes] }}</td>
           <td>{{ data.firstNameTH }} {{ data.lastNameTH }}</td>
@@ -254,7 +399,15 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
           <td>{{ data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD" ? data.groupNumberBrewing : "ไม่มีรายการ" }}</td>
           <td>{{ data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD" ? data.groupNumberCupTaster : "ไม่มีรายการ" }}</td>
           <td>{{ dataConfig.masterTypeSize[data.shirtSize] }}</td>
-          <td><button class="btn btn-info w-24" @click="addCompetitionRound(data.applicationId, data.competitionTypes)">เพิ่มสายการแข่ง</button></td>
+          <td>
+            <div class="badge badge-info text-white w-36">{{ getCompetitionText(data.competitionResults) }}</div>
+          </td>
+          <td v-show='!((data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD") && data.groupNumberBrewing != null || (data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD") && data.groupNumberCupTaster != null)'>
+            <button class="btn btn-info w-24" @click="addCompetitionRound(data.applicationId, data.competitionTypes)">เพิ่มสายการแข่ง</button>
+          </td>
+          <td v-show='!data?.competitionResults?.finalRoundPassed'>
+            <button class="btn btn-warning w-32" @click="updateCompetitorsWinner(data.applicationId, data.competitionTypes, data.competitionResults)">อัพเดตการเข้ารอบ</button>
+          </td>
         </tbody>
       </table>
     </div>

@@ -19,7 +19,8 @@ export default defineEventHandler(async (event) => {
             body: {
                 search: body.search,
                 pageSize: body.pageSize,
-                pageNumber: body.pageNumber
+                pageNumber: body.pageNumber,
+                competitionRounds: body?.competitionRounds
             }
         }).catch(error => console.log(error.response));
     }catch(error){
