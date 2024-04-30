@@ -3,8 +3,12 @@ import InsiderConfigurationComponents from "~/components/Insiders/InsiderConfigu
 import {useHead} from "nuxt/app";
 import InsiderBrewerCupViewTable from "~/components/Insiders/InsiderBrewerCupViewTable.vue";
 useHead({
-  title: "Configuration"
+  title: "Brewer List Viewer"
 })
+definePageMeta({
+  middleware: ['auth'],
+  layout: 'insider'
+});
 </script>
 <template>
   <div class="outerContainer bgCon">
