@@ -382,7 +382,7 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
             <th></th>
           </tr>
         </thead>
-        <tbody v-for="(data,index) in dataConfig.brewerList">
+        <tbody v-for="(data,index) in dataConfig.brewerList" :style="!data?.isVerifiedApplicator && !data?.canJoin ? { 'background-color': 'white' } : {'background-color': 'green','color':'white'}">
           <td>{{ index+1 }}</td>
           <td>{{ dataConfig.masterTypeData[data.competitionTypes] }}</td>
           <td>{{ data.firstNameTH }} {{ data.lastNameTH }}</td>
