@@ -104,6 +104,26 @@ async function searchData() {
   }
 }
 
+async function checkIn(applicationId: string) {
+  try {
+    const fetchData = await $fetch('/api/configuration/brewer/checkin',{
+      method: "POST",
+      body: {
+        applicationId
+      }
+    })
+    if (fetchData?.message === "Successful") {
+      await $swal.fire({
+        title: `เช็คอินแล้วเรียบร้อย`,
+        icon: 'successful',
+      })
+    }
+    await getSummary();
+  }catch(error){
+    throw error;
+  }
+}
+
 await searchData();
 await getSummary();
 
@@ -372,6 +392,9 @@ async function addCompetitionRound(applicationId: string, competitionTypes: stri
           <td>{{ data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD" ? data.groupNumberBrewing : "ไม่มีรายการ" }}</td>
           <td>{{ data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_NORMAL" || data.competitionTypes == "BREWING_PLUS_CUP_TASTER_EARLY_BIRD" ? data.groupNumberCupTaster : "ไม่มีรายการ" }}</td>
           <td>{{ dataConfig.masterTypeSize[data.shirtSize] }}</td>
+          <td>
+            <button v-show="!data?.isVerifiedApplicator && !data?.canJoin" class="btn btn-success" @click="checkIn(data?.applicationId)">Check-In</button>
+          </td>
           <td>
             <div v-show='data.competitionTypes == "BREWING_NORMAL" || data.competitionTypes == "BREWING_EARLY_BIRD"' class="badge badge-info text-white w-36 mb-2 text-xs h-12 text-center">BREW(S) : {{ getCompetitionText(data.competitionResults[0]) }}</div>
             <div v-show='data.competitionTypes == "CUP_TASTER_NORMAL" || data.competitionTypes == "CUP_TASTER_EARLY_BIRD"' class="badge badge-accent text-white w-36 text-xs h-12 text-center">CUP(S) : {{ getCompetitionText(data.competitionResults[0]) }}</div>
