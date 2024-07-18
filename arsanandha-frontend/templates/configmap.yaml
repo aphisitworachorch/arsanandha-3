@@ -8,6 +8,9 @@ data:
   {{ if .Values.applicationData.nuxtPublicAPIURL }}
   NUXT_PUBLIC_API_URL: "{{ .Values.applicationData.nuxtPublicAPIURL }}"
   {{ end }}
+  {{ if .Values.applicationData.nuxtPublicNextVAPIURL }}
+  NUXT_PUBLIC_NEXT_V_API_URL: "{{ .Values.applicationData.nuxtPublicNextVAPIURL }}"
+  {{ end }}
   {{ if .Values.applicationData.azureADTenantId }}
   NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_ENDPOINTS_AUTHORIZATION: {{ printf "https://login.microsoftonline.com/%s/oauth2/v2.0/authorize" .Values.applicationData.azureADTenantId }}
   NUXT_PUBLIC_AUTH_STRATEGIES_AZURE_AD_ENDPOINTS_TOKEN: {{ printf "https://login.microsoftonline.com/%s/oauth2/v2.0/token" .Values.applicationData.azureADTenantId }}

@@ -106,6 +106,8 @@ export default defineNuxtConfig({
         public:{
             API_URL: process.env.API_URL,
             BREWER_API_URL: process.env.BREWER_API_URL,
+            NEXT_V_API_URL: process.env.NEXT_V_API_URL,
+            ENABLE_NEXT_V_API: true,
             auth:{
                 strategies:{
                     azure_ad: {

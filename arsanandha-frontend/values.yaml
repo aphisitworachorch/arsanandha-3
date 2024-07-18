@@ -55,6 +55,7 @@ credentials:
 
 applicationData:
   nuxtPublicAPIURL: {{nuxt-public-api-url}}
+  nuxtPublicNextVAPIURL: {{nuxt-public-next-v-api-url}}
   nuxtBrewerAPIURL: {{brew-api-url}}
   azureADRedirectURI: {{azure-ad-redirect-uri}}
   azureADTenantId: {{azure-ad-tenant-id}}

@@ -29,7 +29,7 @@ async function fetchPortfolioData() {
     server: true,
     lazy: true,
   });
-  dataObject.biography = data?.value?.data;
+  dataObject.biography = data?.value?.result;
 }
 </script>
 <template>
