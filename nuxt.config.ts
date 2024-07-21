@@ -55,6 +55,20 @@ export default defineNuxtConfig({
         },
     },
     auth:{
+        stores:{
+            cookie: {
+                enabled: true,
+                prefix: 'auth.',
+                options: {
+                    path: '/',
+                    domain: 'arsanandha.xyz',
+                    sameSite: 'lax',
+                    maxAge: 604800,
+                    secure: true,
+                },
+            },
+        },
+        fullPathRedirect: true,
         strategies: {
             local: {
                 token: {
