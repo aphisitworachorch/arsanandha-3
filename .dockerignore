@@ -12,3 +12,4 @@ frontend-deploy.yaml
 docker-compose.yaml
 docs
 Dockerfile
+node_modules
