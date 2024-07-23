@@ -176,7 +176,9 @@ export default defineNuxtConfig({
                 'font-src': ["'self'", "https:", "data:"],
                 'base-uri': ["'none'"],
                 'object-src': ["'none'"],
-                'script-src-attr': ["'none'"],
+                'script-src-attr': [
+                    "'none'"
+                ],
                 'form-action': ["'self'"],
                 'frame-ancestors': ["'self'"],
                 'upgrade-insecure-requests': true
@@ -188,8 +190,8 @@ export default defineNuxtConfig({
         '/weather':{
             security:{
                 headers: {
-                    contentSecurityPolicy:{
-                        'script-src-attr': ["'unsafe-inline'"],
+                    permissionsPolicy:{
+                        'geolocation':['self','https://arsanandha.xyz','https://*.arsanandha.xyz'],
                     }
                 }
             }
@@ -197,8 +199,8 @@ export default defineNuxtConfig({
         '/viewprofile':{
             security:{
                 headers: {
-                    permissionsPolicy:{
-                        'geolocation':['self','https://arsanandha.xyz','https://*.arsanandha.xyz']
+                    contentSecurityPolicy:{
+                        'script-src-attr': ["'unsafe-inline'"],
                     }
                 }
             }

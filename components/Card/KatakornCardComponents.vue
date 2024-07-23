@@ -26,7 +26,7 @@
     </div>
   </div>
   <dialog :id="details?.student_id?.split(' ')?.join('')" class="modal text-left">
-    <div class="modal-box">
+    <div class="modal-box bg-white">
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       </form>
@@ -38,12 +38,12 @@
           {{ details?.firstname?.split("นาย")?.find(data => data != "") }} {{ details?.lastname }}
         </h2>
         <div>
-          <div class="badge badge-accent gap-2 shadow-2xl">
+          <div class="badge badge-success gap-2 shadow-2xl">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path style="fill:white;" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>          {{details?.student_id}}
           </div>
         </div>
         <div>
-          <div class="badge badge-accent gap-2 shadow-2xl">
+          <div class="badge badge-success gap-2 shadow-2xl">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path style="fill:white;" d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V256.9L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6h29.7c33.7 0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V352H152z"/></svg> ชั้นปี {{details?.year}} / สำนักวิชา {{ details?.faculty }}
           </div>
         </div>
@@ -76,6 +76,7 @@
           <b>ส่วนสูง</b> {{ details?.height }} เซนติเมตร<br/>
           <b>น้ำหนัก</b> {{ details?.weight }} กิโลกรัม<br/>
           <span class="font-bold" v-if="details.did_you_katakorn_before">✅ เคยเป็นคทากรมาก่อน</span><span class="font-bold" v-if="!details?.did_you_katakorn_before">❎ ไม่เคยเป็นคทากรมาก่อน</span> <br/>
+          <b>เหตุผล</b> {{ details?.reason }} <br/>
         </p>
       </h3>
     </div>
