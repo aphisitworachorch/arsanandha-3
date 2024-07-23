@@ -188,6 +188,15 @@ export default defineNuxtConfig({
         '/weather':{
             security:{
                 headers: {
+                    contentSecurityPolicy:{
+                        'script-src-attr': ["'unsafe-inline'"],
+                    }
+                }
+            }
+        },
+        '/viewprofile':{
+            security:{
+                headers: {
                     permissionsPolicy:{
                         'geolocation':['self','https://arsanandha.xyz','https://*.arsanandha.xyz']
                     }
