@@ -72,7 +72,7 @@
         </div>
         <br/>
         <p class="font-apThai">
-          <b>เกิดปี</b> {{ details?.buddhist_birth_year }} <br/>
+          <b>เกิดปี</b> {{ details?.birth_date }} / {{ details?.birth_month }} / {{ details?.buddhist_birth_year }} <br/>
           <b>ส่วนสูง</b> {{ details?.height }} เซนติเมตร<br/>
           <b>น้ำหนัก</b> {{ details?.weight }} กิโลกรัม<br/>
           <span class="font-bold" v-if="details.did_you_katakorn_before">✅ เคยเป็นคทากรมาก่อน</span><span class="font-bold" v-if="!details?.did_you_katakorn_before">❎ ไม่เคยเป็นคทากรมาก่อน</span> <br/>
