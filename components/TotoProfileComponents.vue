@@ -22,7 +22,8 @@ const dataObject = reactive({
   dynamicSVGClass: {},
   loaded: false,
   userInfo: {},
-  images: ""
+  images: "",
+  warnings: [],
 })
 
 function showName() {
@@ -56,6 +57,13 @@ async function getProfileImage() {
   dataObject.images = data?.value?.data.image_src;
 }
 
+async function getEarthquakes() {
+  const {data} = await useFetch('/api/profile/earthquakes-alert', {
+    method: 'GET'
+  });
+  dataObject.warnings = data?.value?.result;
+}
+
 async function getDominant() {
   const {data} = await useFetch('/api/profile/getColor', {
     headers: {'Content-Type': 'application/json'},
@@ -82,6 +90,7 @@ async function getDominant() {
 }
 
 showName()
+await getEarthquakes();
 await getProfileImage();
 const getColor = await getDominant();
 dataObject.dynamicColorClass = getColor.background;
@@ -106,6 +115,20 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
 
 <template>
   <div class="container font-apFont">
+    <div class="card rounded md:w-full w-80 bg-gradient-to-r from-white to-red-500 shadow mb-5 font-apThai p-4 animate__animated animate__fadeInDown">
+      <h3 class="text-left text-xl font-bold">⚠️ ประกาศเตือนภัยแผ่นดินไหว (จากกองเฝ้าระวังแผ่นดินไหว กรมอุตุนิยมวิทยา)</h3>
+      <div v-for="data in dataObject.warnings">
+        <div class="text-wrap text-left align-right p-2">
+          <b>แผ่นดินไหว ณ {{ data?.country?.thai_name_country }} วันที่/เวลา {{ new Date(data?.timestamp).toLocaleString("th-TH") }}</b>
+          <br/>
+          <b class="text-error">ความแรง {{ data?.magnitude }} แมกนิจูด</b>
+          <br/>
+          <b>ความลึก {{ data?.depth }} กิโลเมตร (Phases {{ data?.phases }})</b>
+          <br/>
+          <a :href="data?.details_link" class="font-bold btn btn-warning">📗 รายละเอียดทั้งหมด</a>
+        </div>
+      </div>
+    </div>
     <div :style="$auth.loggedIn ? { 'background-color': '#3271CD' } : dataObject.dynamicColorClass" class="card rounded-b-none lg:card-side lg:w-full sm:w-full md:w-full w-80">
       <figure class="object-cover animate__animated animate__fadeIn animate__delay-1s flex">
         <nuxt-img ref="profileBackground" format="webp" src="pics/26-OG.jpg" class="avatarBackground" alt="Profile Background" />
