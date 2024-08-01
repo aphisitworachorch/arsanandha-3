@@ -56,6 +56,9 @@ export default defineNuxtConfig({
     },
     auth:{
         stores:{
+            state: {
+                namespace: 'auth'
+            },
             cookie: {
                 enabled: true,
                 prefix: 'auth.',
@@ -68,7 +71,6 @@ export default defineNuxtConfig({
                 },
             },
         },
-        fullPathRedirect: true,
         strategies: {
             local: {
                 token: {

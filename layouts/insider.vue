@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const $auth = useAuth()
-const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.data) : null;
+const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d?._data?.data) : null;
 </script>
 
 <template>
-  <div  v-if="$auth.loggedIn" class="navbar bg-black font-apMonoFont">
+  <div  v-if="$auth?.loggedIn" class="navbar bg-black font-apMonoFont">
     <div class="flex-none">
       <div class="dropdown dropdown-content dropdown-bottom text-white">
         <button class="btn btn-square btn-ghost" tabindex="0">
@@ -33,12 +33,12 @@ const currentUser = $auth.loggedIn ? await $auth.fetchUser().then(d => d._data.d
     </div>
     <div class="flex text-right">
       <div class="dropdown dropdown-end text-white">
-        <div v-if="$auth.loggedIn" class="text-sm break-all w-24 sm:w-60 md:w-60 lg:w-60" tabindex="0" role="button">
-          <p class="break-all">{{ currentUser.name }}</p>
+        <div v-if="$auth?.loggedIn" class="text-sm break-all w-24 sm:w-60 md:w-60 lg:w-60" tabindex="0" role="button">
+          <p class="break-all">{{ currentUser?.name }}</p>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52 text-white">
           <li><a>Settings</a></li>
-          <li><a @click="$auth.logout()">Logout</a></li>
+          <li><a @click="$auth?.logout()">Logout</a></li>
         </ul>
       </div>
     </div>
