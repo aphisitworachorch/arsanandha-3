@@ -1,9 +1,4 @@
 <template>
-  <NuxtParticles
-      id="tsparticles"
-      :options="options"
-      @load="onLoad"
-  ></NuxtParticles>
   <div class="outerContainer">
     <div class="innerContainer">
       <TotoProfileComponents></TotoProfileComponents>

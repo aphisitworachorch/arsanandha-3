@@ -207,7 +207,7 @@ export default defineNuxtConfig({
         },
         "/": {
             cache: {
-                maxAge: 60
+                maxAge: 5
             }
         },
         "/about": {
