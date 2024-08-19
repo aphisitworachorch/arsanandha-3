@@ -42,7 +42,12 @@ export default defineNuxtConfig({
         },
         download: true,
         display: 'auto',
-    }],'@nuxt-alt/auth', '@pinia/nuxt',"nuxt-lodash",'nuxt-security','nuxt-particles'],
+    }],'@nuxt-alt/auth', '@pinia/nuxt',"nuxt-lodash",'nuxt-security',['nuxt-particles',{
+        particles: {
+            mode: 'slim',
+            lazy: true
+        }
+    }]],
     nitro: {
         compressPublicAssets: {
             brotli: true,
