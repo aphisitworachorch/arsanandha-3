@@ -1,10 +1,10 @@
 
 <template>
   <div class="container font-apFont">
-    <h1 class="text-3xl font-apThai">รายชื่อคทากร</h1>
-    <div class="flex md:flex-row flex-col flex-wrap items-center">
+    <h1 class="text-5xl pt-5 pb-5 text-white font-apThai">รายชื่อคทากร</h1>
+    <div class="flex md:flex-row flex-col flex-wrap items-center w-full">
       <div class="p-3 items-center" v-for="data in retrieved">
-        <KatakornCardComponents :images_src="data.thumbnails" :details="useOmit(data,['images_url'])"></KatakornCardComponents>
+        <KatakornCardComponents :images_src="data.thumbnails" :details="data"></KatakornCardComponents>
       </div>
     </div>
   </div>

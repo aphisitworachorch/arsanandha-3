@@ -37,7 +37,7 @@ export default {
 </script>
 <style scoped>
 .outerContainer {
-  @apply hero min-h-screen transform-gpu subpixel-antialiased bg-black
+  @apply hero min-h-screen transform-gpu subpixel-antialiased bg-blue-900
 }
 .innerContainer {
   @apply hero-content text-center
